@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".AcceptDiaryActivity">
+
+    <View
+        android:id="@+id/accept_diary_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </View>
+
+    <ImageView
+        android:id="@+id/accept_diary_back_iv"
+        android:layout_width="17dp"
+        android:layout_height="10dp"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/accept_diary_header"
+        app:layout_constraintBottom_toBottomOf="@id/accept_diary_header"
+        app:layout_constraintStart_toStartOf="@id/accept_diary_header" />
+
+    <TextView
+        android:id="@+id/accept_diary_header_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="받은 일기"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:layout_marginStart="72dp"
+        app:layout_constraintStart_toStartOf="@id/accept_diary_header"
+        app:layout_constraintTop_toTopOf="@id/accept_diary_header"
+        app:layout_constraintBottom_toBottomOf="@id/accept_diary_header" />
+
+    <ImageView
+        android:id="@+id/accept_diary_menu_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_kebab_menu"
+        app:layout_constraintTop_toTopOf="@id/accept_diary_header"
+        app:layout_constraintBottom_toBottomOf="@id/accept_diary_header"
+        app:layout_constraintEnd_toEndOf="@id/accept_diary_header"
+        android:layout_marginEnd="16dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/accept_diary_profile_cv"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintTop_toBottomOf="@id/accept_diary_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/profile_image_background"
+        >
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/accept_diary_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="오늘도맑음"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/accept_diary_profile_cv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/accept_diary_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021년 12월 18일"
+        android:textSize="12sp"
+        android:textColor="#C6C7E8"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/accept_diary_name_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ScrollView
+        android:id="@+id/accept_diary_content_sv"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintTop_toBottomOf="@id/accept_diary_date_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <TextView
+            android:id="@+id/accept_diary_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:lineHeight="24dp"
+            android:text="내 손잡아 준 너 매일 아침 눈을 뜰 때면\n갓 내린 커피 향이 날 깨워 너와 함께 맞이 하는\n하루하루는 설레기만 해 매일 널 위해서\n머리를 다듬고 예쁜 안경도 써 보고\n어울린다고 말해주기를 어린아이처럼\n조르고 싶어"
+            />
+    </ScrollView>
+
+    <View
+        android:id="@+id/accept_diary_reply_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/button_active_background" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="답장"
+        android:textColor="#262D89"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/accept_diary_reply_btn"
+        app:layout_constraintBottom_toBottomOf="@id/accept_diary_reply_btn"
+        app:layout_constraintStart_toStartOf="@id/accept_diary_reply_btn"
+        app:layout_constraintEnd_toEndOf="@id/accept_diary_reply_btn"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
