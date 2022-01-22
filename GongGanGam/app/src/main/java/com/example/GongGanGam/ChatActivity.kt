@@ -1,5 +1,6 @@
 package com.example.GongGanGam
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.GongGanGam.databinding.ActivityChatBinding
@@ -17,7 +18,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.chatBackIv.setOnClickListener {
-
+            finish()
         }
     }
 }

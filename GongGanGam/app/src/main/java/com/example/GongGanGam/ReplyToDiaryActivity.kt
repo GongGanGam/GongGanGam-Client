@@ -1,9 +1,11 @@
 package com.example.GongGanGam
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import com.example.GongGanGam.databinding.ActivityReplyToDiaryBinding
 
@@ -20,6 +22,10 @@ class ReplyToDiaryActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
+        binding.replyToDiaryBackCl.setOnClickListener {
+            hideKeyBoard()
+        }
+
         binding.replyToDiaryContentEt.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -45,5 +51,10 @@ class ReplyToDiaryActivity : AppCompatActivity() {
         binding.replyToDiaryBackIv.setOnClickListener {
             finish()
         }
+    }
+
+    private fun hideKeyBoard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.replyToDiaryContentEt.windowToken, 0)
     }
 }

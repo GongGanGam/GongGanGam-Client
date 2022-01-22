@@ -10,21 +10,21 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/letter_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/background_transparent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="6dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="#FFFFFF"
-        app:tabSelectedTextColor="#FFFFFF"
-        app:tabTextColor="#9CA3D4"
-        app:tabTextAppearance="@style/tab_text"
-        app:tabMode="scrollable"
         app:tabGravity="start"
-
+        app:tabIndicatorColor="#FFFFFF"
         app:tabIndicatorFullWidth="false"
-        android:layout_marginTop="38dp"
-        android:layout_marginStart="16dp" />
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#FFFFFF"
+        app:tabTextAppearance="@style/tab_text"
+        app:tabTextColor="#9CA3D4" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/letter_view_pager"

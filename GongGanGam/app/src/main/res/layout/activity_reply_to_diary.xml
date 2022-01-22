@@ -2,9 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reply_to_diary_back_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_solid"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ReplyToDiaryActivity">
 
 
@@ -37,7 +40,7 @@
         android:layout_marginEnd="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:background="@drawable/letter_item_background"
+        android:background="@drawable/write_input_background"
         app:layout_constraintTop_toBottomOf="@id/reply_to_diary_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,10 +103,10 @@
             android:textCursorDrawable="@drawable/edit_text_cursor"
             android:textSelectHandle="@color/inactiveBtnColor"
             android:hint="당신의 공감을 선물해 주세요"
+            android:inputType="textMultiLine"
             android:textColorHint="#9CA3D4"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-
             android:lineHeight="24dp" />
 
     </ScrollView>

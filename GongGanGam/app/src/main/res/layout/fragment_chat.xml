@@ -25,6 +25,7 @@
         android:textStyle="bold"
         android:textSize="17sp"
         android:textColor="#FFFFFF"
+        android:fontFamily="@font/omni_gothic_35"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="@id/chat_header"
         app:layout_constraintTop_toTopOf="@id/chat_header"

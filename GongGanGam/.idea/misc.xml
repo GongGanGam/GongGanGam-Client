@@ -23,17 +23,24 @@
         <entry key="app/src/main/res/drawable/main_btm_letter_selector.xml" value="0.14375" />
         <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.14375" />
         <entry key="app/src/main/res/drawable/profile_image_background.xml" value="0.584514152344487" />
+        <entry key="app/src/main/res/drawable/upload_photo_background.xml" value="0.7312368716492683" />
+        <entry key="app/src/main/res/drawable/write_change_btn_background.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_input_background.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/write_plus_background.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_share_btn_active.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_share_btn_inactive.xml" value="0.140625" />
         <entry key="app/src/main/res/font/font.xml" value="0.2212962962962963" />
-        <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.3576271186440678" />
+        <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.28983899216978487" />
         <entry key="app/src/main/res/layout/activity_accept_diary.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_accept_diary_acitivity.xml" value="0.17944700863929658" />
-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3838383838383838" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3532710280373832" />
         <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.11474164133738601" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.23129141283390411" />
-        <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.2688975715550966" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.10797110279645117" />
-        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_diary_write.xml" value="0.12553802994800017" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12196465790570521" />
+        <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.22591130280768323" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.6673973780574413" />
+        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.17935578330893118" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_received_reply.xml" value="0.1" />
