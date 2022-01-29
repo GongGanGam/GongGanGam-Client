@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_diary_wirte_emoji_constraint"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:gravity="center"
+            android:clickable="true"
+            android:layout_marginTop="16dp"
+            >
+
+<!--    <View-->
+<!--        android:id="@+id/diary_write_emoji_view"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/diary_write_emoji_emoji_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_img_camera"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/diary_write_emoji_emoji_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#9FA8DA"
+            android:text="진짜 즐거워요"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_emoji_iv"
+            />
+
+<!--    </View>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

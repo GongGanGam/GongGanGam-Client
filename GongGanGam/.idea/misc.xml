@@ -3,6 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/button_active_background.xml" value="0.23425925925925925" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/button_active_stroke_background.xml" value="0.1" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/button_inactive_background.xml" value="0.23425925925925925" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/mypage_edit_btn_shape.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/profile_image_background.xml" value="0.25833333333333336" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_thumb_off.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_thumb_on.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_thumb_selector.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_track_off.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_track_on.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_track_selector.xml" value="0.13240740740740742" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_accept_chatting.xml" value="0.25364583333333335" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_diary_write.xml" value="0.12129629629629629" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_diary_write_emoji.xml" value="0.176" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_my_page_notice.xml" value="0.17844202898550723" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_diary_write_emoji.xml" value="0.152" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_mypage_leave.xml" value="0.17844202898550723" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_received_diary.xml" value="0.4" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/item_diary_write_emoji.xml" value="0.264" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/item_mypage_notice_list.xml" value="0.17844202898550723" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18611111111111112" />
         <entry key="app/src/main/res/drawable/accept_chatting_diary_info_background.xml" value="0.18611111111111112" />
         <entry key="app/src/main/res/drawable/accept_chatting_info_background.xml" value="0.2212962962962963" />
