@@ -12,23 +12,22 @@ import com.example.GongGanGam.databinding.ActivityDiaryWriteEmojiBinding
 import com.example.GongGanGam.databinding.ItemDiaryWriteEmojiBinding
 
 
-class DiaryWriteEmojiRVAdapter(private val emojis : ArrayList<Emoji>):RecyclerView.Adapter<DiaryWriteEmojiRVAdapter.ViewHolder>(){
-    lateinit var binding:ActivityDiaryWriteEmojiBinding
+class DiaryWriteEmojiRVAdapter(private val emojilist : ArrayList<Emoji>):RecyclerView.Adapter<DiaryWriteEmojiRVAdapter.ViewHolder>(){
+
+    interface MyItemClickListener{
+        fun onItemClick(emoji: Emoji)
+    }
+
+    private lateinit var  mitemClickListener:MyItemClickListener
+
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener){
+        mitemClickListener = itemClickListener
+    }
 
     inner class ViewHolder(val binding: ItemDiaryWriteEmojiBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(emoji: Emoji){
             binding.diaryWriteEmojiEmojiIv.setImageResource(emoji.emoji!!)
             binding.diaryWriteEmojiEmojiTv.text = emoji.state
-
-
-//
-//            binding.diaryWriteEmojiEmojiIv.setOnClickListener{
-//                val btn01 = itemView.findViewById<Button>(R.id.diary_write_emoji_unselect_btn)
-//                val btn02 = itemView.findViewById<Button>(R.id.diary_write_emoji_selected_btn)
-//
-//                btn01.setvisibility = View.GONE
-//                btn02.visibility = View.VISIBLE
-//            }
 
         }
 
@@ -41,11 +40,11 @@ class DiaryWriteEmojiRVAdapter(private val emojis : ArrayList<Emoji>):RecyclerVi
     }
 
 
-    override fun getItemCount(): Int = emojis.size
+    override fun getItemCount(): Int = emojilist.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(emojis[position])
-
+        holder.bind(emojilist[position])
+        holder.itemView.setOnClickListener{ mitemClickListener.onItemClick(emojilist[position])}
     }
 
 

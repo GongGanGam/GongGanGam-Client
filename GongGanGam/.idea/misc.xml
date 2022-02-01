@@ -15,11 +15,13 @@
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_track_on.xml" value="0.13240740740740742" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/drawable/switch_track_selector.xml" value="0.13240740740740742" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_accept_chatting.xml" value="0.25364583333333335" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_accept_diary.xml" value="0.14583333333333334" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_diary_write.xml" value="0.12129629629629629" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_diary_write_emoji.xml" value="0.176" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_my_page_leave.xml" value="0.1" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/activity_my_page_notice.xml" value="0.17844202898550723" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_diary_write_emoji.xml" value="0.152" />
-        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
+        <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_my_page.xml" value="0.31623376623376626" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_mypage_leave.xml" value="0.17844202898550723" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/fragment_received_diary.xml" value="0.4" />
         <entry key="..\:/android-sdk/gonggangam_client/GongGanGam-Client/GongGanGam/app/src/main/res/layout/item_diary_write_emoji.xml" value="0.264" />

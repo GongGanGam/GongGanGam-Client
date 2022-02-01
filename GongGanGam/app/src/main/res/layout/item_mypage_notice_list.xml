@@ -87,7 +87,7 @@
             android:layout_marginEnd="33dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/lorem"
+            android:text="@string/content01"
             android:textColor="#ffffff"/>
 
         <View

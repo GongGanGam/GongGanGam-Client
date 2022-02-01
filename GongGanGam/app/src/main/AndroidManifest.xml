@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.GongGanGam">
 
-    //갤러리 권한 설정
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BottomNaviTemplate">
+        <activity
+            android:name=".MyPageLeaveActivity"
+            android:exported="false" />
         <activity
             android:name=".DiaryWriteActivity"
             android:exported="false" />
@@ -34,8 +36,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyPageNoticeActivity"/>
-        <activity android:name=".DiaryWriteEmojiActivity"/>
+        <activity android:name=".MyPageNoticeActivity" />
+        <activity android:name=".DiaryWriteEmojiActivity" />
     </application>
 
 </manifest>

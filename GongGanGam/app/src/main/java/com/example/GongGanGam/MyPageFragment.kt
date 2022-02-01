@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.GongGanGam.DiaryWriteEmojiActivity
 import com.example.GongGanGam.databinding.FragmentMyPageBinding
+import kotlinx.android.synthetic.main.fragment_my_page.*
 
 class MyPageFragment() : Fragment() {
     lateinit var binding: FragmentMyPageBinding
@@ -20,12 +21,21 @@ class MyPageFragment() : Fragment() {
     ): View? {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
+        //프로필 사진 넣기
+        mypage_user_add_profile.setOnClickListener{
+            
+        }
+
         binding.mypageCsNoticeTv.setOnClickListener {
             startActivity(Intent(activity, MyPageNoticeActivity::class.java))
         }
 
         binding.mypageMypageTv.setOnClickListener {
             startActivity(Intent(activity, DiaryWriteEmojiActivity::class.java))
+        }
+
+        binding.mypageEditBtn.setOnClickListener {
+            startActivity(Intent(activity, MyPageLeaveActivity::class.java))
         }
 
         return binding.root

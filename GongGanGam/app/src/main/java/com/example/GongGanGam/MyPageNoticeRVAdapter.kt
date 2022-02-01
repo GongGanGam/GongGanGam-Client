@@ -9,23 +9,19 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.GongGanGam.R
+import com.example.GongGanGam.databinding.ItemMypageNoticeListBinding
 
-class MypageNoticeRVAdapter (private val noticelist: List<Notice>): RecyclerView.Adapter<MypageNoticeRVAdapter.ViewHolder>() {
+class MypageNoticeRVAdapter (private val noticelist: ArrayList<Notice>): RecyclerView.Adapter<MypageNoticeRVAdapter.ViewHolder>() {
 
-    class ViewHolder(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder( val binding: ItemMypageNoticeListBinding ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(notice: Notice) {
-            val title = itemView.findViewById<TextView>(R.id.item_mypage_notice_title_tv)
-            val date = itemView.findViewById<TextView>(R.id.item_mypage_notice_date_tv)
-            val contentExpand =
-                itemView.findViewById<LinearLayout>(R.id.mypage_notice_content_layout)
+            val contentExpand = itemView.findViewById<LinearLayout>(R.id.mypage_notice_content_layout)
             val constraint = itemView.findViewById<ConstraintLayout>(R.id.item_mypage_notice_constraint)
 
-            title.text = notice.title
-            date.text = notice.date
-
+            binding.itemMypageNoticeTitleTv.text=notice.title
+            binding.itemMypageNoticeDateTv.text=notice.date
+            binding.mypageNoticeContentTv.text = notice.content
 
             constraint.setOnClickListener {
                 val show = animationLayout(!notice.isExpanded, it, contentExpand)
@@ -54,10 +50,10 @@ class MypageNoticeRVAdapter (private val noticelist: List<Notice>): RecyclerView
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_mypage_notice_list, parent, false)
-        )
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val binding: ItemMypageNoticeListBinding = ItemMypageNoticeListBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
