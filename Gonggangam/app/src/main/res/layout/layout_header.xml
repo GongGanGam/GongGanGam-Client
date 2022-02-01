@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@+id/layout_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </View>
+
+    <ImageView
+        android:id="@+id/layout_header_back_iv"
+        android:layout_width="17dp"
+        android:layout_height="10dp"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/layout_header_layout"
+        app:layout_constraintBottom_toBottomOf="@id/layout_header_layout"
+        app:layout_constraintStart_toStartOf="@id/layout_header_layout" />
+
+    <TextView
+        android:id="@+id/layout_header_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="헤더 제목"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:layout_marginStart="72dp"
+        app:layout_constraintStart_toStartOf="@id/layout_header_layout"
+        app:layout_constraintTop_toTopOf="@id/layout_header_layout"
+        app:layout_constraintBottom_toBottomOf="@id/layout_header_layout" />
+
+    <ImageView
+        android:id="@+id/layout_header_menu_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_kebab_menu"
+        app:layout_constraintTop_toTopOf="@id/layout_header_layout"
+        app:layout_constraintBottom_toBottomOf="@id/layout_header_layout"
+        app:layout_constraintEnd_toEndOf="@id/layout_header_layout"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/layout_header_btn_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="버튼"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintTop_toTopOf="@id/layout_header_layout"
+        app:layout_constraintBottom_toBottomOf="@id/layout_header_layout"
+        app:layout_constraintEnd_toEndOf="@id/layout_header_layout"
+        android:layout_marginEnd="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
