@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_received_letter_cl"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:padding="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/letter_item_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_received_letter_cv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:cardCornerRadius="30dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/profile_image_background"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintEnd_toStartOf="@id/item_received_letter_user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/item_received_letter_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="오늘도맑음"
+        android:layout_marginStart="10dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="@id/item_received_letter_cv"
+        app:layout_constraintBottom_toBottomOf="@id/item_received_letter_cv"
+        app:layout_constraintStart_toEndOf="@id/item_received_letter_cv" />
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/item_received_letter_new_cv"
+      android:layout_width="13dp"
+      android:layout_height="13dp"
+      app:cardCornerRadius="4dp"
+      android:visibility="gone"
+      android:backgroundTint="#FF6767"
+      android:layout_marginStart="4dp"
+      app:layout_constraintStart_toEndOf="@id/item_received_letter_user_name"
+      app:layout_constraintTop_toTopOf="@id/item_received_letter_user_name"
+      app:layout_constraintBottom_toBottomOf="@id/item_received_letter_user_name">
+
+      <TextView
+          android:visibility="gone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="N"
+          android:textStyle="bold"
+          android:textSize="10sp"
+          android:textColor="#FFFFFF"
+          android:layout_gravity="center" />
+  </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/item_received_letter_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9CA3D4"
+        android:textSize="12sp"
+        android:text="21.12.24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    
+    <TextView
+        android:id="@+id/item_received_letter_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:text="기억하니 우리가 했던 이별 시간이 멈춘 듯..."
+        app:layout_constraintTop_toBottomOf="@id/item_received_letter_cv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
