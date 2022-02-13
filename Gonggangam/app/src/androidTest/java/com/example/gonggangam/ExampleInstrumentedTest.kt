@@ -1,4 +1,4 @@
-package com.example.gonggangam
+package com.example.GongGanGam
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

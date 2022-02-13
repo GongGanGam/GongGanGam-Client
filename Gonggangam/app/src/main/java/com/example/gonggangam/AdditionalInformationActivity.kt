@@ -2,81 +2,85 @@ package com.example.gonggangam
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
-import com.example.gonggangam.databinding.DialogDatepickerBinding
+import com.example.GongGanGam.R
+import com.example.GongGanGam.databinding.ActivityAdditionalInformationBinding
 
 class AdditionalInformationActivity() : AppCompatActivity() {
-    lateinit var binding : ActivityAdditionalInformationBinding
+    lateinit var binding: ActivityAdditionalInformationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdditionalInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        ButtonChange()
 
 
-        binding.additionalSexMaleBtn.setOnClickListener {
-            if(binding.additionalSexFemaleBtn.isSelected||binding.additionalSexNoBtn.isSelected ){
-                binding.additionalSexMaleBtn.isSelected = true
-                binding.additionalSexFemaleBtn.isSelected = false
-                binding.additionalSexNoBtn.isSelected = false
+        binding.additionalGenderMaleBtn.setOnClickListener {
+            if (binding.additionalGenderFemaleBtn.isSelected || binding.additionalGenderNoBtn.isSelected) {
+                binding.additionalGenderMaleBtn.isSelected = true
+                binding.additionalGenderFemaleBtn.isSelected = false
+                binding.additionalGenderNoBtn.isSelected = false
 
-            }
-            else{
-                binding.additionalSexMaleBtn.isSelected =  binding.additionalSexMaleBtn.isSelected != true
+            } else {
+                binding.additionalGenderMaleBtn.isSelected =
+                    binding.additionalGenderMaleBtn.isSelected != true
 
             }
         }
-        binding.additionalSexFemaleBtn.setOnClickListener {
+        binding.additionalGenderFemaleBtn.setOnClickListener {
 
-            if(binding.additionalSexMaleBtn.isSelected ||binding.additionalSexNoBtn.isSelected ){
-                binding.additionalSexFemaleBtn.isSelected = true
-                binding.additionalSexMaleBtn.isSelected = false
-                binding.additionalSexNoBtn.isSelected = false
+            if (binding.additionalGenderMaleBtn.isSelected || binding.additionalGenderNoBtn.isSelected) {
+                binding.additionalGenderFemaleBtn.isSelected = true
+                binding.additionalGenderMaleBtn.isSelected = false
+                binding.additionalGenderNoBtn.isSelected = false
 
-            }
-            else{
-                binding.additionalSexFemaleBtn.isSelected =  binding.additionalSexFemaleBtn.isSelected != true
+            } else {
+                binding.additionalGenderFemaleBtn.isSelected =
+                    binding.additionalGenderFemaleBtn.isSelected != true
             }
         }
-        binding.additionalSexNoBtn.setOnClickListener {
+        binding.additionalGenderNoBtn.setOnClickListener {
 
-            if(binding.additionalSexMaleBtn.isSelected ||binding.additionalSexFemaleBtn.isSelected ){
-                binding.additionalSexNoBtn.isSelected = true
-                binding.additionalSexMaleBtn.isSelected = false
-                binding.additionalSexFemaleBtn.isSelected = false
+            if (binding.additionalGenderMaleBtn.isSelected || binding.additionalGenderFemaleBtn.isSelected) {
+                binding.additionalGenderNoBtn.isSelected = true
+                binding.additionalGenderMaleBtn.isSelected = false
+                binding.additionalGenderFemaleBtn.isSelected = false
 
-            }
-            else{
-                binding.additionalSexNoBtn.isSelected =  binding.additionalSexNoBtn.isSelected != true
+            } else {
+                binding.additionalGenderNoBtn.isSelected =
+                    binding.additionalGenderNoBtn.isSelected != true
             }
         }
         binding.additionalBirthYearInputTv.setOnClickListener {
             callNumberPicker()
         }
-        binding.additionalCompleteBtn.setOnClickListener{
+        binding.additionalCompleteBtn.setOnClickListener {
             complete()
         }
-    }
-    private fun callNumberPicker(){
-        val dialog = AlertDialog.Builder(this).create()
-        val edialog : LayoutInflater = LayoutInflater.from(this)
-        val mView : View = edialog.inflate(R.layout.dialog_datepicker,null)
 
-        val year : NumberPicker = mView.findViewById(R.id.datepicker_birth_year_picker_np)
-        val save : Button = mView.findViewById(R.id.datepicker_birth_year_ok_btn)
+        binding.additionalCl.setOnClickListener {
+            hideKeyBoard()
+        }
+    }
+
+    private fun callNumberPicker() {
+        val dialog = AlertDialog.Builder(this).create()
+        val edialog: LayoutInflater = LayoutInflater.from(this)
+        val mView: View = edialog.inflate(R.layout.dialog_datepicker, null)
+
+        val year: NumberPicker = mView.findViewById(R.id.datepicker_birth_year_picker_np)
+        val save: Button = mView.findViewById(R.id.datepicker_birth_year_ok_btn)
 
         //  순환 안되게 막기
         year.wrapSelectorWheel = false
@@ -90,18 +94,16 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         year.maxValue = 2022
 
         //초기 보여지는 값 설정
-        if(binding.additionalBirthYearInputTv.text.isEmpty()) {
+        if (binding.additionalBirthYearInputTv.text.isEmpty()) {
             year.value = 2000
-        }
-        else{
+        } else {
             year.value = binding.additionalBirthYearInputTv.text.toString().toInt()
         }
 
 
-
         //  완료 버튼 클릭 시
         save.setOnClickListener {
-            binding.additionalBirthYearInputTv.text=(year.value).toString()
+            binding.additionalBirthYearInputTv.text = (year.value).toString()
 
             dialog.dismiss()
             dialog.cancel()
@@ -112,7 +114,8 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         dialog.create()
         dialog.show()
     }
-    private fun complete(){
+
+    private fun complete() {
         if (binding.additionalNickInputEt.text.toString().isEmpty()
         ) {
             Toast.makeText(this, "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -122,28 +125,29 @@ class AdditionalInformationActivity() : AppCompatActivity() {
             Toast.makeText(this, "출생년도를 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
-        if (!binding.additionalSexMaleBtn.isSelected&&!binding.additionalSexFemaleBtn.isSelected
-            &&!binding.additionalSexNoBtn.isSelected) {
+        if (!binding.additionalGenderMaleBtn.isSelected && !binding.additionalGenderFemaleBtn.isSelected
+            && !binding.additionalGenderNoBtn.isSelected
+        ) {
             Toast.makeText(this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
         val nickName: String = binding.additionalNickInputEt.text.toString()
         val birthYear: String = binding.additionalBirthYearInputTv.text.toString()
-        lateinit var sex : String
+        lateinit var gender: String
 
-        if(binding.additionalSexMaleBtn.isSelected){
-            sex = binding.additionalSexMaleBtn.text.toString()
+        if (binding.additionalGenderMaleBtn.isSelected) {
+            gender = binding.additionalGenderMaleBtn.text.toString()
+        } else if (binding.additionalGenderFemaleBtn.isSelected) {
+            gender = binding.additionalGenderFemaleBtn.text.toString()
+        } else if (binding.additionalGenderNoBtn.isSelected) {
+            gender = binding.additionalGenderNoBtn.text.toString()
         }
 
-        else if(binding.additionalSexFemaleBtn.isSelected){
-            sex = binding.additionalSexFemaleBtn.text.toString()
-        }
-
-        else if(binding.additionalSexNoBtn.isSelected){
-            sex = binding.additionalSexNoBtn.text.toString()
-        }
-
-       Toast.makeText(this, "nickname $nickName birthYear $birthYear sex $sex", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this,
+            "nickname $nickName birthYear $birthYear gender $gender",
+            Toast.LENGTH_SHORT
+        ).show()
 
 
 //
@@ -157,4 +161,40 @@ class AdditionalInformationActivity() : AppCompatActivity() {
 //            Toast.makeText(this, "회원정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
 //        }
     }
+
+    private fun hideKeyBoard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.additionalNickInputEt.windowToken, 0)
+        binding.additionalNickInputEt.clearFocus()
     }
+
+    private fun ButtonChange() {
+        binding.additionalNickInputEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val nk = binding.additionalNickInputEt.toString().isNotEmpty()
+                val bir = binding.additionalBirthYearInputTv.toString().isNotEmpty()
+                lateinit var gen: String
+                if (binding.additionalGenderMaleBtn.isSelected) {
+                    gen = binding.additionalGenderMaleBtn.text.toString()
+                } else if (binding.additionalGenderFemaleBtn.isSelected) {
+                    gen = binding.additionalGenderFemaleBtn.text.toString()
+                } else if (binding.additionalGenderNoBtn.isSelected) {
+                    gen = binding.additionalGenderNoBtn.text.toString()
+                }
+
+                if (nk && bir && gen.isNotEmpty()) {
+                    binding.additionalCompleteBtn.setBackgroundResource(R.drawable.button_active_background)
+                    binding.additionalCompleteBtn.setTextColor(resources.getColor(R.color.primaryColor))
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
+    }
+}

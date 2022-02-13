@@ -1,10 +1,8 @@
-package com.example.gonggangam
+package com.example.GongGanGam
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gonggangam.databinding.ActivityMainBinding
-import com.kakao.sdk.common.util.Utility
+import com.example.GongGanGam.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -15,10 +13,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.mainBtmNav.itemIconTintList = null
-
-
-        val keyHash = Utility.getKeyHash(this)
-        Log.d("HASH", keyHash)
 
         // init clear status bar
 //        val window = window
@@ -33,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         // init bottom navigation
         initNavigation()
 
+
+
+
+
     }
 
     private fun initNavigation() {
@@ -45,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, DiaryFragment())
                         .commitAllowingStateLoss()
+                    binding.mainBtmNav.setBackgroundResource(R.drawable.btm_background_diary)
                     return@setOnItemSelectedListener true
                 }
 
@@ -52,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, LetterFragment())
                         .commitAllowingStateLoss()
+
+                    binding.mainBtmNav.setBackgroundResource(R.drawable.background_solid)
                     return@setOnItemSelectedListener true
                 }
 
@@ -59,6 +60,8 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, ChatFragment())
                         .commitAllowingStateLoss()
+
+                    binding.mainBtmNav.setBackgroundResource(R.drawable.background_solid)
                     return@setOnItemSelectedListener true
                 }
 
@@ -66,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, MyPageFragment())
                         .commitAllowingStateLoss()
+
+                    binding.mainBtmNav.setBackgroundResource(R.drawable.background_solid)
                     return@setOnItemSelectedListener true
                 }
 

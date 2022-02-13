@@ -1,18 +1,19 @@
 package com.example.gonggangam
 
 import android.app.AlertDialog
-import android.content.ContentProvider
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gonggangam.databinding.ActivityMyInfoBinding
-import org.xml.sax.ContentHandler
+import com.example.GongGanGam.MyPageLeaveActivity
+import com.example.GongGanGam.R
+import com.example.GongGanGam.databinding.ActivityMyInfoBinding
 
 class MyInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityMyInfoBinding
@@ -28,9 +29,16 @@ class MyInfoActivity : AppCompatActivity() {
         binding.myInfoLayoutHeader.layoutHeaderTitleTv.text = "내 정보"
         binding.myInfoLayoutHeader.layoutHeaderBtnTv.text = "저장"
 
+        binding.myInfoLayoutHeader.layoutHeaderBackIv.setOnClickListener {
+           finish()
+        }
+
+        binding.myInfoCl.setOnClickListener {
+            hideKeyBoard()
+        }
 
         //임의로 버튼 선택 -> 추후 삭제해야함!
-        binding.myInfoSexNoBtn.isSelected = true
+        binding.myInfoGenderNoBtn.isSelected = true
         binding.myInfoAgeNoBtn.isSelected = true
         //연령대 지정 버튼
         binding.myInfoAgeSimilarBtn.setOnClickListener {
@@ -56,40 +64,40 @@ class MyInfoActivity : AppCompatActivity() {
             }
         }
         //성별 선택 버튼
-        binding.myInfoSexMaleBtn.setOnClickListener {
-            if(binding.myInfoSexFemaleBtn.isSelected||binding.myInfoSexNoBtn.isSelected ){
-                binding.myInfoSexMaleBtn.isSelected = true
-                binding.myInfoSexFemaleBtn.isSelected = false
-                binding.myInfoSexNoBtn.isSelected = false
+        binding.myInfoGenderMaleBtn.setOnClickListener {
+            if(binding.myInfoGenderFemaleBtn.isSelected||binding.myInfoGenderNoBtn.isSelected ){
+                binding.myInfoGenderMaleBtn.isSelected = true
+                binding.myInfoGenderFemaleBtn.isSelected = false
+                binding.myInfoGenderNoBtn.isSelected = false
 
             }
             else{
-                binding.myInfoSexMaleBtn.isSelected =  binding.myInfoSexMaleBtn.isSelected != true
+                binding.myInfoGenderMaleBtn.isSelected =  binding.myInfoGenderMaleBtn.isSelected != true
 
             }
         }
-        binding.myInfoSexFemaleBtn.setOnClickListener {
+        binding.myInfoGenderFemaleBtn.setOnClickListener {
 
-            if(binding.myInfoSexMaleBtn.isSelected ||binding.myInfoSexNoBtn.isSelected ){
-                binding.myInfoSexFemaleBtn.isSelected = true
-                binding.myInfoSexMaleBtn.isSelected = false
-                binding.myInfoSexNoBtn.isSelected = false
+            if(binding.myInfoGenderMaleBtn.isSelected ||binding.myInfoGenderNoBtn.isSelected ){
+                binding.myInfoGenderFemaleBtn.isSelected = true
+                binding.myInfoGenderMaleBtn.isSelected = false
+                binding.myInfoGenderNoBtn.isSelected = false
 
             }
             else{
-                binding.myInfoSexFemaleBtn.isSelected =  binding.myInfoSexFemaleBtn.isSelected != true
+                binding.myInfoGenderFemaleBtn.isSelected =  binding.myInfoGenderFemaleBtn.isSelected != true
             }
         }
-        binding.myInfoSexNoBtn.setOnClickListener {
+        binding.myInfoGenderNoBtn.setOnClickListener {
 
-            if(binding.myInfoSexMaleBtn.isSelected ||binding.myInfoSexFemaleBtn.isSelected ){
-                binding.myInfoSexNoBtn.isSelected = true
-                binding.myInfoSexMaleBtn.isSelected = false
-                binding.myInfoSexFemaleBtn.isSelected = false
+            if(binding.myInfoGenderMaleBtn.isSelected ||binding.myInfoGenderFemaleBtn.isSelected ){
+                binding.myInfoGenderNoBtn.isSelected = true
+                binding.myInfoGenderMaleBtn.isSelected = false
+                binding.myInfoGenderFemaleBtn.isSelected = false
 
             }
             else{
-                binding.myInfoSexNoBtn.isSelected =  binding.myInfoSexNoBtn.isSelected != true
+                binding.myInfoGenderNoBtn.isSelected =  binding.myInfoGenderNoBtn.isSelected != true
             }
         }
 
@@ -100,12 +108,14 @@ class MyInfoActivity : AppCompatActivity() {
             callNumberPicker()
         }
 
-        //정보 저장 - 페이지 자체의 저장
+        //정보를 서버에 넘김
         binding.myInfoLayoutHeader.layoutHeaderBtnTv.setOnClickListener {
             complete()
         }
 
-
+        binding.myInfoLeaveBtnTv.setOnClickListener {
+            startActivity(Intent(this, MyPageLeaveActivity::class.java))
+        }
     }
 
     private fun callNumberPicker() {
@@ -161,8 +171,8 @@ class MyInfoActivity : AppCompatActivity() {
             Toast.makeText(this, "연령대 지정 여부를 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
-        if (!binding.myInfoSexMaleBtn.isSelected && !binding.myInfoSexFemaleBtn.isSelected
-            && !binding.myInfoSexNoBtn.isSelected
+        if (!binding.myInfoGenderMaleBtn.isSelected && !binding.myInfoGenderFemaleBtn.isSelected
+            && !binding.myInfoGenderNoBtn.isSelected
         ) {
             Toast.makeText(this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -170,16 +180,16 @@ class MyInfoActivity : AppCompatActivity() {
 
         val nickName: String = binding.myInfoNickInputEt.text.toString()
         val birthYear: String = binding.myInfoBirthYearInputTv.text.toString()
-        lateinit var sex: String
+        lateinit var gender: String
         lateinit var age: String
 
         //성별
-        if (binding.myInfoSexMaleBtn.isSelected) {
-            sex = binding.myInfoSexMaleBtn.text.toString()
-        } else if (binding.myInfoSexFemaleBtn.isSelected) {
-            sex = binding.myInfoSexFemaleBtn.text.toString()
-        } else if (binding.myInfoSexNoBtn.isSelected) {
-            sex = binding.myInfoSexNoBtn.text.toString()
+        if (binding.myInfoGenderMaleBtn.isSelected) {
+            gender = binding.myInfoGenderMaleBtn.text.toString()
+        } else if (binding.myInfoGenderFemaleBtn.isSelected) {
+            gender = binding.myInfoGenderFemaleBtn.text.toString()
+        } else if (binding.myInfoGenderNoBtn.isSelected) {
+            gender = binding.myInfoGenderNoBtn.text.toString()
         }
 
         //나이
@@ -189,8 +199,13 @@ class MyInfoActivity : AppCompatActivity() {
             age = binding.myInfoAgeNoBtn.text.toString()
         }
 
-        Toast.makeText(this, "nickname $nickName birthYear $birthYear sex $sex age $age", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "nickname $nickName birthYear $birthYear gender $gender age $age", Toast.LENGTH_SHORT).show()
 
 
+    }
+    private fun hideKeyBoard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.myInfoNickInputEt.windowToken, 0)
+        binding.myInfoNickInputEt.clearFocus()
     }
 }

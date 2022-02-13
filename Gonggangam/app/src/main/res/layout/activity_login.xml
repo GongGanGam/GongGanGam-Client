@@ -32,26 +32,26 @@
         />
     <LinearLayout
         android:id="@+id/login_sns_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/login_title_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="112dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         >
         <Button
             android:id="@+id/login_kakao_btn"
             android:backgroundTint="#FEE500"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_sns_button"
             android:textSize="14sp"
             android:textAlignment="center"
             android:textStyle="normal"
-           android:textFontWeight="400"
+            android:textFontWeight="400"
             android:paddingStart="26dp"
             android:textColor="#191919"
             android:paddingTop="16dp"
@@ -64,7 +64,7 @@
             />
         <Button
             android:id="@+id/login_naver_btn"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/background_sns_button"
             android:textSize="14sp"
@@ -78,24 +78,6 @@
             android:lineHeight="16sp"
             android:layout_marginTop="16dp"
             android:drawableStart="@drawable/ic_login_naver"
-            android:paddingEnd="26dp"
-            />
-        <Button
-            android:id="@+id/login_google_btn"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:background="@drawable/background_sns_button"
-            android:textSize="14sp"
-            android:textAlignment="center"
-            android:textStyle="normal"
-            android:paddingStart="26dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="#222222"
-            android:text="구글로 시작하기"
-            android:lineHeight="16sp"
-            android:layout_marginTop="16dp"
-            android:drawableStart="@drawable/ic_login_google"
             android:paddingEnd="26dp"
             />
     </LinearLayout>

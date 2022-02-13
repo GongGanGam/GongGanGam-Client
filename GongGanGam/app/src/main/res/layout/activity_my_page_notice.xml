@@ -1,0 +1,66 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#262D89">
+
+    <View
+        android:id="@+id/mypage_notice_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </View>
+
+    <ImageView
+        android:id="@+id/mypage_notice_back_iv"
+        android:layout_width="17dp"
+        android:layout_height="10dp"
+        android:src="@drawable/arrow_hdpi"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/mypage_notice_header"
+        app:layout_constraintBottom_toBottomOf="@id/mypage_notice_header"
+        app:layout_constraintStart_toStartOf="@id/mypage_notice_header" />
+
+    <TextView
+        android:id="@+id/mypage_notice_header_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="공지사항"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:layout_marginStart="72dp"
+        app:layout_constraintStart_toStartOf="@+id/mypage_notice_header"
+        app:layout_constraintTop_toTopOf="@+id/mypage_notice_header"
+        app:layout_constraintBottom_toBottomOf="@+id/mypage_notice_header" />
+
+    <ImageView
+        android:id="@+id/accept_diary_menu_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:src="@drawable/kebab_menu_hdpi"
+        app:layout_constraintTop_toTopOf="@id/mypage_notice_header"
+        app:layout_constraintBottom_toBottomOf="@id/mypage_notice_header"
+        app:layout_constraintEnd_toEndOf="@id/mypage_notice_header"
+        android:layout_marginEnd="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mypage_notice_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_mypage_notice_list"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

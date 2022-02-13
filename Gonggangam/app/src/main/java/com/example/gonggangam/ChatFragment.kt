@@ -1,11 +1,11 @@
-package com.example.gonggangam
+package com.example.GongGanGam
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.gonggangam.databinding.FragmentChatBinding
+import androidx.fragment.app.Fragment
+import com.example.GongGanGam.databinding.FragmentChatBinding
 
 class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
@@ -20,5 +20,6 @@ class ChatFragment : Fragment() {
 
         return binding.root
     }
+
 
 }

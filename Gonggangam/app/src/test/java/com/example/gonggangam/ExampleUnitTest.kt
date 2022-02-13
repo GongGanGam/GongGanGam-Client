@@ -1,4 +1,4 @@
-package com.example.gonggangam
+package com.example.GongGanGam
 
 import org.junit.Test
 

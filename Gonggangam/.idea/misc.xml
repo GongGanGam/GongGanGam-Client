@@ -3,60 +3,97 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/additional_seletor_rounded_corner.xml" value="0.175" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/additional_sex_selector.xml" value="0.196875" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_dialog.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_dialog_btn.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_gradient.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_sns_button.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_transparent.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/button_active_background.xml" value="0.215625" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/button_active_stroke_background.xml" value="0.215625" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/button_inactive_background.xml" value="0.18703703703703703" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/edittext_rounded_corner_rectangle.xml" value="0.19739583333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/header.xml" value="0.18703703703703703" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/main_btm_chat_selector.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/main_btm_letter_selector.xml" value="0.17962962962962964" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.17962962962962964" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/selector_text.xml" value="0.2" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/font/font.xml" value="0.11979166666666667" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_additional_information.xml" value="0.22" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_initial.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_login_old.xml" value="0.13177083333333334" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_my_info.xml" value="0.22" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/dialog_date_picker.xml" value="0.1" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/dialog_datepicker.xml" value="0.22" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_chat.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_diary.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_letter.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_received_diary.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_received_reply.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/header.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/item_header.xml" value="0.22" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/item_header_button.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/layout_header.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
-        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19583333333333333" />
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14322916666666666" />
-        <entry key="app/src/main/res/drawable/background_gradient.xml" value="0.11574074074074074" />
-        <entry key="app/src/main/res/drawable/background_transparent.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/main_btm_chat_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/main_btm_color_selector.xml" value="0.14270833333333333" />
-        <entry key="app/src/main/res/drawable/main_btm_diary_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/main_btm_letter_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.12107396149949341" />
-        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.12107396149949341" />
-        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.12107396149949341" />
-        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.12107396149949341" />
-        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.23148148148148148" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/accept_chatting_info_background.xml" value="0.1171875" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/additional_gender_selector.xml" value="0.1421875" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_calendar.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_calendar_date.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_dialog_btn.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_gradient.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_sns_button.xml" value="0.14166666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/background_solid.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/btm_background_diary.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/button_inactive_background.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/calendar_not_select_background.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/calendar_select_background.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/calendar_week_layout.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/drawable/edit_text_cursor.xml" value="0.14010416666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_accept_chatting.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_accept_diary.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_additional_information.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_diary_write.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_diary_write_emoji.xml" value="0.1265625" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_login.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_login_old.xml" value="0.12760416666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_my_info.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_my_page_leave.xml" value="0.22" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_my_page_notice.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_reply_to_diary.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/activity_splash.xml" value="0.12291666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/calendar_date_layout.xml" value="0.43894899536321486" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/calendar_day_layout.xml" value="0.6666666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/calendar_day_legend.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/calendar_month_header_layout.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/calendar_week_layout.xml" value="0.5" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/dialog_datepicker.xml" value="0.12760416666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_chat.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_diary.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_letter.xml" value="0.1" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_my_page.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_received_diary.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/fragment_received_reply.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/item_diary_write_emoji.xml" value="0.1265625" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/item_mypage_notice_list.xml" value="0.1265625" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/item_received_letter.xml" value="0.11145833333333334" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/layout/layout_header.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/Gonggangam/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/drawable/accept_chatting_diary_info_background.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/drawable/accept_chatting_info_background.xml" value="0.2212962962962963" />
+        <entry key="app/src/main/res/drawable/background_gradient.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/background_photo.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/drawable/background_solid.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/background_transparent.xml" value="0.1712962962962963" />
+        <entry key="app/src/main/res/drawable/btm_background_diary.xml" value="0.2064814814814815" />
+        <entry key="app/src/main/res/drawable/button_active_background.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/button_active_stroke_background.xml" value="0.2212962962962963" />
+        <entry key="app/src/main/res/drawable/button_inactive_background.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/chat_footer_top_border.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/drawable/edit_text_cursor.xml" value="0.21296296296296297" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/letter_item_background.xml" value="0.3725908824659206" />
+        <entry key="app/src/main/res/drawable/main_btm_chat_selector.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/drawable/main_btm_color_selector.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/drawable/main_btm_diary_selector.xml" value="0.18611111111111112" />
+        <entry key="app/src/main/res/drawable/main_btm_letter_selector.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/profile_image_background.xml" value="0.584514152344487" />
+        <entry key="app/src/main/res/drawable/upload_photo_background.xml" value="0.7312368716492683" />
+        <entry key="app/src/main/res/drawable/write_change_btn_background.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_input_background.xml" value="0.14375" />
+        <entry key="app/src/main/res/drawable/write_plus_background.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_share_btn_active.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/write_share_btn_inactive.xml" value="0.140625" />
+        <entry key="app/src/main/res/font/font.xml" value="0.2212962962962963" />
+        <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.28983899216978487" />
+        <entry key="app/src/main/res/layout/activity_accept_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_accept_diary_acitivity.xml" value="0.17944700863929658" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3532710280373832" />
+        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.11474164133738601" />
+        <entry key="app/src/main/res/layout/activity_diary_write.xml" value="0.18126914332856464" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12196465790570521" />
+        <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.22591130280768323" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.6673973780574413" />
+        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.17935578330893118" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_received_reply.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_received_letter.xml" value="0.2784253481294301" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.18333333333333332" />
       </map>
     </option>
   </component>
@@ -65,5 +102,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.18126914332856464" />
+      </ProjectState>
+    </option>
   </component>
 </project>

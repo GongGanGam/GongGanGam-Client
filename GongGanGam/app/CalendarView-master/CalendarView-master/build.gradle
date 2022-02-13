@@ -1,0 +1,32 @@
+buildscript {
+    apply from: rootProject.file("dependencies.gradle")
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath deps.gradle_plugins.android
+        classpath deps.gradle_plugins.kotlin
+        classpath deps.gradle_plugins.maven_release
+        classpath deps.gradle_plugins.ktlint
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    apply plugin: 'org.jlleitschuh.gradle.ktlint'
+
+    ktlint {
+        version = "0.36.0"
+        disabledRules = ["no-wildcard-imports", "import-ordering"]
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
