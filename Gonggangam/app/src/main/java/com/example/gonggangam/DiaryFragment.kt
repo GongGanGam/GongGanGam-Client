@@ -1,16 +1,16 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.os.Bundle
-import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.GongGanGam.databinding.FragmentDiaryBinding
+import com.example.gonggangam.databinding.FragmentDiaryBinding
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -43,7 +43,7 @@ class DiaryFragment : Fragment() {
         binding.diaryCalendarViewCv.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.diaryCalendarViewCv.scrollToMonth(currentMonth)
 
-        binding.diaryCalendarViewCv.daySize=Size(240,460)
+//        binding.diaryCalendarViewCv.daySize=Size(240,460)
         class  DayViewContainer(view: View) : ViewContainer(view) {
             val dateText = view.findViewById<TextView>(R.id.calendar_date_text_tv)
             val dateImg=view.findViewById<ImageView>(R.id.calendar_date_img_iv)
@@ -117,6 +117,10 @@ class DiaryFragment : Fragment() {
                     container.dateText.visibility= INVISIBLE
                     container.dateImg.visibility= INVISIBLE
                 }
+
+                //date height
+                val dayWidth = binding.diaryCalendarViewCv.daySize.width
+                container.dateLayout.layoutParams = LinearLayout.LayoutParams(dayWidth, dayWidth*3/2)
 
                 // Other binding logic
             }

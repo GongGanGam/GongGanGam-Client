@@ -12,8 +12,8 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.GongGanGam.R
-import com.example.GongGanGam.databinding.ActivityAdditionalInformationBinding
+import com.example.gonggangam.R
+import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
 
 class AdditionalInformationActivity() : AppCompatActivity() {
     lateinit var binding: ActivityAdditionalInformationBinding

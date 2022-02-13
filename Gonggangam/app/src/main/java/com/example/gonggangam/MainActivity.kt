@@ -1,8 +1,12 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
+import MyPageFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.GongGanGam.databinding.ActivityMainBinding
+import com.example.gonggangam.DiaryFragment
+import com.example.gonggangam.R
+import com.example.gonggangam.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -26,11 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         // init bottom navigation
         initNavigation()
-
-
-
-
-
     }
 
     private fun initNavigation() {
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.mypageFragment -> {
+                    setFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, MyPageFragment())
                         .commitAllowingStateLoss()
@@ -77,6 +77,14 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+    }
+
+    private fun setFragment() {
+        val MyPageFragment = MyPageFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.mainFrm.id, MyPageFragment, "PICK_IMAGE_FRAGMENT")
+            .commit()
     }
 
 

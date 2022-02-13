@@ -11,9 +11,9 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.GongGanGam.MyPageLeaveActivity
-import com.example.GongGanGam.R
-import com.example.GongGanGam.databinding.ActivityMyInfoBinding
+import com.example.gonggangam.MyPageLeaveActivity
+import com.example.gonggangam.R
+import com.example.gonggangam.databinding.ActivityMyInfoBinding
 
 class MyInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityMyInfoBinding

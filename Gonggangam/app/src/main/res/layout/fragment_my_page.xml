@@ -28,11 +28,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/mypage_user_profile_none"
-            app:civ_border_width="1dp"
             app:civ_border_color="#9CA3D4"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_bottom_mypage_select"
+            android:src="@drawable/profile_img"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="88dp"
             app:layout_constraintStart_toStartOf="parent"

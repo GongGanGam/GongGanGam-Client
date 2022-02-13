@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:layout_marginVertical="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_message_profile_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/default_profile_img" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_message_opp_name_tv"
+        android:text="이름"
+        android:textSize="12sp"
+        android:textColor="#C6C7E8"
+        android:layout_marginStart="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_message_profile_iv"/>
+
+    <TextView
+        android:id="@+id/item_message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#1A227E"
+        android:textSize="14sp"
+        android:text="메시지"
+        android:layout_marginTop="6dp"
+        android:paddingVertical="7dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/left_message_9"
+        app:layout_constraintTop_toBottomOf="@id/item_message_opp_name_tv"
+        app:layout_constraintStart_toEndOf="@id/item_message_profile_iv"
+        android:layout_marginStart="6dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
