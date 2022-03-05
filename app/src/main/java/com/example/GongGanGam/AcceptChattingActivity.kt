@@ -1,11 +1,10 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Visibility
 import android.view.View
-import com.example.GongGanGam.databinding.ActivityAcceptChattingBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
 
 class AcceptChattingActivity : AppCompatActivity() {
     lateinit var binding: ActivityAcceptChattingBinding

@@ -70,10 +70,10 @@
             android:id="@+id/accept_chatting_my_mood_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_mood_ex"
+            android:src="@drawable/emoji_dark_sad"
             app:layout_constraintStart_toStartOf="@id/accept_chatting_my_cl"
-            app:layout_constraintTop_toTopOf="@id/accept_chatting_my_cl"
-            />
+            app:layout_constraintTop_toTopOf="@id/accept_chatting_my_cl" />
+
         <TextView
             android:id="@+id/accept_chatting_my_date"
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:background="@drawable/profile_image_background"
-        android:src="@drawable/ic_mood_ex"
+        android:src="@drawable/emoji_dark_soso"
         app:layout_constraintTop_toBottomOf="@id/accept_chatting_my_cl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

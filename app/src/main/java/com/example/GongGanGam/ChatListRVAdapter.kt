@@ -1,11 +1,9 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.GongGanGam.databinding.ItemChatListBinding
-import com.example.GongGanGam.databinding.ItemReceivedLetterBinding
+import com.example.gonggangam.databinding.ItemChatListBinding
 
 class ChatListRVAdapter(private val chatLists : ArrayList<ChatList>) :
     RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>(){

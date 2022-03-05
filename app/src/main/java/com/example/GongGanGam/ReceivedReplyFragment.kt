@@ -1,25 +1,21 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.GongGanGam.databinding.FragmentReceivedReplyBinding
+import com.example.gonggangam.databinding.FragmentReceivedReplyBinding
 
 class ReceivedReplyFragment : Fragment() {
     lateinit var binding: FragmentReceivedReplyBinding
 
     private val replies = arrayListOf<Diary>(
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯...")
+        Diary("", "오늘도맑음", "21.12.24", "오늘은 날씨가 참 맑았다. 날씨와는 반대로..."),
+        Diary("", "영화빌런","21.12.24", "스파이더맨 진짜 재밌었다. 특히 역대 스파이..."),
+        Diary("", "캐롤과휘리릭", "21.12.24", "오늘은 날씨가 참 맑았다. 날씨와는 반대로..."),
     )
 
     override fun onCreateView(
