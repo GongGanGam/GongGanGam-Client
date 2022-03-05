@@ -1,47 +1,40 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Context
-import android.content.Intent
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import com.example.GongGanGam.databinding.ActivityDiaryWriteBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
+
 
 class DiaryWriteActivity : AppCompatActivity() {
     lateinit var binding: ActivityDiaryWriteBinding
-    lateinit var observer: MyLifecycleObserver
-    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        binding.writeDiaryPhotoIv.setImageURI(result.data?.data)
-        binding.writeDiaryPhotoIv.visibility = View.VISIBLE
-    }
-
     var isShare:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDiaryWriteBinding.inflate(layoutInflater)
-        observer = MyLifecycleObserver(this.activityResultRegistry)
-        lifecycle.addObserver(observer)
 
-
+        getImoji()
         initListener()
         setContentView(binding.root)
     }
 
+    private fun getImoji(){
+        val extras = intent.extras
+        val s = extras!!.getString("state")
+        val byteArray = intent.getByteArrayExtra("image")
+        val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
+
+        val str = """
+            $s
+            
+            """.trimIndent()
+        binding.writeMoodInfoTv.setText(str)
+        binding.writeMoodIconIv.setImageBitmap(bitmap)
+    }
 
     private fun initListener() {
         binding.writeBackIv.setOnClickListener {
@@ -54,7 +47,6 @@ class DiaryWriteActivity : AppCompatActivity() {
 
         binding.writeUploadPhotoBtn.setOnClickListener {
             //이미지 첨부
-            observer.selectImage()
         }
 
         binding.writeShareBtn.setOnClickListener {
@@ -69,49 +61,12 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         }
 
-        binding.writeInputEt.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                binding.writeInputNv.invalidate()
-                binding.writeInputNv.requestLayout()
-            }
-        })
 
     }
 
     private fun hideKeyBoard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.writeInputEt.windowToken, 0)
-        binding.writeInputEt.clearFocus()
-    }
-
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = MediaStore.Images.Media.CONTENT_TYPE
-        intent.type = "image/*"
-        getContent.launch(intent)
-    }
-
-    inner class MyLifecycleObserver(private val registry: ActivityResultRegistry)
-        : DefaultLifecycleObserver {
-        lateinit var getContent : ActivityResultLauncher<String>
-
-        override fun onCreate(owner: LifecycleOwner) {
-            getContent = registry.register("key", owner, ActivityResultContracts.GetContent()) { uri ->
-                // Handle the returned Uri
-            }
-        }
-
-        fun selectImage() {
-            openGallery()
-        }
     }
 
 

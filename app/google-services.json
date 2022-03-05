@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "897228064004",
-    "project_id": "gonggangam-47655",
-    "storage_bucket": "gonggangam-47655.appspot.com"
+    "project_number": "285856462372",
+    "project_id": "gonggangam-f2086",
+    "storage_bucket": "gonggangam-f2086.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:897228064004:android:c100e099c07c6d0a04bc51",
+        "mobilesdk_app_id": "1:285856462372:android:c68927caf407b516b64ab1",
         "android_client_info": {
-          "package_name": "com.example.GongGanGam"
+          "package_name": "com.example.gonggangam"
         }
       },
       "oauth_client": [
         {
-          "client_id": "897228064004-3mk4nc64t9jj6dq4sm4ip8eoqtkmvpnk.apps.googleusercontent.com",
+          "client_id": "285856462372-mc27dakn8ngbjvgtgm8ngcu5d2hetbm9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCY_o_QpDQusBLYzSadzWPZv8iOaxzKCa4"
+          "current_key": "AIzaSyAsKnOxM7VqZkwSz_F4C1kTPgwM_avHAw4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "897228064004-3mk4nc64t9jj6dq4sm4ip8eoqtkmvpnk.apps.googleusercontent.com",
+              "client_id": "285856462372-mc27dakn8ngbjvgtgm8ngcu5d2hetbm9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,4 +1,4 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
-import com.example.GongGanGam.databinding.ActivityReplyToDiaryBinding
+import com.example.gonggangam.databinding.ActivityReplyToDiaryBinding
 
 class ReplyToDiaryActivity : AppCompatActivity() {
     lateinit var binding: ActivityReplyToDiaryBinding

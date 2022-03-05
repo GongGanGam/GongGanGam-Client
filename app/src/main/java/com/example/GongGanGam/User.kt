@@ -1,4 +1,4 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 data class User(
     var name: String ="",

@@ -1,10 +1,9 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.GongGanGam.databinding.ActivityAcceptDiaryBinding
-import com.example.GongGanGam.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.databinding.ActivityAcceptDiaryBinding
 
 class AcceptDiaryActivity : AppCompatActivity() {
     lateinit var binding: ActivityAcceptDiaryBinding

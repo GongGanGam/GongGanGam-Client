@@ -1,13 +1,13 @@
-package com.example.GongGanGam
+package com.example.gonggangam
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.GongGanGam.databinding.FragmentReceivedDiaryBinding
+import com.example.gonggangam.databinding.FragmentReceivedDiaryBinding
 
 class ReceivedDiaryFragment : Fragment() {
    lateinit var binding : FragmentReceivedDiaryBinding
@@ -16,10 +16,6 @@ class ReceivedDiaryFragment : Fragment() {
        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
        Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-       Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-       Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-       Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯..."),
-       Diary("", "오늘도맑음", "21.12.24", "기억하니 우리가 했던 이별 시간이 멈춘 듯...")
    )
 
     override fun onCreateView(
