@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary"
-    tools:context="com.example.gonggangam.AdditionalInformationActivity">
+    tools:context="com.example.gonggangam.Activity.AdditionalInformationActivity">
 
     <View
         android:id="@+id/additional_header"

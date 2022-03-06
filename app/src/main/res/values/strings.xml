@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kakao_app_key">f2b1ab86a36bc9f3c9717a5799a8fbf8</string>
+    <string name="naver_client_id">VqIpAv6YCfEjwsKp7mar</string>
+    <string name="naver_client_secret">yzvGNScIhg</string>
+    <string name="naver_client_name">공간감</string>
     <string name="content01">공간감이 새롭게 개편되어 찾아왔습니다! 지난 버전에 분분했던 의견을 적극 반영하고 더욱 좋은 모습으로 찾아뵙기 위해 많은 고민에 고민을 더했습니다. 공간감이 새롭게 개편되어 찾아왔습니다! 지난 버전에 분분했던 의견을 적극 반영하고 더욱 좋은 모습으로 찾아뵙기 위해 많은 고민에 고민을 더했습니다공간감이 새롭게 개편되어 찾아왔습니다! 지난 버전에 분분했던 의견을 적극 반영하고 더욱 좋은 모습으로 찾아뵙기 위해 많은 고민에 고민을 더했습니다공간감이 새롭게 개편되어 찾아왔습니다! 지난 버전에 분분했던 의견을 적극 반영하고 더욱 좋은 모습으로 찾아뵙기 위해 많은 고민에 고민을 더했습니다</string>
     <string-array name="custom_weekdays">
         <item>일</item>
