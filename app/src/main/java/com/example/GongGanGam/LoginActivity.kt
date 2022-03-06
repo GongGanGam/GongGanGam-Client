@@ -14,6 +14,11 @@ import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +29,10 @@ class LoginActivity : AppCompatActivity() {
     var kakaoAccessToken : String = ""
     var kakaoId: String = ""
     var kakaoEmail: String = ""
-    var loginSuccess: Boolean = false;
+    var naverAccessToken: String = ""
+    var naverId: String = ""
+    var naverEmail: String = ""
+    var loginSuccess: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -44,22 +52,34 @@ class LoginActivity : AppCompatActivity() {
 //                }
 //            }
             onKakao()
-            login("code", "18d1c44e27c5b6b64c2e4a2e58a90361", "http://3.34.199.201:3000/app/users/login/kakao")
+            kakaoLogin("code", "18d1c44e27c5b6b64c2e4a2e58a90361", "http://3.34.199.201:3000/app/users/login/kakao")
         }
 
         binding.loginNaverBtn.setOnClickListener {
-            UserApiClient.instance.unlink { error ->
-                if (error != null) {
-                    Log.d("TAG_KAKAO", "연결 끊기 실패", error)
-                }
-                else {
-                    Log.d("TAG_KAKAO", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                }
-            }
+            onNaver()
         }
     }
 
-    fun login(response_type: String, client_id: String, redirect_uri: String) {
+    fun onNaver() {
+        val oauthLoginCallback = object : OAuthLoginCallback {
+            override fun onSuccess() {
+                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                naverAccessToken = NaverIdLoginSDK.getAccessToken().toString()
+                getUserProfile("naver")
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+                val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+                val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+                Toast.makeText(this@LoginActivity,"errorCode:$errorCode, errorDesc:$errorDescription",Toast.LENGTH_SHORT).show()
+            }
+            override fun onError(errorCode: Int, message: String) {
+                onFailure(errorCode, message)
+            }
+        }
+        NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
+    }
+
+    fun kakaoLogin(response_type: String, client_id: String, redirect_uri: String) {
         val authService = getKakaoLoginRetrofit().create(AuthRetrofitInterface::class.java)
         authService.login(response_type, client_id, redirect_uri).enqueue(object:
             Callback<AuthResponse> {
@@ -115,10 +135,11 @@ class LoginActivity : AppCompatActivity() {
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
         }
-        getUserProfile()
+        getUserProfile("kakao")
     }
 
-    fun getUserProfile() {
+    fun getUserProfile(type: String) {
+        if(type == "kakao") {
         UserApiClient.instance.me { user, error ->
             Log.d("TAG_KAKAO", "유저 정보 요청 중")
             if (error != null) {
@@ -131,6 +152,21 @@ class LoginActivity : AppCompatActivity() {
                 kakaoId= user.id.toString()
                 kakaoEmail= user.kakaoAccount?.email.toString()
             }
+        }}
+        else if(type == "naver") {
+            NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+                override fun onSuccess(response: NidProfileResponse) {
+                    Log.d("TAG_NAVER", response.toString())
+                }
+                override fun onFailure(httpStatus: Int, message: String) {
+                    val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+                    val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+                    Toast.makeText(this@LoginActivity, "errorCode: $errorCode, errorDesc: $errorDescription", Toast.LENGTH_SHORT).show()
+                }
+                override fun onError(errorCode: Int, message: String) {
+                    onFailure(errorCode, message)
+                }
+            })
         }
     }
 
