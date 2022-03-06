@@ -36,28 +36,17 @@
         app:layout_constraintBottom_toBottomOf="@id/item_received_letter_iv"
         app:layout_constraintStart_toEndOf="@id/item_received_letter_iv" />
 
-  <androidx.cardview.widget.CardView
-      android:id="@+id/item_received_letter_new_cv"
-      android:layout_width="13dp"
-      android:layout_height="13dp"
-      app:cardCornerRadius="4dp"
-      android:visibility="gone"
-      android:backgroundTint="#FF6767"
-      android:layout_marginStart="4dp"
-      app:layout_constraintStart_toEndOf="@id/item_received_letter_user_name"
-      app:layout_constraintTop_toTopOf="@id/item_received_letter_user_name"
-      app:layout_constraintBottom_toBottomOf="@id/item_received_letter_user_name">
+<ImageView
+    android:id="@+id/item_received_letter_new_iv"
+    android:layout_width="13dp"
+    android:layout_height="13dp"
+    android:src="@drawable/ic_new_letter"
+    android:layout_marginStart="5dp"
+    app:layout_constraintStart_toEndOf="@id/item_received_letter_user_name"
+    app:layout_constraintTop_toTopOf="@id/item_received_letter_user_name"
+    app:layout_constraintBottom_toBottomOf="@id/item_received_letter_user_name"
 
-      <TextView
-          android:visibility="gone"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="N"
-          android:textStyle="bold"
-          android:textSize="10sp"
-          android:textColor="#FFFFFF"
-          android:layout_gravity="center" />
-  </androidx.cardview.widget.CardView>
+    />
 
     <TextView
         android:id="@+id/item_received_letter_date"

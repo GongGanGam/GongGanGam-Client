@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_solid"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LetterFragment">
+    tools:context=".Fragment.LetterFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/letter_tab_layout"

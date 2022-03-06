@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_solid"
     android:id="@+id/write_diary_back_cl"
-    tools:context=".DiaryWriteActivity">
+    tools:context=".Activity.DiaryWriteActivity">
 
     <View
         android:id="@+id/write_header"

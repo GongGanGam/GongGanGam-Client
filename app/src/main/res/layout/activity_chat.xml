@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:onClick="hideKeyboard"
-    tools:context=".ChatActivity">
+    tools:context=".Activity.ChatActivity">
 
     <View
         android:id="@+id/chat_header"
