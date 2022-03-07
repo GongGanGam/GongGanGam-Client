@@ -2,9 +2,7 @@ package com.example.gonggangam.DiaryService
 
 import com.example.gonggangam.AuthService.AuthResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface DiaryRetrofitInterface {
     @GET("app/diarys/share")
@@ -18,4 +16,10 @@ interface DiaryRetrofitInterface {
         @Query("page") page: Int,
         @Header("x-access-token") jwt: String
     ): Call<ReceivedAnswerResponse>
+
+    @POST("app/diarys/answer")
+    fun sendReply(
+        @Header("x-access-token") jwt: String,
+        @Body reply: Reply
+    ): Call<Response>
 }

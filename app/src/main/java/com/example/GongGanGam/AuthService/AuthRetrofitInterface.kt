@@ -1,17 +1,24 @@
 package com.example.gonggangam.AuthService
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
-import retrofit2.http.Query
 
+data class loginBody(
+    @SerializedName("accessToken") val accessToken: String
+)
 interface AuthRetrofitInterface {
-    @GET("authorize")
-    fun login(@Query("response_type") response_type: String,
-              @Query("client_id") client_id: String,
-              @Query("redirect_uri") redirect_uri: String
+    @POST("app/users/login/naver")
+    fun naverLogin(
+        @Body body: loginBody
     ): Call<AuthResponse>
-
-    @POST("authorize")
-    fun naverLogin()
 }
+
+//@FormUrlEncoded
+//@POST("app/users/login/naver")
+//fun naverLogin(
+//    @FieldMap body: HashMap<String, String>
+//): Call<AuthResponse>

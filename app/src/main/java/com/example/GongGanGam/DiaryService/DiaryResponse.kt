@@ -10,6 +10,17 @@ data class Page (
     val pageSize: Int,
 )
 
+data class Reply (
+    @SerializedName("content") val content: String,
+    @SerializedName("diaryIdx") val diaryIdx: Int,
+)
+
+data class Response (
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+)
+
 data class ReceivedDiary (
     @SerializedName("page") val page: Page?,
     @SerializedName("diarys") val diarys: ArrayList<Diary>
