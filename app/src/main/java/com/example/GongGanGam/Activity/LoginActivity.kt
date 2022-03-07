@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.AuthService.AuthResponse
 import com.example.gonggangam.AuthService.AuthRetrofitInterface
+import com.example.gonggangam.AuthService.loginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
-import com.example.gonggangam.getKakaoLoginRetrofit
-import com.example.gonggangam.getNaverLoginRetrofit
+import com.example.gonggangam.getRetrofit
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
 import com.kakao.sdk.common.model.ClientError
@@ -53,12 +53,10 @@ class LoginActivity : AppCompatActivity() {
 //                }
 //            }
             onKakao()
-            kakaoLogin("code", "18d1c44e27c5b6b64c2e4a2e58a90361", "http://3.34.199.201:3000/app/users/login/kakao")
         }
 
         binding.loginNaverBtn.setOnClickListener {
             onNaver()
-            naverLogin("code","uQjTzvqHGDi0sdby9nIL","http://localhost:3000/app/users/login/naver&state=1111" )
         }
     }
 
@@ -67,8 +65,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 naverAccessToken = NaverIdLoginSDK.getAccessToken().toString()
-                Log.d("TAG/NAVER", naverAccessToken)
-                getUserProfile("naver")
+                Log.d("TAG-API-NAVER", naverAccessToken)
+                naverLogin() // API link start
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
@@ -82,19 +80,24 @@ class LoginActivity : AppCompatActivity() {
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
 
-    fun naverLogin(response_type: String, client_id: String, redirect_uri: String) {
-        val authService = getNaverLoginRetrofit().create(AuthRetrofitInterface::class.java)
-        authService.login(response_type, client_id, redirect_uri).enqueue(object: Callback<AuthResponse> {
+    fun naverLogin() {
+//        var body = HashMap<String,String>()
+//        body["accessToken"] = naverAccessToken
+        var body = loginBody(naverAccessToken)
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("NAVER-API", body.toString())
+
+        authService.naverLogin(body).enqueue(object: Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 Log.d("NAVER/API-RESPONSE", response.toString())
 
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
-                    Log.d("NAVER/API-RESPONSE", resp.toString())
+                    Log.d("NAVER/API-RESPONSE-RESP", resp.toString())
 
                     when(resp.code) {
-                        1000 -> loginSuccess = true
-                        else -> loginSuccess = false
+                        1000 -> Log.d("NAVER/API-SUCCESS", resp.code.toString())
+                        else -> Log.d("NAVER/API-SUCCESS", resp.code.toString())
                     }
                 }
             }
@@ -105,30 +108,30 @@ class LoginActivity : AppCompatActivity() {
 
         })
     }
-    fun kakaoLogin(response_type: String, client_id: String, redirect_uri: String) {
-        val authService = getKakaoLoginRetrofit().create(AuthRetrofitInterface::class.java)
-        authService.login(response_type, client_id, redirect_uri).enqueue(object:
-            Callback<AuthResponse> {
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                Log.d("KAKAO/API-RESPONSE", response.toString())
-
-                if(response.isSuccessful && response.code() == 200) {
-                    val resp = response.body()!!
-                    Log.d("KAKAO/API-RESPONSE", resp.toString())
-
-                    when(resp.code) {
-                        1000 -> loginSuccess = true
-                        else -> loginSuccess = false
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.d("LOGIN/API-ERROR", t.message.toString())
-            }
-
-        })
-    }
+//    fun kakaoLogin(response_type: String, client_id: String, redirect_uri: String) {
+//        val authService = getKakaoLoginRetrofit().create(AuthRetrofitInterface::class.java)
+//        authService.login(response_type, client_id, redirect_uri).enqueue(object:
+//            Callback<AuthResponse> {
+//            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+//                Log.d("KAKAO/API-RESPONSE", response.toString())
+//
+//                if(response.isSuccessful && response.code() == 200) {
+//                    val resp = response.body()!!
+//                    Log.d("KAKAO/API-RESPONSE", resp.toString())
+//
+//                    when(resp.code) {
+//                        1000 -> loginSuccess = true
+//                        else -> loginSuccess = false
+//                    }
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+//                Log.d("LOGIN/API-ERROR", t.message.toString())
+//            }
+//
+//        })
+//    }
     fun onKakao(){
         // 카카오 서버 응답에 대한 callback
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->

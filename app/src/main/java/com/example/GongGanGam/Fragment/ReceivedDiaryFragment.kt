@@ -70,14 +70,15 @@ class ReceivedDiaryFragment : Fragment() {
         letterReceivedDiaryRVAdapter.setOnItemClickListener(object:
             LetterReceivedDiaryRVAdapter.OnItemClickListener {
             override fun onItemClick(diary: Diary) {
-                goToAcceptDiary() // 받은 일기 답장 액티비티로 전환
+                goToAcceptDiary(diary) // 받은 일기 답장 액티비티로 전환
             }
         })
 
     }
 
-    private fun goToAcceptDiary() {
+    private fun goToAcceptDiary(diary: Diary) {
         val intent = Intent(activity, AcceptDiaryActivity::class.java)
+        intent.putExtra("diary", diary)
         startActivity(intent)
     }
 
