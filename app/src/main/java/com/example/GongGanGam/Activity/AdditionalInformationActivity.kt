@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -18,13 +19,19 @@ import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
 
 class AdditionalInformationActivity() : AppCompatActivity() {
     lateinit var binding: ActivityAdditionalInformationBinding
+    lateinit var type: String
     private var readyToSave : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdditionalInformationBinding.inflate(layoutInflater)
+        type = intent.getStringExtra("type")!! // kakao or naver
+        Log.d("TAG", type.toString())
+        initListener()
         setContentView(binding.root)
 
+    }
 
+    private fun initListener() {
         binding.additionalGenderMaleBtn.setOnClickListener {
             if (binding.additionalGenderFemaleBtn.isSelected || binding.additionalGenderNoBtn.isSelected) {
                 binding.additionalGenderMaleBtn.isSelected = true
@@ -72,8 +79,6 @@ class AdditionalInformationActivity() : AppCompatActivity() {
             hideKeyBoard()
         }
         buttonChange()
-
-
     }
 
     private fun callNumberPicker() {

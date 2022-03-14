@@ -9,9 +9,10 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import com.example.gonggangam.Class.Diary
+import com.example.gonggangam.Class.ReceivedDiary
+import com.example.gonggangam.DiaryService.BasicResponse
 import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
 import com.example.gonggangam.DiaryService.Reply
-import com.example.gonggangam.DiaryService.Response
 import com.example.gonggangam.Fragment.ReceivedDiaryFragment
 import com.example.gonggangam.R
 import com.example.gonggangam.Util.ImageLoader
@@ -27,12 +28,12 @@ import retrofit2.Callback
 
 class ReplyToDiaryActivity : AppCompatActivity() {
     lateinit var binding: ActivityReplyToDiaryBinding
-    lateinit var diary: Diary
+    var diary = ReceivedDiary()
     private var readyToReply : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReplyToDiaryBinding.inflate(layoutInflater)
-        diary = intent.getSerializableExtra("diary") as Diary
+        diary = intent.getSerializableExtra("diary") as ReceivedDiary
         initListener()
 
         setContentView(binding.root)
@@ -93,8 +94,8 @@ class ReplyToDiaryActivity : AppCompatActivity() {
         // send diary api
         val reply = Reply(binding.replyToDiaryContentEt.text.toString(), diary.userIdx!!)
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.sendReply( getJwt(this), reply).enqueue(object: Callback<Response> {
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+        diaryService.sendReply( getJwt(this), reply).enqueue(object: Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: retrofit2.Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
                     Log.d("TAG/API-RESPONSE", resp.toString())
@@ -106,7 +107,7 @@ class ReplyToDiaryActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Response>, t: Throwable) {
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
                 Log.d("TAG/API-ERROR", t.message.toString())
             }
 

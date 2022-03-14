@@ -10,12 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gonggangam.Activity.AcceptChattingActivity
 import com.example.gonggangam.Adapter.LetterReceivedAnswerRVAdapter
-import com.example.gonggangam.Class.Diary
-import com.example.gonggangam.Adapter.LetterReceivedDiaryRVAdapter
 import com.example.gonggangam.Class.Answer
 import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedAnswerResponse
-import com.example.gonggangam.DiaryService.ReceivedDiaryResponse
+import com.example.gonggangam.DiaryService.ReceivedAnswersResponse
 import com.example.gonggangam.databinding.FragmentReceivedReplyBinding
 import com.example.gonggangam.getJwt
 import com.example.gonggangam.getRetrofit
@@ -41,12 +38,13 @@ class ReceivedReplyFragment : Fragment() {
         return binding.root
     }
 
+
     private fun getData() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getAnswers(1, jwt).enqueue(object: Callback<ReceivedAnswerResponse> {
+        diaryService.getAnswers(1, jwt).enqueue(object: Callback<ReceivedAnswersResponse> {
             override fun onResponse(
-                call: Call<ReceivedAnswerResponse>,
-                response: Response<ReceivedAnswerResponse>
+                call: Call<ReceivedAnswersResponse>,
+                response: Response<ReceivedAnswersResponse>
             ) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
@@ -61,7 +59,7 @@ class ReceivedReplyFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ReceivedAnswerResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ReceivedAnswersResponse>, t: Throwable) {
                 Log.d("TAG/API-ERROR", t.message.toString())
             }
 
@@ -77,14 +75,15 @@ class ReceivedReplyFragment : Fragment() {
         letterReceivedAnswerRVAdapter.setOnItemClickListener(object:
             LetterReceivedAnswerRVAdapter.OnItemClickListener {
             override fun onItemClick(answer: Answer) {
-                goToAcceptChatting() // 받은 일기 답장 액티비티로 전환
+                goToAcceptChatting(answer.answerIdx!!) // 받은 일기 답장 액티비티로 전환
             }
 
         })
     }
 
-    private fun goToAcceptChatting() {
+    private fun goToAcceptChatting(answerIdx: Int) {
         val intent = Intent(activity, AcceptChattingActivity::class.java)
+        intent.putExtra("answerIdx", answerIdx)
         startActivity(intent)
     }
 
