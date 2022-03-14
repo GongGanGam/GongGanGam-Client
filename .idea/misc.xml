@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/profile_image_background.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/write_share_btn_active.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/write_share_btn_inactive.xml" value="0.1296875" />
+        <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.2451219512195122" />
         <entry key="app/src/main/res/layout/activity_accept_diary.xml" value="0.21137206427688504" />
         <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.36993243243243246" />
         <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.10578824398534266" />

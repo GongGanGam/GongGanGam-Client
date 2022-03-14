@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "http://3.36.219.12:3000/"
 var gson = GsonBuilder().setLenient().create()
-val clientBuilder = OkHttpClient.Builder()
+val clientBuilder = OkHttpClient.Builder() // more detail retrofit log
 val loggingIntercepter = HttpLoggingInterceptor()
 
 fun getRetrofit(): Retrofit {

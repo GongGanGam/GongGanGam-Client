@@ -12,7 +12,7 @@ import com.example.gonggangam.Activity.AcceptDiaryActivity
 import com.example.gonggangam.Class.Diary
 import com.example.gonggangam.Adapter.LetterReceivedDiaryRVAdapter
 import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedDiaryResponse
+import com.example.gonggangam.DiaryService.ReceivedDiarysResponse
 import com.example.gonggangam.databinding.FragmentReceivedDiaryBinding
 import com.example.gonggangam.getJwt
 import com.example.gonggangam.getRetrofit
@@ -37,10 +37,10 @@ class ReceivedDiaryFragment : Fragment() {
 
     private fun getData() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getDiaries(1, jwt).enqueue(object: Callback<ReceivedDiaryResponse> {
+        diaryService.getDiaries(1, jwt).enqueue(object: Callback<ReceivedDiarysResponse> {
             override fun onResponse(
-                call: Call<ReceivedDiaryResponse>,
-                response: Response<ReceivedDiaryResponse>
+                call: Call<ReceivedDiarysResponse>,
+                response: Response<ReceivedDiarysResponse>
             ) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
@@ -55,7 +55,7 @@ class ReceivedDiaryFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ReceivedDiaryResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ReceivedDiarysResponse>, t: Throwable) {
                 Log.d("TAG/API-ERROR", t.message.toString())
             }
 
@@ -78,7 +78,7 @@ class ReceivedDiaryFragment : Fragment() {
 
     private fun goToAcceptDiary(diary: Diary) {
         val intent = Intent(activity, AcceptDiaryActivity::class.java)
-        intent.putExtra("diary", diary)
+        intent.putExtra("diaryIdx", diary.diaryIdx)
         startActivity(intent)
     }
 

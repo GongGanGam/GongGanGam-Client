@@ -81,8 +81,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun naverLogin() {
-//        var body = HashMap<String,String>()
-//        body["accessToken"] = naverAccessToken
         var body = loginBody(naverAccessToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("NAVER-API", body.toString())
@@ -96,8 +94,12 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("NAVER/API-RESPONSE-RESP", resp.toString())
 
                     when(resp.code) {
-                        1000 -> Log.d("NAVER/API-SUCCESS", resp.code.toString())
-                        else -> Log.d("NAVER/API-SUCCESS", resp.code.toString())
+                        1000 -> {
+                            Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
+                            // Main으로 이동
+                        }
+                        5028 -> goToAdditionalInfo("naver") // sign in
+                        else -> Toast.makeText(this@LoginActivity,"네이버 로그인 실패",Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -108,30 +110,7 @@ class LoginActivity : AppCompatActivity() {
 
         })
     }
-//    fun kakaoLogin(response_type: String, client_id: String, redirect_uri: String) {
-//        val authService = getKakaoLoginRetrofit().create(AuthRetrofitInterface::class.java)
-//        authService.login(response_type, client_id, redirect_uri).enqueue(object:
-//            Callback<AuthResponse> {
-//            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-//                Log.d("KAKAO/API-RESPONSE", response.toString())
-//
-//                if(response.isSuccessful && response.code() == 200) {
-//                    val resp = response.body()!!
-//                    Log.d("KAKAO/API-RESPONSE", resp.toString())
-//
-//                    when(resp.code) {
-//                        1000 -> loginSuccess = true
-//                        else -> loginSuccess = false
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-//                Log.d("LOGIN/API-ERROR", t.message.toString())
-//            }
-//
-//        })
-//    }
+
     fun onKakao(){
         // 카카오 서버 응답에 대한 callback
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -139,6 +118,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("TAG_KAKAO", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.d("TAG_KAKAO", "카카오계정으로 로그인 성공 ${token.accessToken}")
+                kakaoAccessToken = token.accessToken
+                kakaoLogin()
             }
         }
 
@@ -159,12 +140,43 @@ class LoginActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Log.d("TAG_KAKAO", "카카오톡으로 로그인 성공 ${token.accessToken}")
                     kakaoAccessToken = token.accessToken
+                    kakaoLogin()
                 }
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
         }
-        getUserProfile("kakao")
+    }
+
+    fun kakaoLogin() {
+        var body = loginBody(kakaoAccessToken)
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("KAKAO-API", body.toString())
+
+        authService.kakaoLogin(body).enqueue(object: Callback<AuthResponse> {
+            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                Log.d("KAKAO/API-RESPONSE", response.toString())
+
+                if(response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()!!
+                    Log.d("KAKAO/API-RESPONSE-RESP", resp.toString())
+
+                    when(resp.code) {
+                        1000 -> {
+                            Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
+                            // Main으로 이동
+                        }
+                        5028 -> goToAdditionalInfo("kakao") // sign in
+                        else -> Toast.makeText(this@LoginActivity,"카카오 로그인 실패",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                Log.d("KAKAO/API-ERROR", t.message.toString())
+            }
+
+        })
     }
 
     fun getUserProfile(type: String) {
@@ -199,13 +211,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun goToAdditionalInfo(token: String, id: String, email:String) {
+    fun goToAdditionalInfo(type: String) {
         val intent = Intent(this, AdditionalInformationActivity::class.java)
-        intent.putExtra("token", token)
-        intent.putExtra("id", id)
-        intent.putExtra("email", email)
+        intent.putExtra("type", type)
         startActivity(intent)
         finish()
+    }
+
+    fun goToMainActivity() {
+
     }
 
 }
