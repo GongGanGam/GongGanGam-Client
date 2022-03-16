@@ -9,8 +9,6 @@
 
 # UI
 
----
-
 ![image](https://user-images.githubusercontent.com/89574881/158516906-ab30c7e0-ae49-485c-9e9f-dafe4360cd14.png)
 ![image](https://user-images.githubusercontent.com/89574881/158516902-ebe9b5dc-ca8a-4568-a4da-2f9c3c43a5c8.png)
 ![image](https://user-images.githubusercontent.com/89574881/158516919-8d8731ae-9659-43eb-8a1f-90af8c6513eb.png)
