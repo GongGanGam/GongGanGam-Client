@@ -10,6 +10,8 @@ import com.example.gonggangam.AuthService.AuthRetrofitInterface
 import com.example.gonggangam.AuthService.loginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
 import com.example.gonggangam.getRetrofit
+import com.example.gonggangam.saveJwt
+import com.example.gonggangam.saveUserIdx
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
 import com.kakao.sdk.common.model.ClientError
@@ -28,11 +30,9 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     lateinit var binding : ActivityLoginBinding
     var kakaoAccessToken : String = ""
-    var kakaoId: String = ""
-    var kakaoEmail: String = ""
     var naverAccessToken: String = ""
-    var naverId: String = ""
-    var naverEmail: String = ""
+    var jwt: String = ""
+    var userIdx: Int = -1
     var loginSuccess: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +43,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun initListener() {
         binding.loginKakaoBtn.setOnClickListener {
-//            CoroutineScope(Dispatchers.Main).launch {
-//                launch {
-//                   onKakao()
-//                }.join()
-//
-//                launch {
-//                    goToAdditionalInfo(kakaoAccessToken, kakaoId, kakaoAccessToken)
-//                }
-//            }
             onKakao()
         }
 
@@ -93,10 +84,13 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("NAVER/API-RESPONSE-RESP", resp.toString())
 
+                    userIdx = resp.result!!.userIdx
+                    jwt = resp.result!!.jwt
+
                     when(resp.code) {
                         1000 -> {
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
-                            // Main으로 이동
+                            goToMainActivity()
                         }
                         5028 -> goToAdditionalInfo("naver") // sign in
                         else -> Toast.makeText(this@LoginActivity,"네이버 로그인 실패",Toast.LENGTH_SHORT).show()
@@ -161,10 +155,14 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("KAKAO/API-RESPONSE-RESP", resp.toString())
 
+                    // save userIdx & jwt
+                    userIdx = resp.result!!.userIdx
+                    jwt = resp.result!!.jwt
+
                     when(resp.code) {
                         1000 -> {
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
-                            // Main으로 이동
+                            goToMainActivity()
                         }
                         5028 -> goToAdditionalInfo("kakao") // sign in
                         else -> Toast.makeText(this@LoginActivity,"카카오 로그인 실패",Toast.LENGTH_SHORT).show()
@@ -179,47 +177,25 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    fun getUserProfile(type: String) {
-        if(type == "kakao") {
-        UserApiClient.instance.me { user, error ->
-            Log.d("TAG_KAKAO", "유저 정보 요청 중")
-            if (error != null) {
-                Log.d("TAG_KAKAO", "사용자 정보 요청 실패", error)
-            }
-            else if (user != null) {
-                Log.d("TAG_KAKAO", "사용자 정보 요청 성공" +
-                        "\n회원번호: ${user.id}" +
-                        "\n이메일: ${user.kakaoAccount?.email}")
-                kakaoId= user.id.toString()
-                kakaoEmail= user.kakaoAccount?.email.toString()
-            }
-        }}
-        else if(type == "naver") {
-            NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
-                override fun onSuccess(response: NidProfileResponse) {
-                    Log.d("TAG_NAVER", response.toString())
-                }
-                override fun onFailure(httpStatus: Int, message: String) {
-                    val errorCode = NaverIdLoginSDK.getLastErrorCode().code
-                    val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
-                    Toast.makeText(this@LoginActivity, "errorCode: $errorCode, errorDesc: $errorDescription", Toast.LENGTH_SHORT).show()
-                }
-                override fun onError(errorCode: Int, message: String) {
-                    onFailure(errorCode, message)
-                }
-            })
-        }
-    }
-
     fun goToAdditionalInfo(type: String) {
         val intent = Intent(this, AdditionalInformationActivity::class.java)
-        intent.putExtra("type", type)
+        intent.putExtra("type", type) // kakao or naver
+        intent.putExtra("jwt", jwt) // jwt
+        intent.putExtra("userIdx", userIdx) // userIdx
         startActivity(intent)
         finish()
     }
 
     fun goToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra("jwt", jwt) // jwt
+//        intent.putExtra("userIdx", userIdx) // userIdx
 
+        // user 정보 저장 후 main 진입
+        saveJwt(this, jwt)
+        saveUserIdx(this, userIdx)
+        startActivity(intent)
+        finish()
     }
 
 }

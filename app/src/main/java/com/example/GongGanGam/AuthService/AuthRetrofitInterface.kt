@@ -3,13 +3,19 @@ package com.example.gonggangam.AuthService
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 data class loginBody(
     @SerializedName("token") val token: String
 )
+
+data class signInBody(
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("birthYear") val birthYear: Int,
+    @SerializedName("gender") val gender: String
+)
+
 interface AuthRetrofitInterface {
     @POST("app/users/login/naver")
     fun naverLogin(
@@ -23,13 +29,9 @@ interface AuthRetrofitInterface {
 
     @POST("app/users/signin")
     fun signIn(
-
-    )
+        @Header("x-access-token") jwt: String,
+        @Body body: signInBody
+    ): Call<BasicResponse>
 
 }
 
-//@FormUrlEncoded
-//@POST("app/users/login/naver")
-//fun naverLogin(
-//    @FieldMap body: HashMap<String, String>
-//): Call<AuthResponse>

@@ -12,7 +12,9 @@ import com.example.gonggangam.databinding.FragmentMyPageBinding
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.gonggangam.Activity.LoginActivity
 import com.example.gonggangam.Activity.MyPageNoticeActivity
 import java.io.File
 
@@ -66,6 +68,22 @@ class MyPageFragment() : Fragment() {
                 galleryPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         }
+
+        binding.mypageLogoutTv.setOnClickListener {
+            logout()
+        }
+    }
+
+    private fun logout() {
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val editor = spf!!.edit()
+
+        // editor.remove("jwt")
+        editor.remove("userIdx")
+        editor.remove("jwt")
+        editor.apply()
+        startActivity(intent)
     }
 
     private fun chooseImageFromGallery() {
