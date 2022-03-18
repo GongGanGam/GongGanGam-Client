@@ -3,6 +3,7 @@ package com.example.gonggangam.AuthService
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 data class loginBody(
@@ -28,6 +29,7 @@ interface AuthRetrofitInterface {
 
     @POST("app/users/signin")
     fun signIn(
+        @Header("x-access-token") jwt: String,
         @Body body: signInBody
     ): Call<BasicResponse>
 

@@ -53,7 +53,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("TAG-API-SIGNIN", body.toString())
 
-        authService.signIn(body).enqueue(object: Callback<BasicResponse> {
+        authService.signIn(jwt, body).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 Log.d("SIGNIN/API-RESPONSE", response.toString())
 
