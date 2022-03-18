@@ -11,7 +11,12 @@
         <entry key="app/src/main/res/drawable/write_share_btn_inactive.xml" value="0.1296875" />
         <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.2451219512195122" />
         <entry key="app/src/main/res/layout/activity_accept_diary.xml" value="0.21137206427688504" />
+        <entry key="app/src/main/res/layout/activity_additional_information.xml" value="0.40197851165387444" />
+        <entry key="app/src/main/res/layout/activity_my_info.xml" value="0.21772571107593996" />
+        <entry key="app/src/main/res/layout/activity_my_page_leave.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_my_page_notice.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.36993243243243246" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.4393735989072909" />
         <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.10578824398534266" />
         <entry key="app/src/main/res/layout/fragment_received_reply.xml" value="0.161231884057971" />
         <entry key="app/src/main/res/layout/item_diary_write_emoji.xml" value="0.19155205301702755" />

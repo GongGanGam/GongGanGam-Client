@@ -14,21 +14,68 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.AuthService.*
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
+import com.example.gonggangam.getRetrofit
+import com.example.gonggangam.saveJwt
+import com.example.gonggangam.saveUserIdx
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AdditionalInformationActivity() : AppCompatActivity() {
     lateinit var binding: ActivityAdditionalInformationBinding
-    lateinit var type: String
+    lateinit var type: String // kakao or naver
+    lateinit var jwt: String // jwt
+    var userIdx: Int = -1 // userIdx
     private var readyToSave : Boolean = false
+
+    var nickName: String = ""
+    var birthYear: Int = -1
+    var gender: String = "N"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdditionalInformationBinding.inflate(layoutInflater)
         type = intent.getStringExtra("type")!! // kakao or naver
-        Log.d("TAG", type.toString())
+        jwt = intent.getStringExtra("jwt")!!
+        userIdx = intent.getIntExtra("userIdx", -1)
+
+        Log.d("TAG_INTENT", "type: ${type} jwt: ${jwt} userIdx: ${userIdx}")
         initListener()
         setContentView(binding.root)
 
+    }
+
+    private fun signIn() {
+        var body = signInBody(nickName, birthYear, gender)
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("TAG-API-SIGNIN", body.toString())
+
+        authService.signIn(body).enqueue(object: Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                Log.d("SIGNIN/API-RESPONSE", response.toString())
+
+                if(response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()!!
+                    Log.d("SIGNIN/API-RESPONSE", resp.toString())
+
+                    when(resp.code) {
+                        1000 -> { // 회원가입 성공
+                            Toast.makeText(this@AdditionalInformationActivity,"회원가입 성공",Toast.LENGTH_SHORT).show()
+                            goToMainActivity()
+                        }
+                        else -> Toast.makeText(this@AdditionalInformationActivity,"회원가입 실패",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                Log.d("SIGNIN-TAG/API-ERROR", t.message.toString())
+            }
+
+        })
     }
 
     private fun initListener() {
@@ -138,17 +185,18 @@ class AdditionalInformationActivity() : AppCompatActivity() {
             Toast.makeText(this, "성별을 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
-        val nickName: String = binding.additionalNickInputEt.text.toString()
-        val birthYear: String = binding.additionalBirthYearInputTv.text.toString()
-        lateinit var gender: String
+        nickName = binding.additionalNickInputEt.text.toString() // string
+        birthYear = binding.additionalBirthYearInputTv.text.toString().toInt() // int
 
-        if (binding.additionalGenderMaleBtn.isSelected) {
-            gender = binding.additionalGenderMaleBtn.text.toString()
-        } else if (binding.additionalGenderFemaleBtn.isSelected) {
-            gender = binding.additionalGenderFemaleBtn.text.toString()
-        } else if (binding.additionalGenderNoBtn.isSelected) {
-            gender = binding.additionalGenderNoBtn.text.toString()
+        if (binding.additionalGenderMaleBtn.isSelected) { // 남자
+            gender = "M"
+        } else if (binding.additionalGenderFemaleBtn.isSelected) { // 여자
+            gender = "F"
+        } else if (binding.additionalGenderNoBtn.isSelected) { // 선택하지 않음
+            gender = "N"
         }
+
+        signIn()
 
 //        Toast.makeText(
 //            this,
@@ -167,7 +215,6 @@ class AdditionalInformationActivity() : AppCompatActivity() {
 //        if (user.toString().isEmpty()) {
 //            Toast.makeText(this, "회원정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
 //        }
-        goToMainActivity()
     }
 
         private fun hideKeyBoard() {
@@ -181,24 +228,6 @@ class AdditionalInformationActivity() : AppCompatActivity() {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 }
-//
-//                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                    val nk = binding.additionalNickInputEt.text.toString().isNotEmpty()
-//                    readyToReply = binding.replyToDiaryContentEt.text.toString().isNotEmpty()
-//                    if(readyToReply) {
-//                        binding.replyToDiaryBtn.setBackgroundResource(R.drawable.button_active_background)
-//                        binding.replyToDiaryBtnTv.setTextColor(resources.getColor(R.color.primaryColor))
-//                    }
-//                    else {
-//                        binding.replyToDiaryBtn.setBackgroundResource(R.drawable.button_inactive_background)
-//                        binding.replyToDiaryBtnTv.setTextColor(resources.getColor(R.color.inactiveBtnColor))
-//                    }
-//                }
-//
-//                override fun afterTextChanged(p0: Editable?) {
-//
-//                }
-//            })
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     readyToSave = binding.additionalNickInputEt.text.toString().isNotEmpty()
@@ -230,6 +259,8 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         }
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
+        saveJwt(this, jwt)
+        saveUserIdx(this, userIdx)
         startActivity(intent)
         finish()
     }

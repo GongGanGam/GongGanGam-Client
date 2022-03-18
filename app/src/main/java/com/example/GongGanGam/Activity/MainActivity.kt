@@ -2,6 +2,7 @@ package com.example.gonggangam.Activity
 
 import com.example.gonggangam.Fragment.MyPageFragment
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.Fragment.ChatFragment
 import com.example.gonggangam.Fragment.DiaryFragment
@@ -14,17 +15,27 @@ import com.example.gonggangam.saveUserIdx
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-
+    var jwt: String = ""
+    var userIdx: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_BottomNaviTemplate)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.mainBtmNav.itemIconTintList = null
+//        jwt = intent.getStringExtra("jwt")!!
+//        userIdx = intent.getIntExtra("userIdx", -1)
 
         // dummy
-        saveJwt(this, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ")
-        saveUserIdx(this, 8)
+//        if(jwt == "" || userIdx < 0) {
+//            Toast.makeText(this, "유저 정보 확인 실패", Toast.LENGTH_SHORT).show()
+//            saveJwt(this, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ")
+//            saveUserIdx(this, 8)
+//        }
+
+        // 회원 정보 저장
+//        saveJwt(this, jwt)
+//        saveUserIdx(this, userIdx)
         // init clear status bar
 //        val window = window
 //        window.setFlags(
