@@ -68,7 +68,6 @@
         </activity>
         <activity android:name=".Activity.MyPageLeaveActivity" android:exported="false"/>
         <activity android:name=".Activity.MyPageNoticeActivity"/>
-        <activity android:name=".Activity.DiaryWriteEmojiActivity"/>
     </application>
 
 </manifest>

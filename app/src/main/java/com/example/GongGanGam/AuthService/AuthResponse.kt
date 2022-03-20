@@ -1,5 +1,6 @@
 package com.example.gonggangam.AuthService
 
+import com.example.gonggangam.Class.UserResult
 import com.google.gson.annotations.SerializedName
 
 data class Auth (@SerializedName("userIdx") val userIdx: Int,

@@ -2,15 +2,13 @@ package com.example.gonggangam.Activity
 
 import com.example.gonggangam.Fragment.MyPageFragment
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.*
 import com.example.gonggangam.Fragment.ChatFragment
 import com.example.gonggangam.Fragment.DiaryFragment
 import com.example.gonggangam.Fragment.LetterFragment
-import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityMainBinding
-import com.example.gonggangam.saveJwt
-import com.example.gonggangam.saveUserIdx
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.mainBtmNav.itemIconTintList = null
-//        jwt = intent.getStringExtra("jwt")!!
-//        userIdx = intent.getIntExtra("userIdx", -1)
+
+        Log.d("TAG-MAIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
 
         // dummy
 //        if(jwt == "" || userIdx < 0) {

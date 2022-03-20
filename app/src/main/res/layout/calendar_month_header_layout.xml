@@ -5,6 +5,17 @@
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#FBF8FF">
+    <ImageView
+        android:id="@+id/calendar_left_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/calendar_left_arrow"
+        android:layout_marginEnd="85dp"
+        app:layout_constraintEnd_toStartOf="@id/calendar_month_header_tv"
+        app:layout_constraintTop_toTopOf="@id/calendar_month_header_tv"
+        app:layout_constraintBottom_toBottomOf="@id/calendar_month_header_tv"
+        />
     <TextView
         android:id="@+id/calendar_month_header_tv"
         android:layout_width="wrap_content"
@@ -17,9 +28,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-       android:textAlignment="center"
+        android:textAlignment="center"
         android:layout_marginTop="26dp"
         android:text="2022년 11월" />
+    <ImageView
+        android:id="@+id/calendar_right_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/calendar_right_arrow"
+        android:layout_marginStart="85dp"
+        app:layout_constraintStart_toEndOf="@id/calendar_month_header_tv"
+        app:layout_constraintTop_toTopOf="@id/calendar_month_header_tv"
+        app:layout_constraintBottom_toBottomOf="@id/calendar_month_header_tv"
+        />
     <include
         layout="@layout/calendar_day_legend"
         android:layout_width="match_parent"

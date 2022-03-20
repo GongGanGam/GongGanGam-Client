@@ -101,7 +101,10 @@ class ReplyToDiaryActivity : AppCompatActivity() {
                     Log.d("TAG/API-RESPONSE", resp.toString())
 
                     when(resp.code) {
-                        1000 -> Log.d("TAG/API-RESULT", resp.message)
+                        1000 -> {
+                            Log.d("TAG/API-RESULT", resp.message)
+                            finish()
+                        }
                         else -> Log.d("TAG/API-RESULT", "답장 전송 실패" )
                     }
                 }
@@ -115,7 +118,7 @@ class ReplyToDiaryActivity : AppCompatActivity() {
     }
 
     private fun endReply () {
-        val intent = Intent(this, ReceivedDiaryFragment::class.java)
+        val intent = Intent(this, ReplyToDiaryActivity::class.java)
         startActivity(intent)
     }
     private fun hideKeyBoard() {

@@ -9,12 +9,47 @@ data class Page (
     val pageSize: Int,
 )
 
+// 세영님 api
+data class DayRequest(
+    @SerializedName("year") //년도
+    val year: Int,
+    @SerializedName("month") //월
+    val month: Int,
+    )
+
+data class DayResponse(
+    @SerializedName("isSuccess") //성공여부
+    val isSuccess: Boolean,
+    @SerializedName("code") //코드
+    val code: Int,
+    @SerializedName("message") //성공여부
+    val message: String,
+    @SerializedName("result") //날짜
+    val result: List<DayCell>, //정보가 저장된 날짜 리스트
+)
+
+data class DayCell(
+    @SerializedName("day") //날짜
+    val day: String,
+    @SerializedName("emoji") //날짜에 저장된 이모지
+    val emoji: String,
+)
+
 // basic response
 data class BasicResponse (
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
 )
+
+data class WriteResult (
+    @SerializedName("isSuccess") //성공여부
+    val isSuccess: Boolean,
+    @SerializedName("code") //코드
+    val code: Int,
+    @SerializedName("message") //메세지
+    val message: String,
+    )
 
 data class Reply (
     @SerializedName("content") val content: String,

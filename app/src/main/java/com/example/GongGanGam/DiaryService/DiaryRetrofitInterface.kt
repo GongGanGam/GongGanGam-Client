@@ -1,10 +1,24 @@
 package com.example.gonggangam.DiaryService
 
-import com.example.gonggangam.AuthService.AuthResponse
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface DiaryRetrofitInterface {
+
+    // 세영님쪽 api
+    @Multipart
+    @POST("/app/diarys")
+    fun diaryWrite(
+        @Part uploadImg: Part?,
+        @PartMap data: HashMap<String?, RequestBody?>,
+    ): Call<WriteResult>
+
+    @GET("app/diarys")
+    fun getCalendar(@Query("year") year: Int,
+                    @Query("month") month : Int): Call<DayResponse>
+
+
     @GET("app/diarys/share")
     fun getDiaries(
         @Query("page") page: Int,
