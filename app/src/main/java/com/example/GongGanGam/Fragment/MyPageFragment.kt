@@ -16,10 +16,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.gonggangam.Activity.LoginActivity
+import com.example.gonggangam.Activity.MyInfoActivity
 import com.example.gonggangam.Activity.MyPageNoticeActivity
-import com.example.gonggangam.AuthService.AuthResponse
-import com.example.gonggangam.AuthService.AuthRetrofitInterface
-import com.example.gonggangam.AuthService.UserResponse
+import com.example.gonggangam.MyPageService.MyPageRetrofitInterface
+import com.example.gonggangam.MyPageService.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,7 +69,7 @@ class MyPageFragment() : Fragment() {
     }
 
     private fun getUser() {
-        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        val authService = getRetrofit().create(MyPageRetrofitInterface::class.java)
         authService.getUser(getJwt(requireContext()), getUserIdx(requireContext())).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("TAG-USER", response.toString())
@@ -109,6 +109,11 @@ class MyPageFragment() : Fragment() {
             } else {
                 galleryPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
+        }
+
+        binding.mypageEditBtn.setOnClickListener {
+            val intent = Intent(requireContext(), MyInfoActivity::class.java)
+            startActivity(intent)
         }
 
         binding.mypageLogoutTv.setOnClickListener {

@@ -31,11 +31,6 @@ interface AuthRetrofitInterface {
         @Body body: signInBody
     ): Call<BasicResponse>
 
-    @GET("app/users/{userIdx}")
-    fun getUser(
-        @Header("x-access-token") jwt: String,
-        @Path("userIdx") userIdx: Int,
-    ): Call<UserResponse>
 
 }
 

@@ -1,25 +1,27 @@
 package com.example.gonggangam.Activity
 
+
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.databinding.ActivityDiaryWriteEmojiBinding
-import android.content.Intent
-
-import android.graphics.Bitmap
-
-import android.graphics.drawable.BitmapDrawable
-
 import java.io.ByteArrayOutputStream
 
 
 class DiaryWriteEmojiActivity : AppCompatActivity() {
-    lateinit var binding:ActivityDiaryWriteEmojiBinding
-//    private lateinit var emojiDatas: ArrayList<Emoji>
+    lateinit var binding: ActivityDiaryWriteEmojiBinding
+
+    //    private lateinit var emojiDatas: ArrayList<Emoji>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityDiaryWriteEmojiBinding.inflate(layoutInflater)
+
+
         setContentView(binding.root)
 
 //        emojiDatas =ArrayList()
@@ -38,7 +40,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
 //            add(Emoji(R.drawable.emoji_wonder, "궁금해요"))
 //        }
 
-        binding.diaryWriteEmojiEmojiIv.setOnClickListener{
+        binding.diaryWriteEmojiEmojiIv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -76,7 +78,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
@@ -96,7 +98,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji02Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji02Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -134,11 +136,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji02Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji02Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -154,7 +157,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji03Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji03Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -192,11 +195,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji03Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji03Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -212,7 +216,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji04Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji04Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -250,11 +254,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji04Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji04Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -264,13 +269,15 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
 
                 intent.putExtra("state", "지루해요")
                 intent.putExtra("image", byteArray)
-
+                intent.putExtra("year",intent.getIntExtra("year",0))
+                intent.putExtra("month",intent.getIntExtra("month",0))
+                intent.putExtra("day",intent.getIntExtra("day",0))
                 startActivity(intent);
                 finish();
             }
         }
 
-        binding.diaryWriteEmojiEmoji05Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji05Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -308,11 +315,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji05Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji05Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -328,7 +336,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji06Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji06Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -366,11 +374,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji06Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji06Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -386,7 +395,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji07Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji07Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -424,11 +433,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji07Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji07Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -444,7 +454,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji08Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji08Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -482,11 +492,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji08Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji08Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -502,7 +513,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji09Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji09Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -540,11 +551,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji09Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji09Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -560,7 +572,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji10Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji10Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -598,11 +610,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji10Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji10Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -618,7 +631,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji11Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji11Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -656,11 +669,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji12Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji11Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji11Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -676,7 +690,7 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             }
         }
 
-        binding.diaryWriteEmojiEmoji12Iv.setOnClickListener{
+        binding.diaryWriteEmojiEmoji12Iv.setOnClickListener {
             binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
             binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
 
@@ -714,11 +728,12 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
             binding.diaryWriteEmojiDarkEmoji11Iv.visibility = View.VISIBLE
 
 
-            binding.diaryWriteEmojiSelectedBtn.setOnClickListener{
+            binding.diaryWriteEmojiSelectedBtn.setOnClickListener {
                 val intent = Intent(this, DiaryWriteActivity::class.java)
 
                 val stream = ByteArrayOutputStream()
-                val bitmap = (binding.diaryWriteEmojiEmoji12Iv.getDrawable() as BitmapDrawable).bitmap
+                val bitmap =
+                    (binding.diaryWriteEmojiEmoji12Iv.getDrawable() as BitmapDrawable).bitmap
                 val scale = (1024 / bitmap.width.toFloat())
                 val image_w = (bitmap.width * scale).toInt()
                 val image_h = (bitmap.height * scale).toInt()
@@ -733,13 +748,6 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
                 finish();
             }
         }
-
-
-
-
-
-
-
 
 
 //        val emojiAdapter = DiaryWriteEmojiRVAdapter(emojiDatas)
@@ -761,6 +769,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
 
     }
 
+
+}
+
 //    private fun changeEmoji(emoji:Emoji) {
 //        binding.diaryWriteEmojiUnselectBtn.visibility = View.GONE
 //        binding.diaryWriteEmojiSelectedBtn.visibility = View.VISIBLE
@@ -768,4 +779,3 @@ class DiaryWriteEmojiActivity : AppCompatActivity() {
 //    }
 
 
-}

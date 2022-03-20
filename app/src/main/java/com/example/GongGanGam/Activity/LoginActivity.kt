@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.*
 import com.example.gonggangam.AuthService.AuthResponse
 import com.example.gonggangam.AuthService.AuthRetrofitInterface
 import com.example.gonggangam.AuthService.loginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
-import com.example.gonggangam.getRetrofit
-import com.example.gonggangam.saveJwt
-import com.example.gonggangam.saveUserIdx
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
 import com.kakao.sdk.common.model.ClientError
@@ -38,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("TAG-LOGIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
         initListener()
     }
 
@@ -48,6 +47,14 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginNaverBtn.setOnClickListener {
             onNaver()
+        }
+
+        binding.dummy.setOnClickListener {
+            saveJwt(this, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ")
+            saveUserIdx(this, 8)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

@@ -19,10 +19,3 @@ data class BasicResponse (
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
 )
-
-data class UserResponse (
-    @SerializedName("isSuccess") val isSuccess: Boolean,
-    @SerializedName("code") val code: Int,
-    @SerializedName("message") val message: String,
-    @SerializedName("result") val result: UserResult?
-        )
