@@ -22,6 +22,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.DiaryWriteEmojiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DiaryReadActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DiaryWriteActivity"
             android:exported="false" />
         <activity

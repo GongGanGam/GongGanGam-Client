@@ -8,7 +8,7 @@ interface DiaryRetrofitInterface {
 
     // 세영님쪽 api
     @Multipart
-    @POST("/app/diarys")
+    @POST("app/diarys")
     fun diaryWrite(
         @Part uploadImg: Part?,
         @PartMap data: HashMap<String?, RequestBody?>,
