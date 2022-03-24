@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.gonggangam.Class.BasicDiary
 import com.example.gonggangam.Class.ReceivedAnswer
 import com.example.gonggangam.DiaryService.BasicResponse
@@ -28,7 +29,7 @@ import retrofit2.Response
 class AcceptChattingActivity : AppCompatActivity() {
     lateinit var binding: ActivityAcceptChattingBinding
     var diary = BasicDiary()
-    var answer =ReceivedAnswer()
+    var answer = ReceivedAnswer()
     var answerIdx: Int = -1 // 답장 리스트 프래그먼트에서 넘어온 idx
     val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,11 +43,11 @@ class AcceptChattingActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        if(answerIdx < 0) {
+        if(answerIdx == null) {
             Toast.makeText(this, "답장 정보 조회 실패", Toast.LENGTH_SHORT).show()
             return
         }
-        diaryService.getAnswer(getJwt(this), answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
+        diaryService.receivedAnswer(getJwt(this), answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
             override fun onResponse(
                 call: Call<ReceivedAnswerResponse>,
                 response: Response<ReceivedAnswerResponse>
@@ -67,14 +68,14 @@ class AcceptChattingActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ReceivedAnswerResponse>, t: Throwable) {
-                Log.d("TAG/API-ERROR", t.message.toString())
+                Log.d("TAG/API-ERROR", t.message.toString());
             }
 
         })
     }
 
     private fun rejectAnswer() {
-        diaryService.receivedAnswer(getJwt(this), answerIdx).enqueue(object: Callback<BasicResponse> {
+        diaryService.rejectAnswer(getJwt(this), answerIdx).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
@@ -113,18 +114,21 @@ class AcceptChattingActivity : AppCompatActivity() {
         binding.acceptChattingMyContent.text = diary.diaryContent
 
         // 받은 답장
-        binding.acceptChattingNameTv.text = answer.userNickname
+        binding.acceptChattingNameTv.text = answer.nickname
         binding.acceptChattingDateTv.text = answer.answerDate
         binding.acceptChattingContentTv.text = answer.answerContents
-        if(answer.userProfImg == null) {
+        if(answer.profImg == null) {
             binding.acceptChattingProfileIv.setImageResource(R.drawable.default_profile_img)
         }
         else {
             CoroutineScope(Dispatchers.Main).launch {
                 val bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(answer.userProfImg!!)
+                    ImageLoader.loadImage(answer.profImg!!)
                 }
-                binding.acceptChattingProfileIv.setImageBitmap(bitmap)
+
+                // Glide 적용
+                Glide.with(this@AcceptChattingActivity).load(bitmap).circleCrop().into(binding.acceptChattingProfileIv)
+//                binding.acceptChattingProfileIv.setImageBitmap(bitmap)
             }
         }
 

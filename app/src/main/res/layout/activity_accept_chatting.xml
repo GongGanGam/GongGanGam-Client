@@ -103,15 +103,14 @@
 
     <ImageView
         android:id="@+id/accept_chatting_profile_iv"
+        android:src="@drawable/default_profile_img"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:background="@drawable/profile_image_background"
-        android:src="@drawable/default_profile_img"
         app:layout_constraintTop_toBottomOf="@id/accept_chatting_my_cl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        />
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/accept_chatting_name_tv"

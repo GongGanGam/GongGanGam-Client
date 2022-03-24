@@ -66,17 +66,6 @@ data class ReceivedAnswerList (
     @SerializedName("answers") val answers: ArrayList<Answer>
 )
 
-//data class DiaryOne(
-//    @SerializedName("diaryIdx") val diaryIdx: Int,
-//    @SerializedName("userIdx") val userIdx: Int,
-//    @SerializedName("userNickname") val userNickname: String,
-//    @SerializedName("userProfImg") val userProfImg: String,
-//    @SerializedName("diaryContent") val diaryContent: String,
-//    @SerializedName("diaryDate") val diaryDate: String,
-//    @SerializedName("diaryImg") val diaryImg: String,
-//    @SerializedName("answerValid") val answerValid: String = "",
-//)
-
 data class AnswerOne(
     @SerializedName("diary") val diary: BasicDiary,
     @SerializedName("answer") val answer: ReceivedAnswer
@@ -112,5 +101,10 @@ data class ReceivedAnswerResponse (
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: AnswerOne?
+    @SerializedName("result") val result: ReceivedAnswerResult?
+)
+
+data class ReceivedAnswerResult(
+    @SerializedName("diary") val diary: BasicDiary,
+    @SerializedName("answer") val answer: ReceivedAnswer,
 )

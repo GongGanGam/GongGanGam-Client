@@ -37,21 +37,22 @@ interface DiaryRetrofitInterface {
         @Body reply: Reply
     ): Call<BasicResponse>
 
-    @GET("app/diarys/answer/{answerIdx}")
-    fun getAnswer(
-        @Header("x-access-token") jwt: String,
-        @Path ("answerIdx") answerIdx: Int,
-    ): Call<ReceivedAnswerResponse>
-
     @GET("app/diarys/share/{diaryIdx}")
     fun receivedDiary(
         @Header("x-access-token") jwt:String,
         @Path ("diaryIdx") diaryIdx: Int,
     ): Call<ReceivedDiaryResponse>
 
-    @PATCH("app/diarys/answer/{answerIdx}")
+    @GET("app/diarys/answer/{answerIdx}")
     fun receivedAnswer(
         @Header("x-access-token") jwt:String,
         @Path ("answerIdx") answerIdx: Int,
+    ): Call<ReceivedAnswerResponse>
+
+    @PATCH("app/diarys/answer/{answerIdx}")
+    fun rejectAnswer(
+        @Header("x-access-token") jwt:String,
+        @Path ("answerIdx") answerIdx: Int,
     ): Call<BasicResponse>
+
 }
