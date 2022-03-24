@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/item_chat_background.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/mypage_edit_btn_shape.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/profile_image_background.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/write_share_btn_active.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/write_share_btn_inactive.xml" value="0.1296875" />
+        <entry key="app/src/main/res/layout/activity_accept_chatting.xml" value="0.2233128834355828" />
+        <entry key="app/src/main/res/layout/activity_accept_diary.xml" value="0.21137206427688504" />
+        <entry key="app/src/main/res/layout/activity_additional_information.xml" value="0.40197851165387444" />
+        <entry key="app/src/main/res/layout/activity_diary_read.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_diary_write.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.139618599419503" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_my_info.xml" value="0.21772571107593996" />
+        <entry key="app/src/main/res/layout/activity_my_page_leave.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_my_page_notice.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.36993243243243246" />
+        <entry key="app/src/main/res/layout/calendar_month_header_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.4393735989072909" />
+        <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.10578824398534266" />
+        <entry key="app/src/main/res/layout/fragment_received_reply.xml" value="0.161231884057971" />
+        <entry key="app/src/main/res/layout/item_diary_write_emoji.xml" value="0.19155205301702755" />
+        <entry key="app/src/main/res/layout/item_message_right.xml" value="0.161231884057971" />
+        <entry key="app/src/main/res/layout/item_mypage_notice_list.xml" value="0.161231884057971" />
+        <entry key="app/src/main/res/layout/item_received_letter.xml" value="0.39212880803062894" />
+        <entry key="app/src/main/res/layout/layout_header.xml" value="0.161231884057971" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

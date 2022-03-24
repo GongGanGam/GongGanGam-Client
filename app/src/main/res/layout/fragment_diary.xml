@@ -5,17 +5,90 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_gradient"
-    tools:context=".DiaryFragment">
-
-    <Button
-        android:id="@+id/diary_btn"
+    tools:context=".Fragment.DiaryFragment"
+    >
+    <include
+        layout="@layout/layout_header"
+        android:id="@+id/diary_layout_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="일기쓰러가기"
         />
+    <TextView
+        android:id="@+id/diary_title_01_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘,"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/diary_layout_header"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="26dp"
+        android:fontFamily="@font/omnigothic_045"
+        android:textSize="24sp"
+        android:lineHeight="36sp"
+        />
+    <TextView
+        android:id="@+id/diary_title_02_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="당신을 위한 공간감"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/diary_title_01_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="26dp"
+        android:fontFamily="@font/omnigothic_045"
+        android:textSize="24sp"
+        android:lineHeight="36sp"
+        />
+    <ImageView
+        android:id="@+id/diary_img_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_main_moon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/diary_layout_header"
+        android:layout_marginEnd="42.29dp"
+        />
+    <LinearLayout
+        android:background="@drawable/background_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="24dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:backgroundTint="#FBF8FF">
+        <com.kizitonwose.calendarview.CalendarView
+            android:id="@+id/diary_calendarView_cv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cv_scrollMode="paged"
+            app:cv_orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cv_outDateStyle="endOfRow"
+            app:cv_inDateStyle="firstMonth"
+            android:backgroundTint="#FBF8FF"
 
+            app:layout_constraintTop_toBottomOf="@id/diary_img_iv"
+            app:cv_hasBoundaries="true"
+            app:cv_dayViewResource="@layout/calendar_date_layout"
+            app:cv_monthHeaderResource="@layout/calendar_month_header_layout"
+            />
+        <!--    app:cv_monthHeaderResource="@layout/calendar_header_layout"-->
+
+        <!--        android:id="@+id/diary_btn"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        android:text="일기쓰러가기"-->
+        <!--        />-->
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
