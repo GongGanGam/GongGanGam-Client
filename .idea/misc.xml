@@ -15,12 +15,14 @@
         <entry key="app/src/main/res/layout/activity_diary_read.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_diary_write.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.139618599419503" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_my_info.xml" value="0.21772571107593996" />
         <entry key="app/src/main/res/layout/activity_my_page_leave.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_my_page_notice.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.36993243243243246" />
         <entry key="app/src/main/res/layout/calendar_month_header_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_letter.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.4393735989072909" />
         <entry key="app/src/main/res/layout/fragment_received_diary.xml" value="0.10578824398534266" />
         <entry key="app/src/main/res/layout/fragment_received_reply.xml" value="0.161231884057971" />
