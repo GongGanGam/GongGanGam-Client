@@ -5,11 +5,18 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 const val BASE_URL = "http://3.36.219.12:3000/"
 var gson = GsonBuilder().setLenient().create()
 val clientBuilder = OkHttpClient.Builder() // more detail retrofit log
 val loggingIntercepter = HttpLoggingInterceptor()
+
+//var okHttpClient = OkHttpClient().newBuilder()
+//    .connectTimeout(30, TimeUnit.SECONDS)
+//    .readTimeout(30, TimeUnit.SECONDS)
+//    .writeTimeout(30, TimeUnit.SECONDS)
+//    .build()
 
 fun getRetrofit(): Retrofit {
     loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
@@ -20,21 +27,5 @@ fun getRetrofit(): Retrofit {
         .client(clientBuilder.build())
         .build()
 
-    return retrofit
-}
-
-fun getKakaoLoginRetrofit(): Retrofit {
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://kauth.kakao.com/oauth/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
-    return retrofit
-}
-
-fun getNaverLoginRetrofit(): Retrofit {
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://nid.naver.com/oauth2.0/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
     return retrofit
 }
