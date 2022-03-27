@@ -1,8 +1,9 @@
 package com.example.gonggangam.Class
 
+import java.io.Serializable
+
 data class User(
-    var name: String ="",
-    var profileImg: String="",
-    var uid: String="",
-    var pushToken: String="",
-)
+    var nickname: String? =null,
+    var profImg: String?=null,
+    var uid: Int?=null,
+):Serializable

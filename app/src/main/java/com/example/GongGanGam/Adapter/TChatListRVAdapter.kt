@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gonggangam.Class.ChatList
 import com.example.gonggangam.databinding.ItemChatListBinding
 
-class ChatListRVAdapter(private val chatLists : ArrayList<ChatList>) :
-    RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>(){
+class TChatListRVAdapter(private val chatLists: ArrayList<ChatList>) :
+    RecyclerView.Adapter<TChatListRVAdapter.ViewHolder>(){
 
     interface OnItemClickListener{
         fun onItemClick(chatList: ChatList)

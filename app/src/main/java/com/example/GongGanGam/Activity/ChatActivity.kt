@@ -1,6 +1,8 @@
 package com.example.gonggangam.Activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,13 +14,22 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.gonggangam.Class.ChatModel
 import com.example.gonggangam.Class.Comment
 import com.example.gonggangam.Class.User
+import com.example.gonggangam.Fragment.ChatFragment
+import com.example.gonggangam.R
+import com.example.gonggangam.Util.ImageLoader
 import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
+import com.example.gonggangam.getUserIdx
 import com.google.firebase.database.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 
 class ChatActivity : AppCompatActivity() {
@@ -26,13 +37,30 @@ class ChatActivity : AppCompatActivity() {
     lateinit var imm: InputMethodManager
     lateinit var mDatabase: DatabaseReference
     lateinit var chatModel: ChatModel
-    var me: User = User("lim", "", "1", "a")
-    var opp: User = User("이불밖은위험해", "", "2", "ab")
+    lateinit var bitmap:Bitmap
     var chatRoomId: String? = null
+
+//    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
+    var myUserIdx:Int = 0
+    var me:User = User("나", null, 8)
+    lateinit var opp:User
+//    var opp:User = User("테스트", "https://gonggangam-bucket.s3.ap-northeast-2.amazonaws.com/btn_msg_blue.PNG", 0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        myUserIdx = getUserIdx(this)
+        opp = intent.getSerializableExtra("opp") as User
+
+        if(opp.profImg != null) {
+            CoroutineScope(Dispatchers.Main).launch {
+                bitmap = withContext(Dispatchers.IO) {
+                    ImageLoader.loadImage(opp.profImg!!)!!
+                }
+            }
+        }
         init()
         initListener()
     }
@@ -49,13 +77,18 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.chatBackIv.setOnClickListener {
+            val intent = Intent(this@ChatActivity, ChatFragment::class.java)
+            startActivity(intent)
             finish()
         }
         binding.chatSendBtnIv.setOnClickListener {
             // 메세지 전송
             chatModel = ChatModel()
-            chatModel.users[me.uid+"_key"] = true
-            chatModel.users[opp.uid+"_key"] = true
+
+            // 그냥 숫자로 저장하게 되면 파이어베이스에서 key로 인식하지 못함
+            chatModel.users[myUserIdx.toString() +"_key"] = true
+            chatModel.users[opp.uid.toString()+"_key"] = true
+            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
 
             // 채팅방 아이디 없으면
             if(chatRoomId == null) {
@@ -77,7 +110,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun sendMsg(msg: String) {
         if(msg != "") {
-            var comment = Comment(me.uid, msg, System.currentTimeMillis())
+            var comment = Comment(myUserIdx.toString(), msg, System.currentTimeMillis())
             mDatabase.child("chatRooms").child(chatRoomId!!).child("comments").push().setValue(comment).addOnSuccessListener {
                 binding.chatInputEt.setText("")
                 Log.d("TAG_CHAT", "메세지전송완료")
@@ -87,14 +120,14 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun checkChatRoom() {
-        mDatabase.child("chatRooms").orderByChild("users/${me.uid}_key").equalTo(true).addListenerForSingleValueEvent(
+        mDatabase.child("chatRooms").orderByChild("users/${myUserIdx.toString()}_key").equalTo(true).addListenerForSingleValueEvent(
             object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(item in snapshot.children) {
                         Log.d("TAG_CHAT, checkChatRoom", item.value.toString())
                         var chatModel: ChatModel = item.getValue(ChatModel::class.java)!!
                         Log.d("TAG_CHAT, checkChatRoom", chatModel.toString())
-                        if(chatModel?.users!!.containsKey(opp.uid+"_key")) {
+                        if(chatModel?.users!!.containsKey(opp.uid.toString()+"_key")) {
                             chatRoomId = item.key.toString()
                             binding.chatSendBtnIv.isEnabled = true
 
@@ -150,11 +183,11 @@ class ChatActivity : AppCompatActivity() {
         var user: User? = null
         init {
             Log.d("TAG_CHAT", "리싸이클러뷰 init 내부")
-            mDatabase.child("users").child(opp.uid+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
+            mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     Log.d("TAG_CHAT", snapshot.key.toString())
                     //user = snapshot.getValue(User::class.java)!!
-                    comments.add(Comment(opp.uid, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
+                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
                     getMessageList()
                 }
 
@@ -213,7 +246,7 @@ class ChatActivity : AppCompatActivity() {
         override fun getItemCount(): Int = comments.size
 
         override fun getItemViewType(position: Int): Int {
-            return if(comments[position].uid+"_key" == me.uid+"_key") {
+            return if(comments[position].uid+"_key" == myUserIdx.toString()+"_key") {
                 0 // 오른쪽
             } else {
                 1 // 왼
@@ -223,7 +256,24 @@ class ChatActivity : AppCompatActivity() {
         inner class ViewHolder(private val b: ItemMessageLeftBinding) : RecyclerView.ViewHolder(b.root) {
             fun bind(comment: Comment) {
                 // 상대 프로필 이미지
-                b.itemMessageLeftNameTv.text = opp.name // 상대 이름
+                if(opp.profImg == null) {
+                    b.itemMessageLeftProfileIv.setImageResource(R.drawable.default_profile_img)
+                }
+                else { // bitmap을 최초 1번 생성 후 glide apply
+                    Glide.with(this@ChatActivity).load(bitmap).circleCrop().into(b.itemMessageLeftProfileIv)
+                }
+//                else {
+//
+//                    CoroutineScope(Dispatchers.Main).launch {
+//                        val bitmap = withContext(Dispatchers.IO) {
+//                            ImageLoader.loadImage(opp.profImg!!)
+//                        }
+//                        // Glide 적용
+//                        Glide.with(this@ChatActivity).load(bitmap).circleCrop().into(b.itemMessageLeftProfileIv)
+//                    }
+//                }
+
+                b.itemMessageLeftNameTv.text = opp.nickname // 상대 이름
                 b.itemMessageLeftTv.text = comment.message // 상대 메세지
                 b.itemMessageLeftTimeTv.text = convertTimestampToDate(comment.timeStamp)
             }
