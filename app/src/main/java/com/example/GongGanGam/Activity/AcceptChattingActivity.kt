@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.gonggangam.Class.BasicDiary
 import com.example.gonggangam.Class.ReceivedAnswer
+import com.example.gonggangam.Class.User
 import com.example.gonggangam.DiaryService.BasicResponse
 import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
 import com.example.gonggangam.DiaryService.ReceivedAnswerResponse
@@ -112,6 +113,7 @@ class AcceptChattingActivity : AppCompatActivity() {
             }
         }
         binding.acceptChattingMyContent.text = diary.diaryContent
+        binding.acceptChattingEmojiIv.setImageResource(resources.getIdentifier("emoji_"+diary.emoji, "drawable", packageName))
 
         // 받은 답장
         binding.acceptChattingNameTv.text = answer.nickname
@@ -146,6 +148,7 @@ class AcceptChattingActivity : AppCompatActivity() {
 
         binding.acceptChattingStartBtn.setOnClickListener {
             val intent = Intent(this@AcceptChattingActivity, ChatActivity::class.java)
+            intent.putExtra("opp", User(answer.nickname!!, answer.profImg!!, answer.answerIdx))
             startActivity(intent)
         }
 
