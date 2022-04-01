@@ -43,30 +43,32 @@
             app:layout_constraintTop_toBottomOf="@id/additional_header"
             app:layout_constraintStart_toStartOf="@id/additional_nick_input_et"
             />
-        <EditText
+
+    <EditText
         android:id="@+id/additional_nick_input_et"
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:hint="닉네임을 입력해 주세요"
         android:inputType="textPersonName"
-        android:textColorHint="#9FA8DA"
-            android:paddingBottom="14dp"
-            android:textFontWeight="700"
-        android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/additional_nickname_title_tv"
+        android:lineHeight="19sp"
         android:paddingStart="16dp"
-            android:lineHeight="19sp"
-            android:paddingTop="13dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/white"
+        android:paddingTop="13dp"
+        android:paddingBottom="14dp"
+        android:textColor="@color/white"
+        android:textColorHint="#9FA8DA"
+        android:textFontWeight="700"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
 
 
-            />
+        app:layout_constraintTop_toBottomOf="@id/additional_nickname_title_tv" />
+
     <TextView
             android:id="@+id/additional_birth_year_title_tv"
             android:layout_width="wrap_content"
