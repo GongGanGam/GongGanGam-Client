@@ -1,5 +1,6 @@
 package com.example.gonggangam.Activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResult
@@ -27,17 +29,27 @@ import retrofit2.Retrofit
 class DiaryWriteActivity : AppCompatActivity() {
     lateinit var binding: ActivityDiaryWriteBinding
     private lateinit var retrofit: Retrofit
+
+    var isShare:Boolean = false
+
     lateinit var observer: MyLifecycleObserver
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        binding.writeDiaryPhotoIv.setImageURI(result.data?.data)
-        binding.writeDiaryPhotoIv.visibility = View.VISIBLE
-        binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
-        binding.writeDiaryPhotoXBtn.setOnClickListener{
-            //x 버튼 클릭했을 때
+        if(result.resultCode == Activity.RESULT_OK) {
+
+            // 이미지 uri 넣기
+            binding.writeDiaryPhotoIv.setImageURI(result.data?.data)
+            Log.d("TAG_WRITE_RESULT", result.data?.data.toString())
+
+            // 이미지 띄우기
+            binding.writeDiaryPhotoIv.visibility = View.VISIBLE
+            binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
+        }
+
+        else {
+            Log.d("TAG_WRITE_ERROR", "이미지 불러오기 취소")
         }
     }
 
-    var isShare:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,18 +73,20 @@ class DiaryWriteActivity : AppCompatActivity() {
             $s
             
             """.trimIndent()
-        binding.writeMoodInfoTv.setText(str)
+        binding.writeMoodInfoTv.text = str
         binding.writeMoodIconIv.setImageBitmap(bitmap)
     }
 
+    private fun saveDiary() {
+        // 다이어리 저장 api 불러오면 됩니다!
+        // 레트로핏 통신 진행
+
+        val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java) // 이렇게 사용하시면 됩니다.
+    }
 
     private fun initListener() {
         binding.writeSaveTv.setOnClickListener {
-            //시연영상용 눈속임
-//                Toast.makeText(this, "감정을 기록했습니다.", Toast.LENGTH_SHORT).show()
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    finish()
-//                },2000) //1초가 1000mills
+            saveDiary()
         }
         //위 writeSaveTv는 시연용입니다 적절하게 수정해주세요
         binding.writeBackIv.setOnClickListener {
@@ -84,12 +98,20 @@ class DiaryWriteActivity : AppCompatActivity() {
         }
 
         binding.writeUploadPhotoBtn.setOnClickListener {
+            // 갤러리 권한 체크
+
             //이미지 첨부
             observer.selectImage()
         }
 
+        binding.writeDiaryPhotoXBtn.setOnClickListener{
+            //x 버튼 클릭했을 때
+            binding.writeDiaryPhotoIv.setImageURI(null)
+            binding.writeDiaryPhotoIv.visibility = View.GONE
+            binding.writeDiaryPhotoXBtn.visibility = View.GONE
+        }
+
         binding.writeShareBtn.setOnClickListener {
-            isShare = !isShare
             if(!isShare) {
                 binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_active)
                 binding.writeShareCheckIv.visibility = View.VISIBLE
@@ -98,6 +120,7 @@ class DiaryWriteActivity : AppCompatActivity() {
                 binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_inactive)
                 binding.writeShareCheckIv.visibility = View.GONE
             }
+            isShare = !isShare
         }
 
         binding.writeInputEt.addTextChangedListener(object: TextWatcher {
@@ -114,12 +137,6 @@ class DiaryWriteActivity : AppCompatActivity() {
                 binding.writeInputNv.requestLayout()
             }
         })
-
-
-        //retrofit 통신
-
-        retrofit = RetrofitClient.getInstance()
-        val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java) // 이렇게 사용하시면 됩니다.
 
 
 //

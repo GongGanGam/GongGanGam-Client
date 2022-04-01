@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_calendar.xml" value="0.10092592592592593" />
+        <entry key="app/src/main/res/drawable/background_dialog.xml" value="0.10092592592592593" />
+        <entry key="app/src/main/res/drawable/background_dialog_btn.xml" value="0.10092592592592593" />
         <entry key="app/src/main/res/drawable/item_chat_background.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/mypage_edit_btn_shape.xml" value="0.1296875" />
