@@ -3,10 +3,9 @@
     package="com.example.gonggangam">
     <!--    인터넷 사용 권한 설정-->
     <uses-permission android:name="android.permission.INTERNET"/>
-
-    <!-- 권한 그룹 : STORAGE-->
+    <!-- 권한 그룹 : STORAGE(GALLERY)-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".Activity.GlobalApplication"
         android:usesCleartextTraffic="true"
