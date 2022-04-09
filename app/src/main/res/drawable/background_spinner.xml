@@ -8,8 +8,8 @@
                         android:width="1dp"
                         android:color="#5963B7" />
                     <corners android:radius="10dp"/>
-                    <padding android:right="20dp" />
-                    <padding android:left="16dp" />
+<!--                    <padding android:right="20dp" />-->
+<!--                    <padding android:left="16dp" />-->
                     <solid
                         android:color="#262D89" />
                 </shape>

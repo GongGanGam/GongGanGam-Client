@@ -69,6 +69,7 @@
         <entry key="app/src/main/res/layout/item_message_right.xml" value="0.161231884057971" />
         <entry key="app/src/main/res/layout/item_mypage_notice_list.xml" value="0.161231884057971" />
         <entry key="app/src/main/res/layout/item_received_letter.xml" value="0.39212880803062894" />
+        <entry key="app/src/main/res/layout/item_report_spinner.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_header.xml" value="0.161231884057971" />
       </map>
     </option>
