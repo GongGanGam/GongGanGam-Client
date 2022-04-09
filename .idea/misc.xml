@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/background_calendar.xml" value="0.16" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/background_spinner.xml" value="0.1" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/button_inactive_background.xml" value="0.1075" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/report_spinner_selector.xml" value="0.1" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/report_spinner_text_selector.xml" value="0.16" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/selector_text.xml" value="0.16" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/drawable/switch_thumb_selector.xml" value="0.16" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/layout/activity_accept_diary.xml" value="0.1" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/layout/activity_report.xml" value="0.2" />
+        <entry key="..\:/Users/test/Desktop/AndroidProjects/GongGanGam-Client/app/src/main/res/layout/item_report_spinner.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/accept_chatting_info_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/additional_gender_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/backgrond_spinner.xml" value="0.1" />

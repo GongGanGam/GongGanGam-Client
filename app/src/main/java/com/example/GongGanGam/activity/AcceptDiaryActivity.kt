@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.GongGanGam.activity.ReportActivity
 import com.example.gonggangam.Class.ReceivedDiary
 import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
 import com.example.gonggangam.DiaryService.ReceivedDiaryResponse
@@ -72,6 +73,11 @@ class AcceptDiaryActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
+
+        binding.acceptDiaryMenuIv.setOnClickListener {
+            goToReportActivity()
+        }
+
         binding.acceptDiaryBackIv.setOnClickListener {
             finish()
         }
@@ -96,5 +102,10 @@ class AcceptDiaryActivity : AppCompatActivity() {
         binding.acceptDiaryContentTv.text = diary.diaryContent
         binding.acceptDiaryNameTv.text = diary.userNickname
         binding.acceptDiaryDateTv.text = diary.diaryDate
+    }
+
+    private fun goToReportActivity() {
+        val intent = Intent(this, ReportActivity::class.java)
+        startActivity(intent)
     }
 }
