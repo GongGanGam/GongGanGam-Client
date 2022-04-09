@@ -3,7 +3,6 @@ package com.example.gonggangam.Fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.gonggangam.Activity.ChatActivity
+import com.example.GongGanGam.activity.ChatActivity
 import com.example.gonggangam.Class.ChatList
-import com.example.gonggangam.Adapter.TChatListRVAdapter
 import com.example.gonggangam.Class.ChatModel
 import com.example.gonggangam.Class.Comment
 import com.example.gonggangam.Class.User
 import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
-import com.example.gonggangam.getUserIdx
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import java.text.SimpleDateFormat

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.GongGanGam.activity.ChatActivity
 import com.example.gonggangam.Class.BasicDiary
 import com.example.gonggangam.Class.ReceivedAnswer
 import com.example.gonggangam.Class.User
