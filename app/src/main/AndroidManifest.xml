@@ -15,7 +15,7 @@
         android:theme="@style/Theme.BottomNaviTemplate"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.GongGanGam.Activity.ReportActivity"
+            android:name="com.example.GongGanGam.activity.ReportActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SplashActivity"
@@ -37,7 +37,7 @@
             android:name=".Activity.DiaryWriteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ChatActivity"
+            android:name="com.example.GongGanGam.activity.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity

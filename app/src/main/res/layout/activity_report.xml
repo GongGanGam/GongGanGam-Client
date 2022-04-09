@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_solid"
-    tools:context="com.example.GongGanGam.Activity.ReportActivity">
+    tools:context="com.example.GongGanGam.activity.ReportActivity">
     <View
         android:id="@+id/report_header_view"
         android:layout_width="match_parent"
@@ -74,6 +74,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_spinner"
+        android:popupBackground="@drawable/button_inactive_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/report_sentence_tv"/>
