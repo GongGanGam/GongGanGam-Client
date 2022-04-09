@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/mypage_edit_btn_shape.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/profile_image_background.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/selector_text.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_thumb_off.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_thumb_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_track_off.xml" value="0.1" />
