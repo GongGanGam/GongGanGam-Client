@@ -19,4 +19,16 @@
         android:text="신고 사유"
         android:textColor="@drawable/report_spinner_text_selector" />
 
+    <ImageView
+        android:id="@+id/item_report_down_iv"
+        android:layout_width="10dp"
+        android:layout_height="5dp"
+        android:src="@drawable/ic_arrow_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

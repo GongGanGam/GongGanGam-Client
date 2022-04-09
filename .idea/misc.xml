@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/background_photo.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_sns_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_solid.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_spinner.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_transparent.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btm_background_diary.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_active_background.xml" value="0.1" />
@@ -56,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_my_page_leave.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_my_page_notice.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_reply_to_diary.xml" value="0.36126679221392227" />
-        <entry key="app/src/main/res/layout/activity_report.xml" value="0.34216323330562" />
+        <entry key="app/src/main/res/layout/activity_report.xml" value="0.1" />
         <entry key="app/src/main/res/layout/calendar_month_header_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.1" />
@@ -69,7 +70,7 @@
         <entry key="app/src/main/res/layout/item_message_right.xml" value="0.161231884057971" />
         <entry key="app/src/main/res/layout/item_mypage_notice_list.xml" value="0.161231884057971" />
         <entry key="app/src/main/res/layout/item_received_letter.xml" value="0.39212880803062894" />
-        <entry key="app/src/main/res/layout/item_report_spinner.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_report_spinner.xml" value="0.2611328125" />
         <entry key="app/src/main/res/layout/layout_header.xml" value="0.161231884057971" />
       </map>
     </option>

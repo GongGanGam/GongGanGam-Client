@@ -12,9 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.example.gonggangam.DiaryService.DayCell
-import com.example.gonggangam.DiaryService.DayResponse
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.DayCell
+import com.example.GongGanGam.diaryService.DayResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.Activity.DiaryWriteEmojiActivity
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.FragmentDiaryBinding

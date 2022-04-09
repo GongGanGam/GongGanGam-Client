@@ -33,7 +33,8 @@
     </string-array>
 
     <string-array name="spinner_report">
-        <item>욕설</item>
+        <item>사유를 선택해 주세요.</item>
+        <item>욕설,비방</item>
         <item>혐오 발언</item>
         <item>불쾌감을 주거나 부적절한 이름 사용</item>
         <item>기타</item>
