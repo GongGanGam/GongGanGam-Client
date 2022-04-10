@@ -1,10 +1,10 @@
-package com.example.gonggangam.Adapter
+package com.example.GongGanGam.adapter
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gonggangam.Class.Emoji
+import com.example.GongGanGam.model.Emoji
 import com.example.gonggangam.databinding.ItemDiaryWriteEmojiBinding
 
 

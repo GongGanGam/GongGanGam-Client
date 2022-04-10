@@ -1,4 +1,4 @@
-package com.example.gonggangam.Util
+package com.example.GongGanGam.util
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

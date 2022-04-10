@@ -1,4 +1,4 @@
-package com.example.gonggangam.Class
+package com.example.GongGanGam.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

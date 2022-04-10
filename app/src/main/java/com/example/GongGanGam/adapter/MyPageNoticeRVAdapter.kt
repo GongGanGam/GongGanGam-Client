@@ -1,6 +1,6 @@
-package com.example.gonggangam.Adapter
+package com.example.GongGanGam.adapter
 
-import com.example.gonggangam.Util.MyPageNoticeAnimation
+import com.example.GongGanGam.util.MyPageNoticeAnimation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gonggangam.Class.Notice
+import com.example.GongGanGam.model.Notice
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ItemMypageNoticeListBinding
 

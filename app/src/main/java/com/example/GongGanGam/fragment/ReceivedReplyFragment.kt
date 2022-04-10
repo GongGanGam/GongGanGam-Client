@@ -1,4 +1,4 @@
-package com.example.gonggangam.Fragment
+package com.example.GongGanGam.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gonggangam.Activity.AcceptChattingActivity
-import com.example.gonggangam.Adapter.LetterReceivedAnswerRVAdapter
-import com.example.gonggangam.Class.Answer
+import com.example.GongGanGam.activity.AcceptChattingActivity
+import com.example.GongGanGam.adapter.LetterReceivedAnswerRVAdapter
+import com.example.GongGanGam.model.Answer
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.ReceivedAnswersResponse
 import com.example.gonggangam.databinding.FragmentReceivedReplyBinding
-import com.example.gonggangam.getJwt
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.Manifest
 import android.app.Activity
@@ -29,7 +29,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Retrofit
 
 

@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

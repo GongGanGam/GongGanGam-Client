@@ -1,6 +1,6 @@
-package com.example.gonggangam.MyPageService
+package com.example.GongGanGam.myPageService
 
-import com.example.gonggangam.Class.UserResult
+import com.example.GongGanGam.model.UserResult
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse (

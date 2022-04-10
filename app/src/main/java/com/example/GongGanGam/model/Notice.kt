@@ -1,4 +1,4 @@
-package com.example.gonggangam.Class
+package com.example.GongGanGam.model
 
 data class NoticeModel(
     var title: String,

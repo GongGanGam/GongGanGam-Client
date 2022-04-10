@@ -15,12 +15,10 @@ import com.example.GongGanGam.diaryService.BasicResponse
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.Report
 import com.example.gonggangam.R
-import com.example.gonggangam.databinding.ActivityReplyToDiaryBinding
 import com.example.gonggangam.databinding.ActivityReportBinding
 import com.example.gonggangam.databinding.ItemReportSpinnerBinding
-import com.example.gonggangam.getJwt
-import com.example.gonggangam.getRetrofit
-import kotlinx.android.synthetic.main.item_report_spinner.view.*
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
