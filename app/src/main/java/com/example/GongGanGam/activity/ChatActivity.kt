@@ -106,6 +106,10 @@ class ChatActivity : AppCompatActivity() {
             }
             // checkChatRoom()
         }
+
+        binding.chatMenuIv.setOnClickListener {
+            goToReportActivity()
+        }
     }
 
     private fun sendMsg(msg: String) {
@@ -164,6 +168,14 @@ class ChatActivity : AppCompatActivity() {
 ////
 ////            }
 ////        })
+    }
+
+    private fun goToReportActivity() {
+        val intent = Intent(this, ReportActivity::class.java)
+        intent.putExtra("reportType", "chat")
+        intent.putExtra("idxOfType", 0)
+        // nickname putExtra
+        startActivity(intent)
     }
 
     fun hideKeyboard(v: View) {

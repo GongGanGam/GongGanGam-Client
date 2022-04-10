@@ -9,12 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.GongGanGam.activity.ChatActivity
+import com.example.GongGanGam.activity.ReportActivity
 import com.example.gonggangam.Class.BasicDiary
 import com.example.gonggangam.Class.ReceivedAnswer
 import com.example.gonggangam.Class.User
-import com.example.gonggangam.DiaryService.BasicResponse
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedAnswerResponse
+import com.example.GongGanGam.diaryService.BasicResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
 import com.example.gonggangam.Util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
@@ -157,5 +158,17 @@ class AcceptChattingActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.acceptChattingMenuIv.setOnClickListener {
+            goToReportActivity()
+        }
+
+    }
+
+    private fun goToReportActivity() {
+        val intent = Intent(this, ReportActivity::class.java)
+        intent.putExtra("reportType", "answer")
+        intent.putExtra("idxOfType", answer.answerIdx)
+        intent.putExtra("reportUserName", answer.nickname)
+        startActivity(intent)
     }
 }

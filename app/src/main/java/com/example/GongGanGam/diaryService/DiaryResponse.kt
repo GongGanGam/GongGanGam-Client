@@ -1,4 +1,4 @@
-package com.example.gonggangam.DiaryService
+package com.example.GongGanGam.diaryService
 
 import com.example.gonggangam.Class.*
 import com.google.gson.annotations.SerializedName
@@ -50,6 +50,13 @@ data class WriteResult (
     @SerializedName("message") //메세지
     val message: String,
     )
+
+data class Report (
+    @SerializedName("reportType") val reportType: String,
+    @SerializedName("idxOfType") val idxOfType: Int,
+    @SerializedName("reportDetail") val reportDetail: Int,
+    @SerializedName("reportContent") val reportContent: String?,
+)
 
 data class Reply (
     @SerializedName("content") val content: String,

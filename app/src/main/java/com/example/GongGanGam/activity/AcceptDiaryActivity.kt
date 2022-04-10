@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.GongGanGam.activity.ReportActivity
 import com.example.gonggangam.Class.ReceivedDiary
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedDiaryResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.ReceivedDiaryResponse
 import com.example.gonggangam.R
 import com.example.gonggangam.Util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptDiaryBinding
@@ -106,6 +106,9 @@ class AcceptDiaryActivity : AppCompatActivity() {
 
     private fun goToReportActivity() {
         val intent = Intent(this, ReportActivity::class.java)
+        intent.putExtra("reportType", "diary")
+        intent.putExtra("idxOfType", diary.diaryIdx)
+        intent.putExtra("reportUserName", diary.userNickname)
         startActivity(intent)
     }
 }

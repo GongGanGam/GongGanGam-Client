@@ -8,12 +8,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import com.example.gonggangam.Class.Diary
 import com.example.gonggangam.Class.ReceivedDiary
-import com.example.gonggangam.DiaryService.BasicResponse
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.Reply
-import com.example.gonggangam.Fragment.ReceivedDiaryFragment
+import com.example.GongGanGam.diaryService.BasicResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.Reply
 import com.example.gonggangam.R
 import com.example.gonggangam.Util.ImageLoader
 import com.example.gonggangam.databinding.ActivityReplyToDiaryBinding

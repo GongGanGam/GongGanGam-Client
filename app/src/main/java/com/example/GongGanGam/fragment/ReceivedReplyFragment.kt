@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gonggangam.Activity.AcceptChattingActivity
 import com.example.gonggangam.Adapter.LetterReceivedAnswerRVAdapter
 import com.example.gonggangam.Class.Answer
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedAnswersResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.ReceivedAnswersResponse
 import com.example.gonggangam.databinding.FragmentReceivedReplyBinding
 import com.example.gonggangam.getJwt
 import com.example.gonggangam.getRetrofit
