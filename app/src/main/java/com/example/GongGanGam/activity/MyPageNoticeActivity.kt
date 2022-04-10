@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gonggangam.Adapter.MypageNoticeRVAdapter
-import com.example.gonggangam.Class.Notice
-import com.example.gonggangam.Class.NoticeModel
-import com.example.gonggangam.MyPageService.MyPageRetrofitInterface
+import com.example.GongGanGam.adapter.MypageNoticeRVAdapter
+import com.example.GongGanGam.model.Notice
+import com.example.GongGanGam.model.NoticeModel
+import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
 import com.example.gonggangam.databinding.ActivityMyPageNoticeBinding
 import kotlinx.android.synthetic.main.activity_my_page_notice.*
 import retrofit2.Call

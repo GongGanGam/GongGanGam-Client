@@ -1,9 +1,10 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gonggangam.Activity.AcceptDiaryActivity
 import com.example.gonggangam.databinding.ActivityDiaryReadBinding
 
 class DiaryReadActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.gonggangam.Fragment
+package com.example.GongGanGam.fragment
 
 import android.Manifest
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.gonggangam.*
 import com.example.gonggangam.databinding.FragmentMyPageBinding
 import android.content.pm.PackageManager
 import android.util.Log
@@ -15,11 +14,14 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.example.gonggangam.Activity.LoginActivity
-import com.example.gonggangam.Activity.MyInfoActivity
+import com.example.GongGanGam.activity.LoginActivity
+import com.example.GongGanGam.activity.MyInfoActivity
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getRetrofit
+import com.example.GongGanGam.util.getUserIdx
 import com.example.gonggangam.Activity.MyPageNoticeActivity
-import com.example.gonggangam.MyPageService.MyPageRetrofitInterface
-import com.example.gonggangam.MyPageService.UserResponse
+import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
+import com.example.GongGanGam.myPageService.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

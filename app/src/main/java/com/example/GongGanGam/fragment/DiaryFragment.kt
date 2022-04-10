@@ -1,4 +1,4 @@
-package com.example.gonggangam.Fragment
+package com.example.GongGanGam.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,10 +15,10 @@ import androidx.fragment.app.Fragment
 import com.example.GongGanGam.diaryService.DayCell
 import com.example.GongGanGam.diaryService.DayResponse
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
-import com.example.gonggangam.Activity.DiaryWriteEmojiActivity
+import com.example.GongGanGam.activity.DiaryWriteEmojiActivity
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.FragmentDiaryBinding
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getRetrofit
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth

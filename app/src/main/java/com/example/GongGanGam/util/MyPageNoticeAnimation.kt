@@ -1,4 +1,4 @@
-package com.example.gonggangam.Util
+package com.example.GongGanGam.util
 
 import android.view.View
 import android.view.ViewGroup

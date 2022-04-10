@@ -1,4 +1,4 @@
-package com.example.gonggangam.AuthService
+package com.example.GongGanGam.authService
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.content.Context
 import android.content.Intent
@@ -8,15 +8,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import com.example.gonggangam.Class.ReceivedDiary
+import com.example.GongGanGam.model.ReceivedDiary
 import com.example.GongGanGam.diaryService.BasicResponse
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.Reply
 import com.example.gonggangam.R
-import com.example.gonggangam.Util.ImageLoader
+import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityReplyToDiaryBinding
-import com.example.gonggangam.getJwt
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

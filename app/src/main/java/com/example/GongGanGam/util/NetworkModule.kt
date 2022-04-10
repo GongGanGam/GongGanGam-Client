@@ -1,11 +1,10 @@
-package com.example.gonggangam
+package com.example.GongGanGam.util
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 const val BASE_URL = "http://3.36.219.12:3000/"
 var gson = GsonBuilder().setLenient().create()

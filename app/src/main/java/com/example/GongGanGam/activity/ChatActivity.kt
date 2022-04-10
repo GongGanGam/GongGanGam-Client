@@ -15,16 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.gonggangam.Class.ChatModel
-import com.example.gonggangam.Class.Comment
-import com.example.gonggangam.Class.User
-import com.example.gonggangam.Fragment.ChatFragment
+import com.example.GongGanGam.model.ChatModel
+import com.example.GongGanGam.model.Comment
+import com.example.GongGanGam.model.User
+import com.example.GongGanGam.fragment.ChatFragment
 import com.example.gonggangam.R
-import com.example.gonggangam.Util.ImageLoader
+import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
-import com.example.gonggangam.getUserIdx
+import com.example.GongGanGam.util.getUserIdx
 import com.google.firebase.database.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,8 +42,8 @@ class ChatActivity : AppCompatActivity() {
 
 //    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
     var myUserIdx:Int = 0
-    var me:User = User("나", null, 8)
-    lateinit var opp:User
+    var me: User = User(8, "나", null)
+    lateinit var opp: User
 //    var opp:User = User("테스트", "https://gonggangam-bucket.s3.ap-northeast-2.amazonaws.com/btn_msg_blue.PNG", 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +88,7 @@ class ChatActivity : AppCompatActivity() {
             // 그냥 숫자로 저장하게 되면 파이어베이스에서 key로 인식하지 못함
             chatModel.users[myUserIdx.toString() +"_key"] = true
             chatModel.users[opp.uid.toString()+"_key"] = true
-            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
+//            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
 
             // 채팅방 아이디 없으면
             if(chatRoomId == null) {

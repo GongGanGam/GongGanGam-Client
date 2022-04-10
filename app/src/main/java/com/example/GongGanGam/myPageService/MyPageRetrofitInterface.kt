@@ -1,6 +1,7 @@
-package com.example.gonggangam.MyPageService
+package com.example.GongGanGam.myPageService
 
-import com.example.gonggangam.Class.NoticeModel
+import com.example.GongGanGam.model.NoticeModel
+import com.example.GongGanGam.myPageService.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

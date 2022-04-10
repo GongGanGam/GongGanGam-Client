@@ -1,6 +1,6 @@
 package com.example.GongGanGam.diaryService
 
-import com.example.gonggangam.Class.*
+import com.example.GongGanGam.model.*
 import com.google.gson.annotations.SerializedName
 
 data class Page (
@@ -114,4 +114,11 @@ data class ReceivedAnswerResponse (
 data class ReceivedAnswerResult(
     @SerializedName("diary") val diary: BasicDiary,
     @SerializedName("answer") val answer: ReceivedAnswer,
+)
+
+data class ChatListResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: ArrayList<ChatList>
 )
