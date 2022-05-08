@@ -126,7 +126,7 @@ class ReportActivity : AppCompatActivity(),  AdapterView.OnItemSelectedListener 
     }
 
     inner class ReportSpinnerAdapter: BaseAdapter() {
-        val reports = resources.getStringArray(R.array.spinner_report)
+        private val reports = resources.getStringArray(R.array.spinner_report)
 
         override fun getCount(): Int = reports.size
 

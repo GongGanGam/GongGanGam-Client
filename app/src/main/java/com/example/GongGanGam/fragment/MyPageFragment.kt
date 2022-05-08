@@ -1,6 +1,7 @@
 package com.example.GongGanGam.fragment
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,19 +10,30 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.gonggangam.databinding.FragmentMyPageBinding
 import android.content.pm.PackageManager
+import android.os.Environment
+import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.example.GongGanGam.activity.DiaryWriteActivity
 import com.example.GongGanGam.activity.LoginActivity
 import com.example.GongGanGam.activity.MyInfoActivity
+import com.example.GongGanGam.activity.MyPageNoticeActivity
+import com.example.GongGanGam.diaryService.BasicResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import com.example.GongGanGam.util.getUserIdx
-import com.example.gonggangam.Activity.MyPageNoticeActivity
 import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
 import com.example.GongGanGam.myPageService.UserResponse
+import com.example.GongGanGam.util.FormDataUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,16 +41,71 @@ import java.io.File
 
 
 class MyPageFragment() : Fragment() {
+
+    lateinit var diaryImg:String // diaryImg uri 저장 변수
+    lateinit var observer: DiaryWriteActivity.MyLifecycleObserver
+
     private var clicked = false
     private val PHOTO_NAME = "photo"
     private lateinit var photoFile : File
     lateinit var binding: FragmentMyPageBinding
-//
-//    private var _binding: FragmentMyPageBinding? = null
-//    private val binding get() = _binding!!
 
-    private val selectedImages = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
-        binding.mypageUserProfileNone.setImageURI(uriList[0])
+
+    private val selectedImages = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        if(result.resultCode == Activity.RESULT_OK) {
+
+            // 이미지 uri 넣기
+            diaryImg = result.data?.data.toString() // image uri 저장
+            Log.d("TAG_WRITE_RESULT", diaryImg)
+
+            // Glide로 띄우기, 모서리 조정
+            Glide.with(this).load(result.data?.data)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                .into(binding.mypageUserProfileNone)
+
+
+
+            val realPath = FormDataUtil.getRealPathFromURI(result.data?.data!!, requireContext())!!
+            val destFile = File(realPath)
+            val multiBody = FormDataUtil.getImageBody("image", destFile)
+
+//            val file = File(Environment.getExternalStorageDirectory(), "/path/")
+//            if (!file.exists())
+//                file.mkdir()
+//
+//            val imageName = "fileName.jpeg"
+//            val imageFile = File("${Environment.getExternalStorageDirectory().absoluteFile}/path/",
+//                imageName
+//            )
+//            val imagePath = imageFile.absolutePath
+
+            val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
+            myPageService.editProfileImage(getJwt(requireContext()), multiBody, getUserIdx(requireContext())).enqueue(object: Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if(response.isSuccessful && response.code() == 200) {
+                        val resp = response.body()!!
+                        Log.d("TAG/API-RESPONSE", resp.toString())
+
+                        when(resp.code) {
+                            1000 -> Log.d("TAG/API-CODE", "프로필 업로드 완료" )
+                            else -> Log.d("TAG/API-CODE", "프로필 업로드 실패" )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                    Log.d("TAG/API-ERROR", t.message.toString())
+                }
+
+            })
+        }
+
+        else {
+            Log.d("TAG_WRITE_ERROR", "이미지 불러오기 취소")
+        }
     }
 
     private val galleryPermissionLauncher = registerForActivityResult(
@@ -99,8 +166,6 @@ class MyPageFragment() : Fragment() {
             }
 
         })
-
-
     }
 
     private fun initClickListeners() {
@@ -136,7 +201,11 @@ class MyPageFragment() : Fragment() {
     }
 
     private fun chooseImageFromGallery() {
-        selectedImages.launch("image/*")
+        // selectedImages.launch("image/*")
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.type = "image/*"
+        selectedImages.launch(intent)
     }
 
     override fun onDestroyView() {
