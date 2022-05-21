@@ -84,6 +84,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.4'
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
