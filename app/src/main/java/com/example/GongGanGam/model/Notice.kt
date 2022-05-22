@@ -7,9 +7,15 @@ data class NoticeModel(
     var notices: ArrayList<Notice>
 )
 
-data class Notice (
-    var title: String? = "",
-    var date: String? = "",
-    var content: String = "",
-    var isExpanded: Boolean = false,
+abstract class NoticeBase(
+    open var title: String? = "",
+    open var date: String? = "",
+    open var content: String = ""
 )
+
+data class Notice (
+    override var title: String? = "",
+    override var date: String? = "",
+    override var content: String = "",
+    var isExpanded: Boolean = false,
+) : NoticeBase()

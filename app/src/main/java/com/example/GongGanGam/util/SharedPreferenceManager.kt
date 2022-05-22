@@ -33,7 +33,7 @@ fun getUserIdx(context: Context) : Int {
 
 fun saveDeviceToken(context: Context, token: String) {
     val pref = context.getSharedPreferences(context.packageName, AppCompatActivity.MODE_PRIVATE)
-    pref.edit().putString("deviceToken", token)
+    pref.edit().putString("deviceToken", token).apply()
 }
 
 fun getDeviceToken(context: Context): String {
