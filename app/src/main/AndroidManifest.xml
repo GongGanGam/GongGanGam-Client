@@ -87,8 +87,21 @@
         <activity
             android:name="com.example.GongGanGam.activity.MyPageLeaveActivity"
             android:exported="false" />
+<<<<<<< HEAD
         <activity android:name="com.example.GongGanGam.activity.MyPageNoticeActivity"
             android:exported="false"/>
+=======
+        <activity android:name=".Activity.MyPageNoticeActivity" />
+
+        <service
+            android:name="com.example.GongGanGam.util.GongFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+>>>>>>> b250ed0aa7f02a3041b83863a1fbacf7f6db1ffb
     </application>
 
 </manifest>

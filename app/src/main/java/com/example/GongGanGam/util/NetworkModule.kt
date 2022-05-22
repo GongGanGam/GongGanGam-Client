@@ -7,8 +7,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.util.concurrent.TimeUnit
+
 
 private const val BASE_URL = "https://gonggangam.site/"
 //private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {

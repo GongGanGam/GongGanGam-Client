@@ -8,9 +8,11 @@ import com.example.gonggangam.*
 import com.example.GongGanGam.fragment.ChatFragment
 import com.example.GongGanGam.fragment.DiaryFragment
 import com.example.GongGanGam.fragment.LetterFragment
+import com.example.GongGanGam.util.getDeviceToken
 import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getUserIdx
 import com.example.gonggangam.databinding.ActivityMainBinding
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainBtmNav.itemIconTintList = null
 
         Log.d("TAG-MAIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
-
         // dummy
 //        if(jwt == "" || userIdx < 0) {
 //            Toast.makeText(this, "유저 정보 확인 실패", Toast.LENGTH_SHORT).show()
