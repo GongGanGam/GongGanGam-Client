@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.Manifest
 import android.app.Activity
@@ -6,13 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.RoundedCorner
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -28,11 +26,10 @@ import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.R
-import com.example.gonggangam.RetrofitClient
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Retrofit
 
 

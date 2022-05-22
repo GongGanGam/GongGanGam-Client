@@ -1,4 +1,4 @@
-package com.example.gonggangam.DiaryService
+package com.example.GongGanGam.diaryService
 
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -55,4 +55,21 @@ interface DiaryRetrofitInterface {
         @Path ("answerIdx") answerIdx: Int,
     ): Call<BasicResponse>
 
+
+    @POST("app/chat")
+    fun startChatting(
+        @Header("x-access-token") jwt: String,
+        @Body chatUserIdx: Int,
+    ): Call<BasicResponse>
+
+    @GET("app/chat")
+    fun getChatList(
+        @Header("x-access-token") jwt:String,
+    ): Call<ChatListResponse>
+
+    @POST("app/admin/report")
+    fun sendReport(
+        @Header("x-access-token") jwt:String,
+        @Body report: Report
+    ): Call<BasicResponse>
 }

@@ -1,4 +1,4 @@
-package com.example.gonggangam.Class
+package com.example.GongGanGam.model
 
 import java.io.Serializable
 data class ReceivedAnswer (

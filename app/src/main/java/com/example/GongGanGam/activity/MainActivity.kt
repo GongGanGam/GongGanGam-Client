@@ -1,13 +1,15 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
-import com.example.gonggangam.Fragment.MyPageFragment
+import com.example.GongGanGam.fragment.MyPageFragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.*
-import com.example.gonggangam.Fragment.ChatFragment
-import com.example.gonggangam.Fragment.DiaryFragment
-import com.example.gonggangam.Fragment.LetterFragment
+import com.example.GongGanGam.fragment.ChatFragment
+import com.example.GongGanGam.fragment.DiaryFragment
+import com.example.GongGanGam.fragment.LetterFragment
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getUserIdx
 import com.example.gonggangam.databinding.ActivityMainBinding
 
 

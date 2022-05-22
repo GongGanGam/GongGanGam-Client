@@ -1,4 +1,4 @@
-package com.example.gonggangam.Fragment
+package com.example.GongGanGam.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

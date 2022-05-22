@@ -1,14 +1,15 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gonggangam.*
-import com.example.gonggangam.AuthService.AuthResponse
-import com.example.gonggangam.AuthService.AuthRetrofitInterface
-import com.example.gonggangam.AuthService.loginBody
+import com.example.GongGanGam.util.*
+import com.example.gonggangam.Activity.AdditionalInformationActivity
+import com.example.GongGanGam.authService.AuthResponse
+import com.example.GongGanGam.authService.AuthRetrofitInterface
+import com.example.GongGanGam.authService.loginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
@@ -16,11 +17,7 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
-import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
-import com.navercorp.nid.profile.NidProfileCallback
-import com.navercorp.nid.profile.data.NidProfileResponse
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

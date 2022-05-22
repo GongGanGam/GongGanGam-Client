@@ -1,13 +1,12 @@
-package com.example.gonggangam.Adapter
+package com.example.GongGanGam.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.gonggangam.Class.Diary
+import com.example.GongGanGam.model.Diary
 import com.example.gonggangam.R
-import com.example.gonggangam.Util.ImageLoader
+import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ItemReceivedLetterBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

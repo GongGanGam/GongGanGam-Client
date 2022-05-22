@@ -54,26 +54,13 @@
         android:layout_marginStart="16dp"
         />
 
-    <View
-        android:id="@+id/report_done_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/button_inactive_background"
-        />
-
     <Spinner
         android:id="@+id/report_reason_spinner"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/background_spinner"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
         android:popupBackground="@drawable/button_inactive_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +81,20 @@
         android:textColorHint="#9FA8DA"
         android:textSize="16sp"
         android:paddingHorizontal="16dp"
+        android:visibility="gone"
         />
+
+    <View
+        android:id="@+id/report_done_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_inactive_background" />
 
     <TextView
         android:id="@+id/report_done_btn_tv"

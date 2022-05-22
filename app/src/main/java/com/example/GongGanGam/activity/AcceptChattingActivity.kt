@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.GongGanGam.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,18 +8,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.GongGanGam.activity.ChatActivity
-import com.example.gonggangam.Class.BasicDiary
-import com.example.gonggangam.Class.ReceivedAnswer
-import com.example.gonggangam.Class.User
-import com.example.gonggangam.DiaryService.BasicResponse
-import com.example.gonggangam.DiaryService.DiaryRetrofitInterface
-import com.example.gonggangam.DiaryService.ReceivedAnswerResponse
+import com.example.GongGanGam.model.BasicDiary
+import com.example.GongGanGam.model.ReceivedAnswer
+import com.example.GongGanGam.model.User
+import com.example.GongGanGam.diaryService.BasicResponse
+import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
-import com.example.gonggangam.Util.ImageLoader
+import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
-import com.example.gonggangam.getJwt
-import com.example.gonggangam.getRetrofit
+import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -149,7 +148,7 @@ class AcceptChattingActivity : AppCompatActivity() {
 
         binding.acceptChattingStartBtn.setOnClickListener {
             val intent = Intent(this@AcceptChattingActivity, ChatActivity::class.java)
-            intent.putExtra("opp", User(answer.nickname!!, answer.profImg!!, answer.answerIdx))
+            intent.putExtra("opp", User(answer.answerIdx, answer.profImg!!, answer.nickname!!))
             startActivity(intent)
         }
 
@@ -157,5 +156,17 @@ class AcceptChattingActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.acceptChattingMenuIv.setOnClickListener {
+            goToReportActivity()
+        }
+
+    }
+
+    private fun goToReportActivity() {
+        val intent = Intent(this, ReportActivity::class.java)
+        intent.putExtra("reportType", "answer")
+        intent.putExtra("idxOfType", answer.answerIdx)
+        intent.putExtra("reportUserName", answer.nickname)
+        startActivity(intent)
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".Activity.AcceptChattingActivity">
+    tools:context="com.example.GongGanGam.activity.AcceptChattingActivity">
 
 
     <View

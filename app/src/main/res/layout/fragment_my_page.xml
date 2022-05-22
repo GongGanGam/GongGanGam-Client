@@ -26,11 +26,11 @@
             android:layout_marginStart="16dp"
             />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/mypage_user_profile_none"
-            app:civ_border_color="#9CA3D4"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:background="@drawable/profile_image_background"
             android:src="@drawable/profile_img"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="88dp"
