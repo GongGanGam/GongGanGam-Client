@@ -52,7 +52,7 @@
         <activity android:name=".Activity.AcceptDiaryActivity" />
         <activity
             android:name="com.example.GongGanGam.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -69,10 +69,10 @@
         </activity>
         <activity
             android:name="com.example.GongGanGam.activity.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
-            android:name=".Activity.AdditionalInformationActivity"
-            android:exported="true"></activity>
+            android:name="com.example.GongGanGam.activity.AdditionalInformationActivity"
+            android:exported="true"/>
         <activity
             android:name="com.example.GongGanGam.activity.MyInfoActivity"
             android:exported="false">
@@ -87,12 +87,8 @@
         <activity
             android:name="com.example.GongGanGam.activity.MyPageLeaveActivity"
             android:exported="false" />
-<<<<<<< HEAD
         <activity android:name="com.example.GongGanGam.activity.MyPageNoticeActivity"
             android:exported="false"/>
-=======
-        <activity android:name=".Activity.MyPageNoticeActivity" />
-
         <service
             android:name="com.example.GongGanGam.util.GongFirebaseMessagingService"
             android:exported="false">
@@ -101,7 +97,6 @@
             </intent-filter>
         </service>
 
->>>>>>> b250ed0aa7f02a3041b83863a1fbacf7f6db1ffb
     </application>
 
 </manifest>
