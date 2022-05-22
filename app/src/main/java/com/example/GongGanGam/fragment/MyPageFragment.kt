@@ -31,9 +31,6 @@ class MyPageFragment() : Fragment() {
     private val PHOTO_NAME = "photo"
     private lateinit var photoFile : File
     lateinit var binding: FragmentMyPageBinding
-//
-//    private var _binding: FragmentMyPageBinding? = null
-//    private val binding get() = _binding!!
 
     private val selectedImages = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
         binding.mypageUserProfileNone.setImageURI(uriList[0])
