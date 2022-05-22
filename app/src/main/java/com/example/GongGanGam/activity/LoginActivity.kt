@@ -6,11 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.GongGanGam.util.*
-import com.example.gonggangam.Activity.AdditionalInformationActivity
 import com.example.GongGanGam.authService.AuthResponse
 import com.example.GongGanGam.authService.AuthRetrofitInterface
 import com.example.GongGanGam.authService.loginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
 import com.kakao.sdk.common.model.ClientError
@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d("TAG-LOGIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
         initListener()
+        loadDeviceToken()
     }
 
     fun initListener() {
@@ -200,6 +201,18 @@ class LoginActivity : AppCompatActivity() {
         saveUserIdx(this, userIdx)
         startActivity(intent)
         finish()
+    }
+
+    private fun loadDeviceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Log.w("TAG-MAIN", "FCM token failed", it.exception)
+            } else {
+
+                saveDeviceToken(this, it.result)
+                Log.d("TAG-MAIN", "FCM token : ${it.result}")
+            }
+        }
     }
 
 }
