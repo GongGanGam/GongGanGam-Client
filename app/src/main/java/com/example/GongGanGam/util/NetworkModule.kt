@@ -20,11 +20,10 @@ val loggingIntercepter = HttpLoggingInterceptor()
 fun getRetrofit(): Retrofit {
     loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
     clientBuilder.addInterceptor(loggingIntercepter)
-    val retrofit = Retrofit.Builder()
+
+    return Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(clientBuilder.build())
         .build()
-
-    return retrofit
 }

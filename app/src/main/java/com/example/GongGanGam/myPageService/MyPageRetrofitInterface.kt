@@ -32,8 +32,8 @@ interface MyPageRetrofitInterface {
     @PATCH("/app/users/{userIdx}/profile")
     fun editProfileImage(
         @Header("x-access-token") jwt: String,
-        @Part profImg: MultipartBody.Part,
-        @Path ("userIdx") userIdx: Int,
+        @Part profImg: MultipartBody.Part?,
+        @Part("userIdx") userIdx: Int,
     ): Call<BasicResponse>
 
 }
