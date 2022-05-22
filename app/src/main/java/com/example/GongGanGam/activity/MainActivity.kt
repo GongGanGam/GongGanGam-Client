@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.mainBtmNav.itemIconTintList = null
 
         Log.d("TAG-MAIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
-        Log.d("TAG-MAIN", "device token: ${getDeviceToken(this)}")
         // dummy
 //        if(jwt == "" || userIdx < 0) {
 //            Toast.makeText(this, "유저 정보 확인 실패", Toast.LENGTH_SHORT).show()

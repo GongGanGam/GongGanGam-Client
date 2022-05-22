@@ -10,7 +10,7 @@ class GongFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        Log.d(TAG, "token : $token")
+        Log.d(TAG, "New FCM device token : $token")
         saveDeviceToken(GlobalApplication.context(), token)
     }
 
