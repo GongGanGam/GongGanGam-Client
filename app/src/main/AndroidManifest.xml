@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gonggangam">
     <!-- 인터넷 사용 권한 설정 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 권한 그룹 : STORAGE(GALLERY) -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.example.GongGanGam.activity.GlobalApplication"
@@ -13,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BottomNaviTemplate"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.example.GongGanGam.activity.ReportActivity"
@@ -49,7 +52,7 @@
         <activity android:name=".Activity.AcceptDiaryActivity" />
         <activity
             android:name="com.example.GongGanGam.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -66,10 +69,10 @@
         </activity>
         <activity
             android:name="com.example.GongGanGam.activity.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
-            android:name=".Activity.AdditionalInformationActivity"
-            android:exported="true"></activity>
+            android:name="com.example.GongGanGam.activity.AdditionalInformationActivity"
+            android:exported="true"/>
         <activity
             android:name="com.example.GongGanGam.activity.MyInfoActivity"
             android:exported="false">
@@ -84,8 +87,8 @@
         <activity
             android:name="com.example.GongGanGam.activity.MyPageLeaveActivity"
             android:exported="false" />
-        <activity android:name=".Activity.MyPageNoticeActivity" />
-
+        <activity android:name="com.example.GongGanGam.activity.MyPageNoticeActivity"
+            android:exported="false"/>
         <service
             android:name="com.example.GongGanGam.util.GongFirebaseMessagingService"
             android:exported="false">

@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 object RetrofitClient {
-    private const val BASE_URL = "http://3.36.219.12:3000"
+//    private const val BASE_URL = "http://3.36.219.12:3000"
+    private const val BASE_URL = "https://gonggangam.site/"
 
     fun getInstance(): Retrofit {
         return Retrofit.Builder()
