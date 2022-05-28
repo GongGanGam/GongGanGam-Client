@@ -19,9 +19,9 @@ import com.example.GongGanGam.model.ChatList
 import com.example.GongGanGam.model.ChatModel
 import com.example.GongGanGam.model.Comment
 import com.example.GongGanGam.model.Diary
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -81,7 +81,7 @@ class ChatFragment : Fragment() {
 
     private fun getChatList() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getChatList(getJwt(requireContext())).enqueue(object: Callback<ChatListResponse> {
+        diaryService.getChatList(PrefManager.jwt).enqueue(object: Callback<ChatListResponse> {
             override fun onResponse(
                 call: Call<ChatListResponse>,
                 response: Response<ChatListResponse>

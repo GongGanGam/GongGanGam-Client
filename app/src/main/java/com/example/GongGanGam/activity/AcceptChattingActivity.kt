@@ -16,8 +16,8 @@ import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
 import com.example.GongGanGam.util.ImageLoader
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,11 +44,7 @@ class AcceptChattingActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        if(answerIdx == null) {
-            Toast.makeText(this, "답장 정보 조회 실패", Toast.LENGTH_SHORT).show()
-            return
-        }
-        diaryService.receivedAnswer(getJwt(this), answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
+        diaryService.receivedAnswer(PrefManager.jwt, answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
             override fun onResponse(
                 call: Call<ReceivedAnswerResponse>,
                 response: Response<ReceivedAnswerResponse>
@@ -76,7 +72,7 @@ class AcceptChattingActivity : AppCompatActivity() {
     }
 
     private fun rejectAnswer() {
-        diaryService.rejectAnswer(getJwt(this), answerIdx).enqueue(object: Callback<BasicResponse> {
+        diaryService.rejectAnswer(PrefManager.jwt, answerIdx).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!

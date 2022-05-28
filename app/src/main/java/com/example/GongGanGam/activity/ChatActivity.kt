@@ -21,10 +21,10 @@ import com.example.GongGanGam.model.User
 import com.example.GongGanGam.fragment.ChatFragment
 import com.example.gonggangam.R
 import com.example.GongGanGam.util.ImageLoader
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
-import com.example.GongGanGam.util.getUserIdx
 import com.google.firebase.database.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,7 +51,7 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        myUserIdx = getUserIdx(this)
+        myUserIdx = PrefManager.userIdx
         opp = intent.getSerializableExtra("opp") as User
 
         if(opp.profImg != null) {

@@ -12,8 +12,8 @@ import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.ReceivedDiaryResponse
 import com.example.gonggangam.R
 import com.example.GongGanGam.util.ImageLoader
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.databinding.ActivityAcceptDiaryBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +45,7 @@ class AcceptDiaryActivity : AppCompatActivity() {
             return
         }
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.receivedDiary(getJwt(this), diaryIdx).enqueue(object:
+        diaryService.receivedDiary(PrefManager.jwt, diaryIdx).enqueue(object:
             Callback<ReceivedDiaryResponse> {
             override fun onResponse(
                 call: Call<ReceivedDiaryResponse>,

@@ -13,8 +13,8 @@ import com.example.GongGanGam.model.Diary
 import com.example.GongGanGam.adapter.LetterReceivedDiaryRVAdapter
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.ReceivedDiarysResponse
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.databinding.FragmentReceivedDiaryBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,14 +30,14 @@ class ReceivedDiaryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentReceivedDiaryBinding.inflate(inflater, container, false)
-        jwt = getJwt(requireContext())
+        jwt = PrefManager.jwt
         getData()
         return binding.root
     }
 
     private fun getData() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getDiaries(1, jwt).enqueue(object: Callback<ReceivedDiarysResponse> {
+        diaryService.getDiaries(1).enqueue(object: Callback<ReceivedDiarysResponse> {
             override fun onResponse(
                 call: Call<ReceivedDiarysResponse>,
                 response: Response<ReceivedDiarysResponse>

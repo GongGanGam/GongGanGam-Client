@@ -27,9 +27,8 @@ import com.example.GongGanGam.diaryService.BasicResponse
 import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
 import com.example.GongGanGam.myPageService.UserResponse
 import com.example.GongGanGam.util.FormDataUtil
-import com.example.GongGanGam.util.getJwt
+import com.example.GongGanGam.util.PrefManager
 import com.example.GongGanGam.util.getRetrofit
-import com.example.GongGanGam.util.getUserIdx
 import com.example.gonggangam.databinding.FragmentMyPageBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -96,7 +95,7 @@ class MyPageFragment() : Fragment() {
 
     private fun getUser() {
         val authService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        authService.getUser(getJwt(requireContext()), getUserIdx(requireContext())).enqueue(object: Callback<UserResponse> {
+        authService.getUser(PrefManager.jwt, PrefManager.userIdx).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("TAG-USER", response.toString())
 
@@ -141,7 +140,7 @@ class MyPageFragment() : Fragment() {
         val requestBody = MultipartBody.Part.createFormData("profImg", destFile.name, requestFile)
 
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        myPageService.editProfileImage(getJwt(requireContext()), requestBody, getUserIdx(requireContext())).enqueue(object: Callback<BasicResponse>{
+        myPageService.editProfileImage(PrefManager.jwt, requestBody, PrefManager.userIdx).enqueue(object: Callback<BasicResponse>{
             override fun onResponse(
                 call: Call<BasicResponse>,
                 response: Response<BasicResponse>

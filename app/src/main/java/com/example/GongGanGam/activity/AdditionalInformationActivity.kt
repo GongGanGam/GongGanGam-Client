@@ -17,11 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.GongGanGam.authService.AuthRetrofitInterface
 import com.example.GongGanGam.authService.BasicResponse
 import com.example.GongGanGam.authService.SignInBody
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
 import com.example.GongGanGam.util.getRetrofit
-import com.example.GongGanGam.util.saveJwt
-import com.example.GongGanGam.util.saveUserIdx
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -261,8 +260,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         }
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        saveJwt(this, jwt)
-        saveUserIdx(this, userIdx)
+        PrefManager.setAuth(jwt, userIdx)
         startActivity(intent)
         finish()
     }

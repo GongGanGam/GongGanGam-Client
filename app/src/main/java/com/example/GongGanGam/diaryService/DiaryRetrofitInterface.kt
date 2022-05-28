@@ -22,7 +22,7 @@ interface DiaryRetrofitInterface {
     @GET("app/diarys/share")
     fun getDiaries(
         @Query("page") page: Int,
-        @Header("x-access-token") jwt: String
+        // @Header("x-access-token") jwt: String
     ): Call<ReceivedDiarysResponse>
 
     @GET("app/diarys/answer")

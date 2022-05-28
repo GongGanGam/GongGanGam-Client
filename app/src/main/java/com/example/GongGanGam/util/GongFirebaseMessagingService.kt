@@ -11,7 +11,7 @@ class GongFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
 
         Log.d(TAG, "New FCM device token : $token")
-        saveDeviceToken(GlobalApplication.context(), token)
+        PrefManager.setDeviceToken(token)
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
