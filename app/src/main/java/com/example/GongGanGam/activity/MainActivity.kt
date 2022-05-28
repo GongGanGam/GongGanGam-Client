@@ -8,8 +8,6 @@ import com.example.gonggangam.*
 import com.example.GongGanGam.fragment.ChatFragment
 import com.example.GongGanGam.fragment.DiaryFragment
 import com.example.GongGanGam.fragment.LetterFragment
-import com.example.GongGanGam.util.getJwt
-import com.example.GongGanGam.util.getUserIdx
 import com.example.gonggangam.databinding.ActivityMainBinding
 
 

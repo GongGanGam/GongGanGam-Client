@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun naverLogin() {
-        var body = LoginBody(naverAccessToken, PrefManager.deviceToken)
+        val body = LoginBody(naverAccessToken, PrefManager.deviceToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("NAVER-API", body.toString())
 
@@ -161,7 +161,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // save userIdx & jwt
                     userIdx = resp.result!!.userIdx
-                    jwt = resp.result!!.jwt
+                    jwt = resp.result.jwt
 
                     when(resp.code) {
                         1000 -> {
