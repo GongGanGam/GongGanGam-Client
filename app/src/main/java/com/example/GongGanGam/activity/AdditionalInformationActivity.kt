@@ -14,10 +14,9 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.GongGanGam.activity.MainActivity
 import com.example.GongGanGam.authService.AuthRetrofitInterface
 import com.example.GongGanGam.authService.BasicResponse
-import com.example.GongGanGam.authService.signInBody
+import com.example.GongGanGam.authService.SignInBody
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
 import com.example.GongGanGam.util.getRetrofit
@@ -52,7 +51,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
     }
 
     private fun signIn() {
-        var body = signInBody(nickName, birthYear, gender)
+        var body = SignInBody(nickName, birthYear, gender)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("TAG-API-SIGNIN", body.toString())
 

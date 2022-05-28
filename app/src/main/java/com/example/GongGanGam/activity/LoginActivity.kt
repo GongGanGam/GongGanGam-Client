@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.GongGanGam.util.*
 import com.example.GongGanGam.authService.AuthResponse
 import com.example.GongGanGam.authService.AuthRetrofitInterface
-import com.example.GongGanGam.authService.loginBody
+import com.example.GongGanGam.authService.LoginBody
 import com.example.gonggangam.databinding.ActivityLoginBinding
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun naverLogin() {
-        var body = loginBody(naverAccessToken)
+        var body = LoginBody(naverAccessToken, getDeviceToken(this))
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("NAVER-API", body.toString())
 
@@ -148,7 +148,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun kakaoLogin() {
-        var body = loginBody(kakaoAccessToken)
+        var body = LoginBody(kakaoAccessToken, getDeviceToken(this))
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("KAKAO-API", body.toString())
 
