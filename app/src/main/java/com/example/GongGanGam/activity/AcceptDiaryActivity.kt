@@ -1,4 +1,4 @@
-package com.example.gonggangam.Activity
+package com.example.gonggangam.activity
 
 import android.content.Intent
 import android.os.Bundle
