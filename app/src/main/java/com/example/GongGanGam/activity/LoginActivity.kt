@@ -28,12 +28,11 @@ class LoginActivity : AppCompatActivity() {
     var naverAccessToken: String = ""
     var jwt: String = ""
     var userIdx: Int = -1
-    var loginSuccess: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("TAG-LOGIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
         initListener()
         loadDeviceToken()
     }
@@ -48,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.dummy.setOnClickListener {
-            saveJwt(this, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ")
-            saveUserIdx(this, 8)
+            // dummy
+            PrefManager.setAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ", 8)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -77,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun naverLogin() {
-        var body = LoginBody(naverAccessToken, getDeviceToken(this))
+        var body = LoginBody(naverAccessToken, PrefManager.deviceToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("NAVER-API", body.toString())
 
@@ -148,7 +147,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun kakaoLogin() {
-        var body = LoginBody(kakaoAccessToken, getDeviceToken(this))
+        var body = LoginBody(kakaoAccessToken, PrefManager.deviceToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("KAKAO-API", body.toString())
 
@@ -193,12 +192,9 @@ class LoginActivity : AppCompatActivity() {
 
     fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-//        intent.putExtra("jwt", jwt) // jwt
-//        intent.putExtra("userIdx", userIdx) // userIdx
 
         // user 정보 저장 후 main 진입
-        saveJwt(this, jwt)
-        saveUserIdx(this, userIdx)
+        PrefManager.setAuth(jwt, userIdx)
         startActivity(intent)
         finish()
     }
@@ -208,8 +204,7 @@ class LoginActivity : AppCompatActivity() {
             if (!it.isSuccessful) {
                 Log.w("TAG-MAIN", "FCM token failed", it.exception)
             } else {
-
-                saveDeviceToken(this, it.result)
+                PrefManager.setDeviceToken(it.result)
                 Log.d("TAG-MAIN", "FCM token : ${it.result}")
             }
         }

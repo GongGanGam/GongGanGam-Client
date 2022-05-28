@@ -2,6 +2,7 @@ package com.example.GongGanGam.activity
 
 import android.app.Application
 import android.content.Context
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.R
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
@@ -30,5 +31,8 @@ class GlobalApplication : Application() {
         NaverIdLoginSDK.initialize(this, resources.getString(R.string.naver_client_id), resources.getString(
             R.string.naver_client_secret
         ), resources.getString(R.string.naver_client_name))
+
+        // spf 초기화
+        PrefManager.init(applicationContext)
     }
 }
