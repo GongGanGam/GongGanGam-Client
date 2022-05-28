@@ -41,7 +41,7 @@ class ReceivedReplyFragment : Fragment() {
 
     private fun getData() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getAnswers(1, jwt).enqueue(object: Callback<ReceivedAnswersResponse> {
+        diaryService.getAnswers(1).enqueue(object: Callback<ReceivedAnswersResponse> {
             override fun onResponse(
                 call: Call<ReceivedAnswersResponse>,
                 response: Response<ReceivedAnswersResponse>

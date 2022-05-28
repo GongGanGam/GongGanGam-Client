@@ -81,7 +81,7 @@ class ChatFragment : Fragment() {
 
     private fun getChatList() {
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.getChatList(PrefManager.jwt).enqueue(object: Callback<ChatListResponse> {
+        diaryService.getChatList().enqueue(object: Callback<ChatListResponse> {
             override fun onResponse(
                 call: Call<ChatListResponse>,
                 response: Response<ChatListResponse>

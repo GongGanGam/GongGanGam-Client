@@ -95,7 +95,7 @@ class MyPageFragment() : Fragment() {
 
     private fun getUser() {
         val authService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        authService.getUser(PrefManager.jwt, PrefManager.userIdx).enqueue(object: Callback<UserResponse> {
+        authService.getUser(PrefManager.userIdx).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("TAG-USER", response.toString())
 
@@ -112,7 +112,6 @@ class MyPageFragment() : Fragment() {
                                     .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                                     .into(binding.mypageUserProfileNone)
                             }
-                            Glide.with(requireContext())
 
                             // 연령대 & 성별
 
@@ -140,7 +139,7 @@ class MyPageFragment() : Fragment() {
         val requestBody = MultipartBody.Part.createFormData("profImg", destFile.name, requestFile)
 
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        myPageService.editProfileImage(PrefManager.jwt, requestBody, PrefManager.userIdx).enqueue(object: Callback<BasicResponse>{
+        myPageService.editProfileImage(requestBody, PrefManager.userIdx).enqueue(object: Callback<BasicResponse>{
             override fun onResponse(
                 call: Call<BasicResponse>,
                 response: Response<BasicResponse>

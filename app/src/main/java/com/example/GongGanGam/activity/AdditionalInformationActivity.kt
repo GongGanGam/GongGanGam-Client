@@ -54,7 +54,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("TAG-API-SIGNIN", body.toString())
 
-        authService.signIn(jwt, body).enqueue(object: Callback<BasicResponse> {
+        authService.signIn(body).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 Log.d("SIGNIN/API-RESPONSE", response.toString())
 
@@ -199,23 +199,6 @@ class AdditionalInformationActivity() : AppCompatActivity() {
 
         signIn()
 
-//        Toast.makeText(
-//            this,
-//            "nickname $nickName birthYear $birthYear gender $gender",
-//            Toast.LENGTH_SHORT
-//        ).show()
-
-
-//
-//        user?.let {
-//            Log.d("LOGINACT/GET_USER", "userId: ${user.id}, $user")
-//            //발급받은 jwt를 저장해주는 함수
-//
-//            saveJwt(user.id)
-//        }
-//        if (user.toString().isEmpty()) {
-//            Toast.makeText(this, "회원정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
-//        }
     }
 
         private fun hideKeyBoard() {

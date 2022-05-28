@@ -55,7 +55,7 @@ class ReportActivity : AppCompatActivity(),  AdapterView.OnItemSelectedListener 
         val report = Report(reportType, idxOfType, reportDetail, reportContent)
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
 
-        diaryService.sendReport(PrefManager.jwt, report).enqueue(object: Callback<BasicResponse> {
+        diaryService.sendReport(report).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
