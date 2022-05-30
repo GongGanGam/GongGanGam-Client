@@ -15,7 +15,6 @@ import com.example.GongGanGam.diaryService.Reply
 import com.example.gonggangam.R
 import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityReplyToDiaryBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -92,7 +91,7 @@ class ReplyToDiaryActivity : AppCompatActivity() {
         // send diary api
         val reply = Reply(binding.replyToDiaryContentEt.text.toString(), diary.userIdx!!)
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
-        diaryService.sendReply( getJwt(this), reply).enqueue(object: Callback<BasicResponse> {
+        diaryService.sendReply(reply).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: retrofit2.Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!

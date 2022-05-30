@@ -28,7 +28,6 @@ interface AuthRetrofitInterface {
 
     @POST("app/users/signin")
     fun signIn(
-        @Header("x-access-token") jwt: String,
         @Body body: SignInBody
     ): Call<BasicResponse>
 

@@ -1,36 +1,40 @@
 package com.example.GongGanGam.util
 
-import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import okhttp3.*
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "https://gonggangam.site/"
-//private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-//    level = HttpLoggingInterceptor.Level.BODY
-//}
 
-var gson = GsonBuilder().setLenient().create()
-private val clientBuilder = OkHttpClient.Builder() // more detail retrofit log
-private val loggingIntercepter = HttpLoggingInterceptor()
+private val loggingIntercepter = HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.BODY
+}
 
-//private val okHttpClient = clientBuilder
-//    .connectTimeout(1, TimeUnit.SECONDS)
-//    .readTimeout(1, TimeUnit.SECONDS)
-//    .writeTimeout(1, TimeUnit.SECONDS)
-//    .build()
+private val okHttpBuilder = OkHttpClient.Builder()
+    .addInterceptor(AppInterceptor())
+    .addNetworkInterceptor(loggingIntercepter)
+    .connectTimeout(5, TimeUnit.SECONDS)
+    .readTimeout(5, TimeUnit.SECONDS)
+    .writeTimeout(5, TimeUnit.SECONDS)
 
 fun getRetrofit(): Retrofit {
-    loggingIntercepter.level = HttpLoggingInterceptor.Level.BODY
-    clientBuilder.addInterceptor(loggingIntercepter)
-
     return Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(okHttpBuilder.build())
         .addConverterFactory(GsonConverterFactory.create())
-        .client(clientBuilder.build())
         .build()
+}
+
+private class AppInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response = with(chain){
+        val request = request().newBuilder()
+            .addHeader("x-access-token", PrefManager.jwt)
+            .build()
+        proceed(request)
+    }
 }

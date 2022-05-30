@@ -17,11 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.GongGanGam.authService.AuthRetrofitInterface
 import com.example.GongGanGam.authService.BasicResponse
 import com.example.GongGanGam.authService.SignInBody
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityAdditionalInformationBinding
 import com.example.GongGanGam.util.getRetrofit
-import com.example.GongGanGam.util.saveJwt
-import com.example.GongGanGam.util.saveUserIdx
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,7 +54,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("TAG-API-SIGNIN", body.toString())
 
-        authService.signIn(jwt, body).enqueue(object: Callback<BasicResponse> {
+        authService.signIn(body).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 Log.d("SIGNIN/API-RESPONSE", response.toString())
 
@@ -200,23 +199,6 @@ class AdditionalInformationActivity() : AppCompatActivity() {
 
         signIn()
 
-//        Toast.makeText(
-//            this,
-//            "nickname $nickName birthYear $birthYear gender $gender",
-//            Toast.LENGTH_SHORT
-//        ).show()
-
-
-//
-//        user?.let {
-//            Log.d("LOGINACT/GET_USER", "userId: ${user.id}, $user")
-//            //발급받은 jwt를 저장해주는 함수
-//
-//            saveJwt(user.id)
-//        }
-//        if (user.toString().isEmpty()) {
-//            Toast.makeText(this, "회원정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
-//        }
     }
 
         private fun hideKeyBoard() {
@@ -261,8 +243,7 @@ class AdditionalInformationActivity() : AppCompatActivity() {
         }
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        saveJwt(this, jwt)
-        saveUserIdx(this, userIdx)
+        PrefManager.setAuth(jwt, userIdx)
         startActivity(intent)
         finish()
     }

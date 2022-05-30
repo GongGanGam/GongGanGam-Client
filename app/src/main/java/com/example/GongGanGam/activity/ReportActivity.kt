@@ -14,10 +14,10 @@ import android.widget.*
 import com.example.GongGanGam.diaryService.BasicResponse
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.Report
+import com.example.GongGanGam.util.PrefManager
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityReportBinding
 import com.example.gonggangam.databinding.ItemReportSpinnerBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +55,7 @@ class ReportActivity : AppCompatActivity(),  AdapterView.OnItemSelectedListener 
         val report = Report(reportType, idxOfType, reportDetail, reportContent)
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
 
-        diaryService.sendReport(getJwt(this), report).enqueue(object: Callback<BasicResponse> {
+        diaryService.sendReport(report).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!

@@ -22,54 +22,44 @@ interface DiaryRetrofitInterface {
     @GET("app/diarys/share")
     fun getDiaries(
         @Query("page") page: Int,
-        @Header("x-access-token") jwt: String
     ): Call<ReceivedDiarysResponse>
 
     @GET("app/diarys/answer")
     fun getAnswers(
         @Query("page") page: Int,
-        @Header("x-access-token") jwt: String
     ): Call<ReceivedAnswersResponse>
 
     @POST("app/diarys/answer")
     fun sendReply(
-        @Header("x-access-token") jwt: String,
         @Body reply: Reply
     ): Call<BasicResponse>
 
     @GET("app/diarys/share/{diaryIdx}")
     fun receivedDiary(
-        @Header("x-access-token") jwt:String,
         @Path ("diaryIdx") diaryIdx: Int,
     ): Call<ReceivedDiaryResponse>
 
     @GET("app/diarys/answer/{answerIdx}")
     fun receivedAnswer(
-        @Header("x-access-token") jwt:String,
         @Path ("answerIdx") answerIdx: Int,
     ): Call<ReceivedAnswerResponse>
 
     @PATCH("app/diarys/answer/{answerIdx}")
     fun rejectAnswer(
-        @Header("x-access-token") jwt:String,
         @Path ("answerIdx") answerIdx: Int,
     ): Call<BasicResponse>
 
 
     @POST("app/chat")
     fun startChatting(
-        @Header("x-access-token") jwt: String,
         @Body chatUserIdx: Int,
     ): Call<BasicResponse>
 
     @GET("app/chat")
-    fun getChatList(
-        @Header("x-access-token") jwt:String,
-    ): Call<ChatListResponse>
+    fun getChatList(): Call<ChatListResponse>
 
     @POST("app/admin/report")
     fun sendReport(
-        @Header("x-access-token") jwt:String,
         @Body report: Report
     ): Call<BasicResponse>
 }

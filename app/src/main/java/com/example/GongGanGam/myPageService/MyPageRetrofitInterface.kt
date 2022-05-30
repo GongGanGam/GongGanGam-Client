@@ -14,13 +14,11 @@ interface MyPageRetrofitInterface {
 
     @GET("app/users/{userIdx}")
     fun getUser(
-        @Header("x-access-token") jwt: String,
         @Path("userIdx") userIdx: Int,
     ): Call<UserResponse>
 
     @PATCH("app/users/{userIdx}")
     fun editUserInfo(
-        @Header("x-access-token") jwt: String,
         @Body nickname: String,
         @Body birthYear: Int,
         @Body setAge: Boolean,
@@ -31,7 +29,6 @@ interface MyPageRetrofitInterface {
     @Multipart
     @PATCH("/app/users/{userIdx}/profile")
     fun editProfileImage(
-        @Header("x-access-token") jwt: String,
         @Part profImg: MultipartBody.Part?,
         @Path("userIdx") userIdx: Int,
     ): Call<BasicResponse>

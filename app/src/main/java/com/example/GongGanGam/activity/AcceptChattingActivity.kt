@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.GongGanGam.model.BasicDiary
@@ -17,7 +16,6 @@ import com.example.GongGanGam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
 import com.example.GongGanGam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
-import com.example.GongGanGam.util.getJwt
 import com.example.GongGanGam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,11 +42,7 @@ class AcceptChattingActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        if(answerIdx == null) {
-            Toast.makeText(this, "답장 정보 조회 실패", Toast.LENGTH_SHORT).show()
-            return
-        }
-        diaryService.receivedAnswer(getJwt(this), answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
+        diaryService.receivedAnswer(answerIdx).enqueue(object: Callback<ReceivedAnswerResponse> {
             override fun onResponse(
                 call: Call<ReceivedAnswerResponse>,
                 response: Response<ReceivedAnswerResponse>
@@ -76,7 +70,7 @@ class AcceptChattingActivity : AppCompatActivity() {
     }
 
     private fun rejectAnswer() {
-        diaryService.rejectAnswer(getJwt(this), answerIdx).enqueue(object: Callback<BasicResponse> {
+        diaryService.rejectAnswer(answerIdx).enqueue(object: Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful && response.code() == 200) {
                     val resp = response.body()!!
