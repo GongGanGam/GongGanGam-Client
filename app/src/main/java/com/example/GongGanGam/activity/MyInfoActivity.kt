@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,48 +12,97 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.GongGanGam.diaryService.BasicResponse
+import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
+import com.example.GongGanGam.util.PrefManager
+import com.example.GongGanGam.util.getRetrofit
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityMyInfoBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyInfoActivity : AppCompatActivity() {
     lateinit var binding: ActivityMyInfoBinding
+    var nickname: String? = ""
+    var birthYear: Int = -1
+    var setAge: String = ""
+    var gender: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initInfo()
+        initListener()
+    }
 
+    private fun initInfo() {
+        nickname = intent.getStringExtra("nickname")
+        birthYear = intent.getIntExtra("birthYear", -1)
+
+        if(nickname == null || birthYear == -1) {
+            Toast.makeText(this@MyInfoActivity, "회원 정보를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        else {
+            binding.myInfoNickInputEt.setText(nickname)
+            binding.myInfoBirthYearInputTv.text = birthYear.toString()
+        }
 
         //MyInfo 에 맞는 헤더 정보 수정
         binding.myInfoLayoutHeader.layoutHeaderTitleTv.text = "내 정보"
         binding.myInfoLayoutHeader.layoutHeaderBtnTv.text = "저장"
 
+        //임의로 버튼 선택 -> 추후 삭제해야함!
+        binding.myInfoAgeNoBtn.isSelected = true
+        when {
+            binding.myInfoAgeNoBtn.isSelected -> {
+                setAge = "F"
+            }
+            binding.myInfoAgeSimilarBtn.isSelected -> {
+                setAge = "T"
+            }
+        }
+
+        binding.myInfoGenderNoBtn.isSelected = true
+        when {
+            binding.myInfoGenderNoBtn.isSelected -> {
+                gender = "N"
+            }
+            binding.myInfoGenderMaleBtn.isSelected -> {
+                gender = "M"
+            }
+            binding.myInfoGenderFemaleBtn.isSelected -> {
+                gender = "F"
+            }
+        }
+
+    }
+
+    private fun initListener() {
         binding.myInfoLayoutHeader.layoutHeaderBackIv.setOnClickListener {
-           finish()
+            finish()
         }
 
         binding.myInfoCl.setOnClickListener {
             hideKeyBoard()
         }
 
-        //임의로 버튼 선택 -> 추후 삭제해야함!
-        binding.myInfoGenderNoBtn.isSelected = true
-        binding.myInfoAgeNoBtn.isSelected = true
         //연령대 지정 버튼
         binding.myInfoAgeSimilarBtn.setOnClickListener {
+            // setAge = "T"
             if(binding.myInfoAgeNoBtn.isSelected ){
                 binding.myInfoAgeSimilarBtn.isSelected = true
                 binding.myInfoAgeNoBtn.isSelected = false
-
             }
             else{
                 binding.myInfoAgeSimilarBtn.isSelected =  binding.myInfoAgeSimilarBtn.isSelected != true
-
             }
         }
         binding.myInfoAgeNoBtn.setOnClickListener {
-
+            // setAge = "F"
             if(binding.myInfoAgeSimilarBtn.isSelected ){
                 binding.myInfoAgeNoBtn.isSelected = true
                 binding.myInfoAgeSimilarBtn.isSelected = false
@@ -64,7 +114,8 @@ class MyInfoActivity : AppCompatActivity() {
         }
         //성별 선택 버튼
         binding.myInfoGenderMaleBtn.setOnClickListener {
-            if(binding.myInfoGenderFemaleBtn.isSelected||binding.myInfoGenderNoBtn.isSelected ){
+            // gender = "M"
+            if(binding.myInfoGenderFemaleBtn.isSelected||binding.myInfoGenderNoBtn.isSelected){
                 binding.myInfoGenderMaleBtn.isSelected = true
                 binding.myInfoGenderFemaleBtn.isSelected = false
                 binding.myInfoGenderNoBtn.isSelected = false
@@ -72,11 +123,10 @@ class MyInfoActivity : AppCompatActivity() {
             }
             else{
                 binding.myInfoGenderMaleBtn.isSelected =  binding.myInfoGenderMaleBtn.isSelected != true
-
             }
         }
         binding.myInfoGenderFemaleBtn.setOnClickListener {
-
+            // gender = "F"
             if(binding.myInfoGenderMaleBtn.isSelected ||binding.myInfoGenderNoBtn.isSelected ){
                 binding.myInfoGenderFemaleBtn.isSelected = true
                 binding.myInfoGenderMaleBtn.isSelected = false
@@ -88,7 +138,7 @@ class MyInfoActivity : AppCompatActivity() {
             }
         }
         binding.myInfoGenderNoBtn.setOnClickListener {
-
+            // gender = "N"
             if(binding.myInfoGenderMaleBtn.isSelected ||binding.myInfoGenderFemaleBtn.isSelected ){
                 binding.myInfoGenderNoBtn.isSelected = true
                 binding.myInfoGenderMaleBtn.isSelected = false
@@ -99,8 +149,6 @@ class MyInfoActivity : AppCompatActivity() {
                 binding.myInfoGenderNoBtn.isSelected =  binding.myInfoGenderNoBtn.isSelected != true
             }
         }
-
-
 
         //출생년도 설정
         binding.myInfoBirthYearInputTv.setOnClickListener {
@@ -145,7 +193,7 @@ class MyInfoActivity : AppCompatActivity() {
         //  완료 버튼 클릭 시
         save.setOnClickListener {
             binding.myInfoBirthYearInputTv.text = (year.value).toString()
-
+            // birthYear = (year.value)
             dialog.dismiss()
             dialog.cancel()
         }
@@ -177,31 +225,59 @@ class MyInfoActivity : AppCompatActivity() {
             return
         }
 
-        val nickName: String = binding.myInfoNickInputEt.text.toString()
-        val birthYear: String = binding.myInfoBirthYearInputTv.text.toString()
-        lateinit var gender: String
-        lateinit var age: String
+//        val nickName: String = binding.myInfoNickInputEt.text.toString()
+//        val birthYear: String = binding.myInfoBirthYearInputTv.text.toString()
+//        lateinit var gender: String
+//        lateinit var age: String
+        nickname = binding.myInfoNickInputEt.text.toString()
+        birthYear = binding.myInfoBirthYearInputTv.text.toString().toInt()
 
         //성별
-        if (binding.myInfoGenderMaleBtn.isSelected) {
-            gender = binding.myInfoGenderMaleBtn.text.toString()
-        } else if (binding.myInfoGenderFemaleBtn.isSelected) {
-            gender = binding.myInfoGenderFemaleBtn.text.toString()
-        } else if (binding.myInfoGenderNoBtn.isSelected) {
-            gender = binding.myInfoGenderNoBtn.text.toString()
+        when {
+            binding.myInfoGenderMaleBtn.isSelected -> {
+                gender = "M"
+            }
+            binding.myInfoGenderFemaleBtn.isSelected -> {
+                gender = "F"
+            }
+            binding.myInfoGenderNoBtn.isSelected -> {
+                gender = "N"
+            }
         }
 
         //나이
         if (binding.myInfoAgeSimilarBtn.isSelected) {
-            age = binding.myInfoAgeSimilarBtn.text.toString()
+            setAge = "T"
         } else if (binding.myInfoAgeNoBtn.isSelected) {
-            age = binding.myInfoAgeNoBtn.text.toString()
+            setAge = "F"
         }
 
-        Toast.makeText(this, "nickname $nickName birthYear $birthYear gender $gender age $age", Toast.LENGTH_SHORT).show()
+        val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
+        myPageService.editUserInfo(nickname!!, birthYear, setAge, gender, PrefManager.userIdx)
+            .enqueue(object: Callback<BasicResponse> {
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if(response.isSuccessful && response.code() == 200) {
+                        val resp = response.body()!!
+                        Log.d("TAG/API-RESPONSE", resp.toString())
 
+                        when(resp.code) {
+                            1000 -> Toast.makeText(this@MyInfoActivity, "회원 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show()
+                            else -> Log.d("TAG/API-CODE", "정보 수정 실패" )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                    Log.d("TAG/API-FAIL", "호출 실패")
+                }
+
+            })
 
     }
+
     private fun hideKeyBoard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.myInfoNickInputEt.windowToken, 0)

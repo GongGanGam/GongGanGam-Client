@@ -21,7 +21,7 @@ interface MyPageRetrofitInterface {
     fun editUserInfo(
         @Body nickname: String,
         @Body birthYear: Int,
-        @Body setAge: Boolean,
+        @Body setAge: String,
         @Body gender: String,
         @Path("userIdx") userIdx: Int
     ): Call<BasicResponse>

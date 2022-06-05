@@ -43,6 +43,8 @@ class MyPageFragment : Fragment() {
 
     private lateinit var imgUri: Uri // diaryImg uri 저장 변수
     lateinit var binding: FragmentMyPageBinding
+    var nickname: String? = null
+    var birthYear: Int? = null
 
     private val selectedImages = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if(result.resultCode == Activity.RESULT_OK) {
@@ -78,7 +80,7 @@ class MyPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
         binding.mypageCsNoticeTv.setOnClickListener {
@@ -107,6 +109,8 @@ class MyPageFragment : Fragment() {
                         1000 -> {
                             binding.mypageUserNameTv.text = resp.result!!.nickname
                             binding.mypageUserBirthyearTv.text = resp.result.birthYear
+                            nickname = resp.result.nickname
+                            birthYear = resp.result.birthYear.toInt()
                             activity?.let {
                                 Glide.with(it).load(resp.result.profImg)
                                     .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
@@ -177,6 +181,8 @@ class MyPageFragment : Fragment() {
 
         binding.mypageEditBtn.setOnClickListener {
             val intent = Intent(requireContext(), MyInfoActivity::class.java)
+            intent.putExtra("nickname", nickname)
+            intent.putExtra("birthYear", birthYear)
             startActivity(intent)
         }
 
