@@ -51,7 +51,7 @@ interface DiaryRetrofitInterface {
 
 
     @POST("app/chat")
-    fun startChatting(
+    fun startChat(
         @Body chatUserIdx: Int,
     ): Call<BasicResponse>
 

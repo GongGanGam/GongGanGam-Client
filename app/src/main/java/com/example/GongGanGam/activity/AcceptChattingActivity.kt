@@ -30,7 +30,7 @@ class AcceptChattingActivity : AppCompatActivity() {
     var diary = BasicDiary()
     var answer = ReceivedAnswer()
     var answerIdx: Int = -1 // 답장 리스트 프래그먼트에서 넘어온 idx
-    val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
+    val diaryService: DiaryRetrofitInterface = getRetrofit().create(DiaryRetrofitInterface::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAcceptChattingBinding.inflate(layoutInflater)
@@ -124,7 +124,6 @@ class AcceptChattingActivity : AppCompatActivity() {
 
                 // Glide 적용
                 Glide.with(this@AcceptChattingActivity).load(bitmap).circleCrop().into(binding.acceptChattingProfileIv)
-//                binding.acceptChattingProfileIv.setImageBitmap(bitmap)
             }
         }
 
@@ -141,9 +140,34 @@ class AcceptChattingActivity : AppCompatActivity() {
         }
 
         binding.acceptChattingStartBtn.setOnClickListener {
-            val intent = Intent(this@AcceptChattingActivity, ChatActivity::class.java)
-            intent.putExtra("opp", User(answer.answerIdx, answer.profImg!!, answer.nickname!!))
-            startActivity(intent)
+            diaryService.startChat(answer.answerUserIdx!!).enqueue(object: Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if(response.isSuccessful && response.code() == 200) {
+                        val resp = response.body()!!
+                        Log.d("TAG/API-RESPONSE", resp.toString())
+
+                        when(resp.code) {
+                            1000 -> {
+                                Log.d("TAG/API-CODE", "채팅 시작 성공")
+
+                                // 채팅 페이지 접속
+                                val intent = Intent(this@AcceptChattingActivity, ChatActivity::class.java)
+                                intent.putExtra("opp", User(answer.answerIdx, answer.profImg!!, answer.nickname!!))
+                                startActivity(intent)
+                            }
+                            else -> Log.d("TAG/API-CODE", "채팅 시작 실패" )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                    Log.d("TAG-FAIL", "채팅 시작 실패")
+                }
+
+            })
         }
 
         binding.acceptChattingBackIv.setOnClickListener {
