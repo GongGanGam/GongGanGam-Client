@@ -1,7 +1,6 @@
 package com.example.GongGanGam.util
 
 import okhttp3.*
-import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
