@@ -21,16 +21,33 @@ interface MyPageRetrofitInterface {
     fun editUserInfo(
         @Body nickname: String,
         @Body birthYear: Int,
-        @Body setAge: Boolean,
+        @Body setAge: String,
         @Body gender: String,
         @Path("userIdx") userIdx: Int
     ): Call<BasicResponse>
 
     @Multipart
-    @PATCH("/app/users/{userIdx}/profile")
+    @PATCH("app/users/{userIdx}/profile")
     fun editProfileImage(
         @Part profImg: MultipartBody.Part?,
         @Path("userIdx") userIdx: Int,
     ): Call<BasicResponse>
 
+    @PATCH("app/users/{userIdx}/push/diary")
+    fun setDiaryPush(
+        @Path("userIdx") userIdx: Int,
+        @Body diaryPush: String
+    ): Call<BasicResponse>
+
+    @PATCH("app/users/{userIdx}/push/answer")
+    fun setAnswerPush(
+        @Path("userIdx") userIdx: Int,
+        @Body answerPush: String
+    ): Call<BasicResponse>
+
+    @PATCH("app/users/{userIdx}/push/chat")
+    fun setChatPush(
+        @Path("userIdx") userIdx: Int,
+        @Body chatPush: String
+    ): Call<BasicResponse>
 }

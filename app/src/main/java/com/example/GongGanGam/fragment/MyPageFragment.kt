@@ -39,10 +39,12 @@ import retrofit2.Response
 import java.io.File
 
 
-class MyPageFragment() : Fragment() {
+class MyPageFragment : Fragment() {
 
     private lateinit var imgUri: Uri // diaryImg uri 저장 변수
     lateinit var binding: FragmentMyPageBinding
+    var nickname: String? = null
+    var birthYear: Int? = null
 
     private val selectedImages = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         if(result.resultCode == Activity.RESULT_OK) {
@@ -78,7 +80,7 @@ class MyPageFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
         binding.mypageCsNoticeTv.setOnClickListener {
@@ -107,6 +109,8 @@ class MyPageFragment() : Fragment() {
                         1000 -> {
                             binding.mypageUserNameTv.text = resp.result!!.nickname
                             binding.mypageUserBirthyearTv.text = resp.result.birthYear
+                            nickname = resp.result.nickname
+                            birthYear = resp.result.birthYear.toInt()
                             activity?.let {
                                 Glide.with(it).load(resp.result.profImg)
                                     .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
@@ -116,6 +120,9 @@ class MyPageFragment() : Fragment() {
                             // 연령대 & 성별
 
                             // toggle
+                            binding.mypageAcceptDiaryToggleSw.isChecked = resp.result.diaryPush == "T"
+                            binding.mypageAcceptReplyToggleSw.isChecked = resp.result.answerPush == "T"
+                            binding.mypageChattingToggleSw.isChecked = resp.result.chatPush == "T"
                         }
                         else -> Toast.makeText(requireContext(),"fail get user",Toast.LENGTH_SHORT).show()
                     }
@@ -174,12 +181,122 @@ class MyPageFragment() : Fragment() {
 
         binding.mypageEditBtn.setOnClickListener {
             val intent = Intent(requireContext(), MyInfoActivity::class.java)
+            intent.putExtra("nickname", nickname)
+            intent.putExtra("birthYear", birthYear)
             startActivity(intent)
         }
 
         binding.mypageLogoutTv.setOnClickListener {
             logout()
         }
+
+        binding.mypageAcceptDiaryToggleSw.setOnClickListener {
+            val isPush: String = if(binding.mypageAcceptDiaryToggleSw.isChecked) {
+                "T"
+            } else {
+                "F"
+            }
+            setPushAlarm(PushType.DIARY, isPush)
+        }
+
+        binding.mypageAcceptReplyToggleSw.setOnClickListener {
+            val isPush: String = if(binding.mypageAcceptReplyToggleSw.isChecked) {
+                "T"
+            } else {
+                "F"
+            }
+            setPushAlarm(PushType.ANSWER, isPush)
+        }
+
+        binding.mypageChattingToggleSw.setOnClickListener {
+            val isPush: String = if(binding.mypageChattingToggleSw.isChecked) {
+                "T"
+            } else {
+                "F"
+            }
+            setPushAlarm(PushType.CHAT, isPush)
+        }
+    }
+
+    private fun setPushAlarm(type: PushType, isPush: String) {
+        val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
+        when(type) {
+            PushType.DIARY -> {
+                myPageService.setDiaryPush(PrefManager.userIdx, isPush).enqueue(object: Callback<BasicResponse>{
+
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if(response.isSuccessful && response.code() == 200) {
+                            val resp = response.body()!!
+                            Log.d("TAG/API-RESPONSE", resp.toString())
+
+                            when(resp.code) {
+                                1000 -> Log.d("TAG/API-CODE", "다이어리 알람 설정 성공" )
+                                else -> Log.d("TAG/API-CODE", "다이어리 알람 설정 실패" )
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                        Log.d("TAG/API_FAIL", "API 호출 실패")
+                    }
+
+                })
+            }
+
+            PushType.ANSWER -> {
+                myPageService.setAnswerPush(PrefManager.userIdx, isPush).enqueue(object: Callback<BasicResponse>{
+
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if(response.isSuccessful && response.code() == 200) {
+                            val resp = response.body()!!
+                            Log.d("TAG/API-RESPONSE", resp.toString())
+
+                            when(resp.code) {
+                                1000 -> Log.d("TAG/API-CODE", "답장 알람 설정 성공" )
+                                else -> Log.d("TAG/API-CODE", "답장 알람 설정 실패" )
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                        Log.d("TAG/API_FAIL", "API 호출 실패")
+                    }
+
+                })
+            }
+
+            PushType.CHAT -> {
+                myPageService.setChatPush(PrefManager.userIdx, isPush).enqueue(object: Callback<BasicResponse>{
+
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if(response.isSuccessful && response.code() == 200) {
+                            val resp = response.body()!!
+                            Log.d("TAG/API-RESPONSE", resp.toString())
+
+                            when(resp.code) {
+                                1000 -> Log.d("TAG/API-CODE", "채팅 알람 설정 성공" )
+                                else -> Log.d("TAG/API-CODE", "채팅 알람 설정 실패" )
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                        Log.d("TAG/API_FAIL", "API 호출 실패")
+                    }
+
+                })
+            }
+        }
+
     }
 
     private fun logout() {
@@ -200,4 +317,9 @@ class MyPageFragment() : Fragment() {
         selectedImages.launch(intent)
     }
 
+    enum class PushType {
+        DIARY,
+        ANSWER,
+        CHAT
+    }
 }
