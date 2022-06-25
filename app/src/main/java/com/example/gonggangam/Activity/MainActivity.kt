@@ -1,5 +1,6 @@
 package com.example.gonggangam.Activity
 
+import android.content.Intent
 import com.example.gonggangam.Fragment.MyPageFragment
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var jwt: String = ""
     var userIdx: Int = -1
+    var thisYear: Int = 0
+    var thisMonth: Int = 0
+    var thisDay: Int = 0
+
+//     fun onDatePass(year: Int, month: Int, day: Int) {
+//        thisYear=year
+//        thisMonth=month
+//        thisDay = day
+//    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_BottomNaviTemplate)
@@ -24,25 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("TAG-MAIN", "jwt: ${getJwt(this)} userIdx: ${getUserIdx(this)}")
 
-        // dummy
-//        if(jwt == "" || userIdx < 0) {
-//            Toast.makeText(this, "유저 정보 확인 실패", Toast.LENGTH_SHORT).show()
-//            saveJwt(this, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ")
-//            saveUserIdx(this, 8)
-//        }
 
-        // 회원 정보 저장
-//        saveJwt(this, jwt)
-//        saveUserIdx(this, userIdx)
-        // init clear status bar
-//        val window = window
-//        window.setFlags(
-//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//
-//        if(Build.VERSION.SDK_INT >= 30) {	// API 30 에 적용
-//            WindowCompat.setDecorFitsSystemWindows(window, false)
-//        }
 
         // init bottom navigation
         initNavigation()
@@ -102,6 +96,19 @@ class MainActivity : AppCompatActivity() {
             .add(binding.mainFrm.id, MyPageFragment, "PICK_IMAGE_FRAGMENT")
             .commit()
     }
+    fun receiveData(year: Int, month: Int, day: Int) {
+        thisYear=year
+        thisMonth=month
+        thisDay = day
+        val intent = Intent(this, DiaryWriteEmojiActivity::class.java)
+        intent.putExtra("year",year)
+        intent.putExtra("month",month)
+        intent.putExtra("day",day)
+
+
+        startActivity(intent)
+    }
+
 
 
 

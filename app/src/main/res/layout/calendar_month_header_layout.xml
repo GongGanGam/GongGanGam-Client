@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:lineHeight="19sp"
-        android:textColor="#222222"
+        android:textColor="#262D89"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"

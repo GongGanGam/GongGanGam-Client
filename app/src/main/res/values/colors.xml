@@ -11,5 +11,6 @@
     <color name="primary">#262D89</color>
     <color name="secondary">#6163BD</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="calendar_inactive">#dddddd</color>
+    <color name="calendar_active">#262D89</color>
 </resources>

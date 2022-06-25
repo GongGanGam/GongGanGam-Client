@@ -1,5 +1,6 @@
 package com.example.gonggangam.DiaryService
 
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -7,16 +8,23 @@ import retrofit2.http.*
 interface DiaryRetrofitInterface {
 
     // 세영님쪽 api
-    @Multipart
+//    @Multipart
+//    @POST("app/diarys")
+//    fun diaryWrite(
+//        @Header("x-access-token") jwt: String,
+//        @Part uploadImg: MultipartBody.Part,
+//        @PartMap data: HashMap<String, RequestBody>,
+//    ): Call<WriteResult>
     @POST("app/diarys")
     fun diaryWrite(
-        @Part uploadImg: Part?,
-        @PartMap data: HashMap<String?, RequestBody?>,
-    ): Call<WriteResult>
-
+        @Header("x-access-token") jwt: String,
+        @Body body: WriteDiary,
+    ): Call<BasicResponse>
     @GET("app/diarys")
-    fun getCalendar(@Query("year") year: Int,
-                    @Query("month") month : Int): Call<DayResponse>
+    fun getCalendar(
+        @Header("x-access-token") jwt: String,
+        @Query("year") year: Int,
+        @Query("month") month : Int ): Call<DayResponse>
 
 
     @GET("app/diarys/share")

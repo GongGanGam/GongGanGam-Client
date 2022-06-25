@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/activity_diary_write.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/activity_diary_write_emoji.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/calendar_date_layout.xml" value="0.5" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/calendar_day_legend.xml" value="0.12" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/calendar_month_header_layout.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/sycho/Desktop/Gonggangam/GongGanGam-Client/app/src/main/res/layout/fragment_diary.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_chat_background.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/main_btm_mypage_selector.xml" value="0.1296875" />
         <entry key="app/src/main/res/drawable/mypage_edit_btn_shape.xml" value="0.1296875" />
