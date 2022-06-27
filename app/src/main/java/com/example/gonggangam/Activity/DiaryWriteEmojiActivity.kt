@@ -94,6 +94,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
 
 
                 startActivity(intent)
@@ -162,27 +165,13 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
 
 
-                chageIntent.putExtra("state", "즐거워요")
-                chageIntent.putExtra("image", byteArray)
-                chageIntent.putExtra("year",mainInt.getIntExtra("year",0))
-                chageIntent.putExtra("month",mainInt.getIntExtra("month",0))
-                chageIntent.putExtra("day",mainInt.getIntExtra("day",0))
 
-//                if(intent.getStringExtra("content")?.isNotEmpty() == true) {
-//                    intent.putExtra("content", intent.getStringExtra("content"))
-//                }
-//                if(intent.getStringExtra("shareAgree")?.isNotEmpty() == true) {
-//                    intent.putExtra("shareAgree", intent.getStringExtra("shareAgree"))
-//                }
-//                if(intent.getStringExtra("img")?.isNotEmpty() == true) {
-//                    intent.putExtra("img", intent.getStringExtra("img"))
-//                }
-//
-//                if(intent.getStringExtra("content")?.isNotEmpty()==true||intent.getStringExtra("shareAgree")?.isNotEmpty()==true||intent.getStringExtra("img")?.isNotEmpty()==true){
-//                    finish()
-//                }
+
 
 
                 startActivity(intent)
@@ -250,7 +239,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
-
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
             }
@@ -311,12 +302,15 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 resize.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 val byteArray: ByteArray = stream.toByteArray()
 
-                Toast.makeText(this, intent.getStringExtra("s"),Toast.LENGTH_LONG).show()
+
                 intent.putExtra("state", "지루해요")
                 intent.putExtra("image", byteArray)
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
 
@@ -382,6 +376,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
             }
@@ -446,6 +443,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
             }
@@ -510,6 +510,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
             }
@@ -574,6 +577,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
             }
@@ -638,6 +644,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
 
@@ -703,6 +712,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
 
@@ -768,6 +780,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
 
@@ -832,6 +847,9 @@ class DiaryWriteEmojiActivity : AppCompatActivity()
                 intent.putExtra("year",mainInt.getIntExtra("year",0))
                 intent.putExtra("month",mainInt.getIntExtra("month",0))
                 intent.putExtra("day",mainInt.getIntExtra("day",0))
+                if(!mainInt.getStringExtra("content").isNullOrEmpty()) intent.putExtra("content",mainInt.getStringExtra("content"))
+                if(!mainInt.getStringExtra("shareAgree").isNullOrEmpty()) intent.putExtra("shareAgree",mainInt.getStringExtra("shareAgree"))
+                if(!mainInt.getStringExtra("img").isNullOrEmpty()) intent.putExtra("img",mainInt.getStringExtra("img"))
                 startActivity(intent)
                 finish()
 

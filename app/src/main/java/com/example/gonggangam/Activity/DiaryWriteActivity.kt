@@ -36,6 +36,7 @@ import com.example.gonggangam.RetrofitClient
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
 import com.example.gonggangam.getJwt
 import com.example.gonggangam.getRetrofit
+import com.google.android.material.snackbar.Snackbar
 import com.kakao.sdk.auth.Constants.CODE
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -61,9 +62,9 @@ class DiaryWriteActivity : AppCompatActivity() {
     lateinit var binding: ActivityDiaryWriteBinding
     lateinit var jwt: String
     private lateinit var retrofit: Retrofit
-
+    var mBackWait:Long = 0 //뒤로가기 버튼 눌렀을 때
     var isShare:Boolean = false
-//    lateinit var diaryImg:String // 세영님 요청하신 diaryImg uri 저장 변수
+
      var diaryImg:String = "" // 세영님 요청하신 diaryImg uri 저장 변수
     lateinit var observer: MyLifecycleObserver
 
@@ -183,7 +184,7 @@ class DiaryWriteActivity : AppCompatActivity() {
         val day = intent.getIntExtra("day",0)
 
         val content = binding.writeInputEt.text.toString()
-        val shareAgree = if (isShare) 'T' else 'F'
+        val shareAgree = if (isShare) "T" else "F"
 
         if(content.isEmpty()){
             Toast.makeText(this, "내용을 입력해주세요!", Toast.LENGTH_SHORT).show()
@@ -195,8 +196,8 @@ class DiaryWriteActivity : AppCompatActivity() {
 
 
 
-        Log.d("글", "저장하려고")
-//            lateinit var imgBody : MultipartBody.Part
+
+
          var imgBody : MultipartBody.Part? = null
             if(diaryImg!=""){
 
@@ -205,23 +206,22 @@ class DiaryWriteActivity : AppCompatActivity() {
                 imgBody = MultipartBody.Part.createFormData("uploadImg", img.name, imgFile)
             }
 
-        val writeD = WriteDiary(emojiStr,year,month,day,content, shareAgree.toString(),imgBody)
+        val writeD = WriteDiary(emojiStr,year,month,day,content, shareAgree,imgBody)
 
         diaryService.diaryWrite(jwt, writeD).enqueue(object : Callback<BasicResponse> {
                 override fun onResponse(
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
                 ) {
-                    Log.d("글", "저장하려고")
+
                     if (response.isSuccessful) { //  response.code == 1000
 
                         Log.d("Retrofit", "onResponse 성공")
-                        Log.d("글", "글이 저장됨")
+                        Log.d("Retrofit", writeD.toString())
 
                     } else { //  response.code == 2000,3000,5001,5002
                         Log.d("Retrofit", "onResponse 실패"+response.code())
-                        Log.d("안됨", "onResponse 실패"+response.code())
-                        Log.d("글", "글이 저장안됨")
+
                     }
                 }
 
@@ -240,49 +240,45 @@ class DiaryWriteActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.writeSaveTv.setOnClickListener {
-            Log.d("저장", "저장하려고")
             saveDiary()
         }
         binding.writeHeaderTitleTv.text = "${ intent.getIntExtra("year",0) }년 ${intent.getIntExtra("month",0)}월 ${intent.getIntExtra("day",0)}일 "
-        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val intent = result.data
-                getImoji()
-                binding.writeHeaderTitleTv.text = "${intent?.getIntExtra("year",0)}년 ${intent?.getIntExtra("month",0)}월 ${intent?.getIntExtra("day",0)}일 "
+
+
+
+        if(intent.getStringExtra("content")?.isNotEmpty() == true) {
+            binding.writeInputEt.setText(intent.getStringExtra("content"))
+        }
+        if(intent.getStringExtra("shareAgree")?.isNotEmpty() == true) {
+            if(intent.getStringExtra("shareAgree")=="T") {
+                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_active)
+                binding.writeShareCheckIv.visibility = View.VISIBLE
+                isShare=true
+            }
+            else {
+                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_inactive)
+                binding.writeShareCheckIv.visibility = View.GONE
             }
         }
+        if(intent.getStringExtra("img")?.isNotEmpty() == true) {
+            // Glide로 띄우기, 모서리 조정
+            Glide.with(this).load(intent.getStringExtra("img"))
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                .into(binding.writeDiaryPhotoIv)
 
+            // 이미지 visibility handling
+            binding.writeDiaryPhotoIv.visibility = View.VISIBLE
+            binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
 
-//        if(intent.getStringExtra("content")?.isNotEmpty() == true) {
-//            binding.writeInputEt.setText(intent.getStringExtra("content"))
-//        }
-//        if(intent.getStringExtra("shareAgree")?.isNotEmpty() == true) {
-//            if(intent.getStringExtra("shareAgree").toString()=='T'.toString()) {
-//                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_active)
-//                binding.writeShareCheckIv.visibility = View.VISIBLE
-//                isShare=true
-//            }
-//            else {
-//                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_inactive)
-//                binding.writeShareCheckIv.visibility = View.GONE
-//            }
-//            isShare = !isShare
-//        }
-//        if(intent.getStringExtra("img")?.isNotEmpty() == true) {
-//            diaryImg = intent.getStringExtra("img").toString() // image uri 저장
-//            Log.d("TAG_WRITE_RESULT", diaryImg)
-//
-//            // Glide로 띄우기, 모서리 조정
-//            Glide.with(this).load(intent.getStringExtra("img"))
-//                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-//                .into(binding.writeDiaryPhotoIv)
-//
-//            // 이미지 visibility handling
-//            binding.writeDiaryPhotoIv.visibility = View.VISIBLE
-//            binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
-//        }
+            diaryImg=intent.getStringExtra("img").toString()
+        }
         binding.writeBackIv.setOnClickListener {
-            finish()
+            if(System.currentTimeMillis() - mBackWait >=2000 ) {
+                mBackWait = System.currentTimeMillis()
+                Toast.makeText(this, "한 번 더 누르면 일기 작성을 종료합니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                finish() //액티비티 종료
+            }
         }
 
         binding.writeDiaryBackCl.setOnClickListener {
@@ -299,6 +295,7 @@ class DiaryWriteActivity : AppCompatActivity() {
             binding.writeDiaryPhotoIv.setImageURI(null)
             binding.writeDiaryPhotoIv.visibility = View.GONE
             binding.writeDiaryPhotoXBtn.visibility = View.GONE
+            diaryImg=""
         }
 
         binding.writeShareBtn.setOnClickListener {
@@ -329,9 +326,20 @@ class DiaryWriteActivity : AppCompatActivity() {
         })
 
         binding.writeMoodChangeBtn.setOnClickListener {
-
-                    val intent = Intent(this, DiaryWriteEmojiActivity::class.java)
-                    startActivity(intent)
+                    val year=intent.getIntExtra("year",0)
+                    val month = intent.getIntExtra("month",0)
+                    val day = intent.getIntExtra("day",0)
+                    Log.d("이어",year.toString())
+                    Log.d("diaryImg",diaryImg.toString())
+                    val shareAgree = if (isShare) "T" else "F"
+                    val emojiIntent = Intent(this, DiaryWriteEmojiActivity::class.java)
+                    emojiIntent.putExtra("year",year)
+                    emojiIntent.putExtra("month",month)
+                    emojiIntent.putExtra("day",day)
+                    emojiIntent.putExtra("content",binding.writeInputEt.text.toString())
+                    emojiIntent.putExtra("shareAgree",shareAgree)
+                    emojiIntent.putExtra("img",diaryImg)
+                    startActivity(emojiIntent)
                     finish()
 
 
