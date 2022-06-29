@@ -67,32 +67,6 @@ class MyPageNoticeActivity:AppCompatActivity() {
             }
         })
 
-        /*
-        // 이부분은 getRetrofit()으로 대체할 수 있습니다!
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://3.36.219.12:3000")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        // MyPageService를 활용하시면 될것같아요! diary쪽에 제가 작업해둔 예제를 보시고 확인해보세용!
-        val retrofitService = retrofit.create(MyPageRetrofitInterface::class.java)
-        retrofitService.requestAllData().enqueue(object : Callback<NoticeModel>{
-            override fun onResponse(call: Call<NoticeModel>, response: Response<NoticeModel>) {
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    body?.let {
-                        setAdapter(it.notices)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<NoticeModel>, t: Throwable) {
-                Log.d("this is error",t.message.toString())
-            }
-        })
-
-         */
-
     }
 
 
