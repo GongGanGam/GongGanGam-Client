@@ -12,7 +12,7 @@ data class NoticeListData(
 }
 
 data class NoticeData(
+    val title: String,
     val noticeContent: String,
-    val noticeDate: String,
-    val title: String
+    val noticeDate: String
 )

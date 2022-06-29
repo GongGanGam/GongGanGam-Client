@@ -66,7 +66,6 @@ class MyPageNoticeActivity:AppCompatActivity() {
                 Log.d(TAG, "retrofit fail : ${t.message}")
             }
         })
-
     }
 
 
