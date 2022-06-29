@@ -20,9 +20,9 @@ class MypageNoticeRVAdapter (private val noticelist: ArrayList<NoticeModel>): Re
             val contentExpand = itemView.findViewById<LinearLayout>(R.id.mypage_notice_content_layout)
             val constraint = itemView.findViewById<ConstraintLayout>(R.id.item_mypage_notice_constraint)
 
-            binding.itemMypageNoticeTitleTv.text = notice.data.title
-            binding.itemMypageNoticeDateTv.text = notice.data.noticeDate
-            binding.mypageNoticeContentTv.text = notice.data.noticeContent
+            binding.itemMypageNoticeTitleTv.text = notice.title
+            binding.itemMypageNoticeDateTv.text = notice.noticeDate
+            binding.mypageNoticeContentTv.text = notice.noticeContent
 
             constraint.setOnClickListener {
                 val show = animationLayout(!notice.isExpanded, it, contentExpand)

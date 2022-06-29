@@ -1,6 +1,8 @@
 package com.example.GongGanGam.model
 
 data class NoticeModel(
-    val data: NoticeData,
+    val title: String,
+    val noticeContent: String,
+    val noticeDate: String,
     var isExpanded: Boolean
 )

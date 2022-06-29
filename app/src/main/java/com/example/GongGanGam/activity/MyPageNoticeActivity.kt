@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.GongGanGam.adapter.MypageNoticeRVAdapter
-import com.example.GongGanGam.model.NoticeData
 import com.example.GongGanGam.model.NoticeListData
 import com.example.GongGanGam.model.NoticeModel
 import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
@@ -55,7 +54,12 @@ class MyPageNoticeActivity:AppCompatActivity() {
                     val body = response.body()
                     body?.let { it ->
                         setAdapter(it.notices.map {
-                            NoticeModel(it, false)
+                            NoticeModel(
+                                title = it.title,
+                                noticeContent = it.noticeContent,
+                                noticeDate = it.noticeDate,
+                                isExpanded = false
+                            )
                         } as ArrayList<NoticeModel>)
                         Log.d(TAG, "retrofit success : $body")
                     }
