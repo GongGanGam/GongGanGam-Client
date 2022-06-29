@@ -1,7 +1,7 @@
 package com.example.GongGanGam.model
 
-data class NoticeData(
-    val notices: ArrayList<Notice>,
+data class NoticeListData(
+    val notices: ArrayList<NoticeData>,
     val page: Page
 ) {
     data class Page(
@@ -11,7 +11,7 @@ data class NoticeData(
     )
 }
 
-data class Notice(
+data class NoticeData(
     val noticeContent: String,
     val noticeDate: String,
     val title: String

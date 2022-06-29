@@ -8,21 +8,21 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.GongGanGam.model.Notice
+import com.example.GongGanGam.model.NoticeModel
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ItemMypageNoticeListBinding
 
-class MypageNoticeRVAdapter (private val noticelist: ArrayList<Notice>): RecyclerView.Adapter<MypageNoticeRVAdapter.ViewHolder>() {
+class MypageNoticeRVAdapter (private val noticelist: ArrayList<NoticeModel>): RecyclerView.Adapter<MypageNoticeRVAdapter.ViewHolder>() {
 
     inner class ViewHolder( val binding: ItemMypageNoticeListBinding ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(notice: Notice) {
+        fun bind(notice: NoticeModel) {
             val contentExpand = itemView.findViewById<LinearLayout>(R.id.mypage_notice_content_layout)
             val constraint = itemView.findViewById<ConstraintLayout>(R.id.item_mypage_notice_constraint)
 
-            binding.itemMypageNoticeTitleTv.text=notice.title
-            binding.itemMypageNoticeDateTv.text=notice.date
-            binding.mypageNoticeContentTv.text = notice.content
+            binding.itemMypageNoticeTitleTv.text = notice.data.title
+            binding.itemMypageNoticeDateTv.text = notice.data.noticeDate
+            binding.mypageNoticeContentTv.text = notice.data.noticeContent
 
             constraint.setOnClickListener {
                 val show = animationLayout(!notice.isExpanded, it, contentExpand)

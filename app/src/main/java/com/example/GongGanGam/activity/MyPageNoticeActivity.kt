@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.GongGanGam.adapter.MypageNoticeRVAdapter
-import com.example.GongGanGam.model.Notice
 import com.example.GongGanGam.model.NoticeData
+import com.example.GongGanGam.model.NoticeListData
+import com.example.GongGanGam.model.NoticeModel
 import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
 import com.example.GongGanGam.util.getRetrofit
 import com.example.gonggangam.databinding.ActivityMyPageNoticeBinding
@@ -36,7 +37,7 @@ class MyPageNoticeActivity:AppCompatActivity() {
         loadData()
     }
 
-    private fun setAdapter(noticeList : ArrayList<Notice>){
+    private fun setAdapter(noticeList : ArrayList<NoticeModel>){
         val mAdapter = MypageNoticeRVAdapter(noticeList)
         mypage_notice_recyclerView.adapter = mAdapter
         mypage_notice_recyclerView.layoutManager = LinearLayoutManager(this)
@@ -48,18 +49,20 @@ class MyPageNoticeActivity:AppCompatActivity() {
     private fun loadData() {
 
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        myPageService.getNoticeList().enqueue(object : Callback<NoticeData> {
-            override fun onResponse(call: Call<NoticeData>, response: Response<NoticeData>) {
+        myPageService.getNoticeList().enqueue(object : Callback<NoticeListData> {
+            override fun onResponse(call: Call<NoticeListData>, response: Response<NoticeListData>) {
                 if (response.isSuccessful) {
                     val body = response.body()
-                    body?.let {
-                        setAdapter(it.notices)
+                    body?.let { it ->
+                        setAdapter(it.notices.map {
+                            NoticeModel(it, false)
+                        } as ArrayList<NoticeModel>)
                         Log.d(TAG, "retrofit success : $body")
                     }
                 }
             }
 
-            override fun onFailure(call: Call<NoticeData>, t: Throwable) {
+            override fun onFailure(call: Call<NoticeListData>, t: Throwable) {
                 Log.d(TAG, "retrofit fail : ${t.message}")
             }
         })
