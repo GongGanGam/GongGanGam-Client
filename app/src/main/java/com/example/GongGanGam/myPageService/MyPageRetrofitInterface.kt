@@ -1,15 +1,14 @@
 package com.example.GongGanGam.myPageService
 
 import com.example.GongGanGam.diaryService.BasicResponse
-import com.example.GongGanGam.model.NoticeModel
-import com.example.GongGanGam.myPageService.UserResponse
+import com.example.GongGanGam.model.NoticeData
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface MyPageRetrofitInterface {
     @GET("app/admin/notice")
-    fun requestAllData(): Call<NoticeModel>
+    fun getNoticeList(): Call<NoticeData>
 
 
     @GET("app/users/{userIdx}")
