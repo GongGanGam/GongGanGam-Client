@@ -53,8 +53,9 @@ class MyPageNoticeActivity:AppCompatActivity() {
             override fun onResponse(call: Call<NoticeResponse>, response: Response<NoticeResponse>) {
                 if (response.isSuccessful) {
                     val body = response.body()
-                    body?.let { it ->
-                        setAdapter(it.result.notices.map {
+
+                    body?.result?.let { it ->
+                        setAdapter(it.notices.map {
                             NoticeModel(
                                 title = it.title,
                                 noticeContent = it.noticeContent,
