@@ -8,8 +8,7 @@ import retrofit2.http.*
 
 interface MyPageRetrofitInterface {
     @GET("app/admin/notice")
-    fun getNoticeList(): Call<NoticeListData>
-
+    fun getNoticeList(): Call<NoticeResponse>
 
     @GET("app/users/{userIdx}")
     fun getUser(

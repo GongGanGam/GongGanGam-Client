@@ -8,6 +8,7 @@ import com.example.GongGanGam.adapter.MypageNoticeRVAdapter
 import com.example.GongGanGam.model.NoticeListData
 import com.example.GongGanGam.model.NoticeModel
 import com.example.GongGanGam.myPageService.MyPageRetrofitInterface
+import com.example.GongGanGam.myPageService.NoticeResponse
 import com.example.GongGanGam.util.getRetrofit
 import com.example.gonggangam.databinding.ActivityMyPageNoticeBinding
 import kotlinx.android.synthetic.main.activity_my_page_notice.*
@@ -48,12 +49,12 @@ class MyPageNoticeActivity:AppCompatActivity() {
     private fun loadData() {
 
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        myPageService.getNoticeList().enqueue(object : Callback<NoticeListData> {
-            override fun onResponse(call: Call<NoticeListData>, response: Response<NoticeListData>) {
+        myPageService.getNoticeList().enqueue(object : Callback<NoticeResponse> {
+            override fun onResponse(call: Call<NoticeResponse>, response: Response<NoticeResponse>) {
                 if (response.isSuccessful) {
                     val body = response.body()
                     body?.let { it ->
-                        setAdapter(it.notices.map {
+                        setAdapter(it.result.notices.map {
                             NoticeModel(
                                 title = it.title,
                                 noticeContent = it.noticeContent,
@@ -66,7 +67,7 @@ class MyPageNoticeActivity:AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<NoticeListData>, t: Throwable) {
+            override fun onFailure(call: Call<NoticeResponse>, t: Throwable) {
                 Log.d(TAG, "retrofit fail : ${t.message}")
             }
         })
