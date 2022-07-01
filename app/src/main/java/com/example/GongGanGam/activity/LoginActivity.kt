@@ -90,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
 
                     userIdx = resp.result!!.userIdx
                     jwt = resp.result!!.jwt
+                    Log.d("test", "${jwt}")
 
                     when(resp.code) {
                         1000 -> {
