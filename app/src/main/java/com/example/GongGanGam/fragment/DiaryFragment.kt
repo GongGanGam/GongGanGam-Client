@@ -179,8 +179,6 @@ class DiaryFragment : Fragment() {
                     }
                 }
 
-
-
                 else if (day.owner != DayOwner.THIS_MONTH) { //월별 범위
 
                     container.dateText.setTextColor(
