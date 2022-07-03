@@ -1,6 +1,7 @@
 package com.example.GongGanGam.activity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -26,25 +27,32 @@ import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.example.GongGanGam.diaryService.BasicResponse
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
+import com.example.GongGanGam.diaryService.WriteDiary
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
 import com.example.GongGanGam.util.getRetrofit
-import retrofit2.Retrofit
+import com.example.gonggangam.activity.DiaryWriteEmojiActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 
 
 class DiaryWriteActivity : AppCompatActivity() {
+    lateinit var binding: ActivityDiaryWriteBinding
+    lateinit var observer: MyLifecycleObserver
     val PERMISSIONS_GALLERY_CODE = 100
     var REQUIRED_PERMISSIONS = arrayOf<String>( Manifest.permission.READ_EXTERNAL_STORAGE)
-
-    lateinit var binding: ActivityDiaryWriteBinding
-
-    private lateinit var retrofit: Retrofit
+    var mBackWait:Long = 0 //뒤로가기 버튼 눌렀을 때
 
     var isShare:Boolean = false
-    lateinit var diaryImg:String // 세영님 요청하신 diaryImg uri 저장 변수
-
-    lateinit var observer: MyLifecycleObserver
+    // lateinit var diaryImg:String // 세영님 요청하신 diaryImg uri 저장 변수
+    var diaryImg:String = ""
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -69,7 +77,7 @@ class DiaryWriteActivity : AppCompatActivity() {
     }
 
     private fun requestPermission(){
-        var permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        val permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         if(permissionCheck != PackageManager.PERMISSION_GRANTED){
             //설명이 필요한지
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
@@ -116,6 +124,8 @@ class DiaryWriteActivity : AppCompatActivity() {
 
         initListener()
         getImoji()
+        val emojiStr=intent.getStringExtra("state")
+        Log.d("이모지?", emojiStr.toString())
         setContentView(binding.root)
     }
 
@@ -134,20 +144,118 @@ class DiaryWriteActivity : AppCompatActivity() {
     }
 
     private fun saveDiary() {
-        // 다이어리 저장 api 불러오면 됩니다!
-        // 첨부한 이미지 uri string은 diaryImg 입니다! 코드를 살펴보면 이해가실겁니다:)
+        var emojiStr=intent.getStringExtra("state").toString()
+        when (emojiStr) {
+            "우울해요" -> emojiStr = "depressed"
+            "짜증나요" -> emojiStr ="annoyed"
+            "지루해요" -> emojiStr ="boring"
+            "복잡해요" -> emojiStr ="complicated"
+            "창피해요" -> emojiStr ="embarrassing"
+            "설레요" -> emojiStr ="excited"
+            "즐거워요" ->  emojiStr ="fun"
+            "행복해요" -> emojiStr ="happy"
+            "슬퍼요" ->  emojiStr ="sad"
+            "그냥 그래요" ->  emojiStr ="soso"
+            "화나요" ->  emojiStr ="upset"
+            "궁금해요" ->   emojiStr ="wonder"
+        }
+        Log.d("이모지?", emojiStr)
+        val year = intent.getIntExtra("year",0)
+        val month = intent.getIntExtra("month",0)
+        val day = intent.getIntExtra("day",0)
 
-        // 레트로핏 통신 진행
+        val content = binding.writeInputEt.text.toString()
+        val shareAgree = if (isShare) "T" else "F"
+
+        if(content.isEmpty()){
+            Toast.makeText(this, "내용을 입력해주세요!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        var imgBody : MultipartBody.Part? = null
+        if(diaryImg!=""){
+
+            val img = File(diaryImg)
+            val imgFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), img)
+            imgBody = MultipartBody.Part.createFormData("uploadImg", img.name, imgFile)
+        }
+        val writeD = WriteDiary(emojiStr,year,month,day,content, shareAgree,imgBody)
+
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java) // 이렇게 사용하시면 됩니다.
+
+        diaryService.diaryWrite(writeD).enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(
+                call: Call<BasicResponse>,
+                response: Response<BasicResponse>
+            ) {
+                Log.d("글", "저장하려고")
+
+                if (response.isSuccessful) { //  response.code == 1000
+
+                    Log.d("Retrofit", "onResponse 성공")
+                    Log.d("Retrofit", writeD.toString())
+
+                } else { //  response.code == 2000,3000,5001,5002
+                    Log.d("Retrofit", "onResponse 실패"+response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                // 실패 처리
+                // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
+                Log.d("Retrofit", "onFailure 에러: "+ t.message.toString())
+                return
+            }
+        })
+        Toast.makeText(this, "일기가 저장되었습니다", Toast.LENGTH_LONG).show()
+        finish()
+
+
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initListener() {
         binding.writeSaveTv.setOnClickListener {
             saveDiary()
         }
-        //위 writeSaveTv는 시연용입니다 적절하게 수정해주세요
+
+        binding.writeHeaderTitleTv.text = "${ intent.getIntExtra("year",0) }년 ${intent.getIntExtra("month",0)}월 ${intent.getIntExtra("day",0)}일 "
+
         binding.writeBackIv.setOnClickListener {
-            finish()
+            if(System.currentTimeMillis() - mBackWait >=2000 ) {
+                mBackWait = System.currentTimeMillis()
+                Toast.makeText(this, "한 번 더 누르면 일기 작성을 종료합니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                finish() //액티비티 종료
+            }
+        }
+
+        if(intent.getStringExtra("content")?.isNotEmpty() == true) {
+            binding.writeInputEt.setText(intent.getStringExtra("content"))
+        }
+
+        if(intent.getStringExtra("shareAgree")?.isNotEmpty() == true) {
+            if(intent.getStringExtra("shareAgree")=="T") {
+                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_active)
+                binding.writeShareCheckIv.visibility = View.VISIBLE
+                isShare=true
+            }
+            else {
+                binding.writeShareBtn.setBackgroundResource(R.drawable.write_share_btn_inactive)
+                binding.writeShareCheckIv.visibility = View.GONE
+            }
+        }
+        if(intent.getStringExtra("img")?.isNotEmpty() == true) {
+            // Glide로 띄우기, 모서리 조정
+            Glide.with(this).load(intent.getStringExtra("img"))
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                .into(binding.writeDiaryPhotoIv)
+
+            // 이미지 visibility handling
+            binding.writeDiaryPhotoIv.visibility = View.VISIBLE
+            binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
+
+            diaryImg=intent.getStringExtra("img").toString()
         }
 
         binding.writeDiaryBackCl.setOnClickListener {
@@ -159,11 +267,12 @@ class DiaryWriteActivity : AppCompatActivity() {
             requestPermission()
         }
 
-        binding.writeDiaryPhotoXBtn.setOnClickListener{
+        binding.writeDiaryPhotoXBtn.setOnClickListener {
             //x 버튼 클릭했을 때
             binding.writeDiaryPhotoIv.setImageURI(null)
             binding.writeDiaryPhotoIv.visibility = View.GONE
             binding.writeDiaryPhotoXBtn.visibility = View.GONE
+            diaryImg=""
         }
 
         binding.writeShareBtn.setOnClickListener {
@@ -193,55 +302,23 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         })
 
-
-//
-//            val emojiRequestBody : RequestBody = emoji.toPlainRequestBody()
-//            val yearRequestBody: RequestBody = year.toPlainRequestBody()
-//            val monthRequestBody: RequestBody = month.toPlainRequestBody()
-//            val dayRequestBody: RequestBody = day.toPlainRequestBody()
-//            val contentRequestBody: RequestBody = content.toPlainRequestBody()
-//            val textHashMap = hashMapOf<java.lang.String, RequestBody>()
-//            textHashMap["emoji"] = emojiRequestBody
-//            textHashMap["year"] = yearRequestBody
-//            textHashMap["month"] = monthRequestBody
-//            textHashMap["day"] = dayRequestBody
-//            textHashMap["content"] = indexRequestBody
-//
-//
-//            service.getCalendar(Year.now().value.toInt(), YearMonth.now().monthValue.toInt())
-//                .enqueue((object : Callback<DayResponse> {
-//                    override fun onResponse(
-//                        call: Call<DayResponse>,
-//                        response: Response<DayResponse>
-//                    ) {
-//                        if (response.isSuccessful) { //  response.code == 1000
-//                            // 성공 처리
-//                            val temp = response?.body()!!.result
-//
-//                            for (i in temp) {
-//                                dayList?.set(i.day.toInt(), i)
-//                            }
-//
-//                            Log.d("Retrofit", "onResponse 성공")
-//                            Log.d("됨", "onResponse 성공")
-//                            Log.d("년 달",
-//                                Year.now().value.toInt().toString() + YearMonth.now().monthValue.toInt()
-//                                    .toString()
-//                            )
-//                        } else { //  response.code == 2000,3000,5001,5002
-//                            Log.d("Retrofit", "onResponse 실패" + response.code())
-//                            Log.d("안됨", "onResponse 실패" + response.code())
-//                        }
-//                    }
-//
-//                    override fun onFailure(call: Call<DayResponse>, t: Throwable) {
-//                        // 실패 처리
-//                        // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
-//                        Log.d("Retrofit", "onFailure 에러: " + t.message.toString())
-//                    }
-//                }))
-
-
+        binding.writeMoodChangeBtn.setOnClickListener {
+            val year=intent.getIntExtra("year",0)
+            val month = intent.getIntExtra("month",0)
+            val day = intent.getIntExtra("day",0)
+            Log.d("이어",year.toString())
+            Log.d("diaryImg",diaryImg.toString())
+            val shareAgree = if (isShare) "T" else "F"
+            val emojiIntent = Intent(this, DiaryWriteEmojiActivity::class.java)
+            emojiIntent.putExtra("year",year)
+            emojiIntent.putExtra("month",month)
+            emojiIntent.putExtra("day",day)
+            emojiIntent.putExtra("content",binding.writeInputEt.text.toString())
+            emojiIntent.putExtra("shareAgree",shareAgree)
+            emojiIntent.putExtra("img",diaryImg)
+            startActivity(emojiIntent)
+            finish()
+        }
 
     }
 
