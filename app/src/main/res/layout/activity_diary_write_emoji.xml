@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#262D89"
+    >
+
+    <View
+        android:id="@+id/diary_write_emoji_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_x_iv"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/x_btn"
+        app:layout_constraintTop_toTopOf="@id/diary_write_emoji_header"
+        app:layout_constraintBottom_toBottomOf="@id/diary_write_emoji_header"
+        app:layout_constraintEnd_toEndOf="@id/diary_write_emoji_header"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/diary_write_emoji_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="기다리고 있었어요:)\n오늘의 감정은 어떤가요?"
+        android:fontFamily="@font/omni_gothic_35"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="98dp"
+        android:layout_marginStart="26dp"
+        />
+
+
+
+
+<!--    <GridView-->
+<!--        android:id="@+id/diary_write_emoji_gridView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_tv"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginStart="50dp"-->
+<!--        android:numColumns="3"-->
+<!--        tools:listitem="@layout/item_diary_write_emoji"-->
+<!--        />-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/diary_write_emoji_recyclerView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_tv"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        tools:listitem="@layout/item_diary_write_emoji"-->
+<!--        />-->
+
+
+    <View
+        android:id="@+id/diary_write_emoji_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/diary_write_emoji_view_04"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_happy"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_happy"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="행복해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_02"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/diary_write_emoji_view_05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji02_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_fun"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_02"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_02"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_02"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji02_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_fun"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_02"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_02"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_02"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji02_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="즐거워요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_02"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_02"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_02"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_03"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/diary_write_emoji_view_06"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="55dp">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji03_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_soso"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_03"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_03"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_03"
+        />
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji03_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_soso"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_03"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_03"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_03"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji03_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="그냥 그래요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_03"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_03"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_03"
+        />
+
+
+    <View
+        android:id="@+id/diary_write_emoji_view_04"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="55dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji04_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_boring"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_04"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji04_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_boring"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_04"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji04_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="지루해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_04"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_04"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_05"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji05_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_sad"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_05"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_05"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_05"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji05_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_sad"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_05"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_05"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_05"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji05_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="슬퍼요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_05"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_05"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_05"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_06"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="55dp">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji06_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_upset"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_06"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji06_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_upset"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_06"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji06_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="화나요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_06"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_06"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_07"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_04"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji07_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_annoyed"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_07"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji07_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_annoyed"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_07"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji07_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="짜증나요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_07"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_07"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_08"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_05">
+
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji08_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_depressed"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_08"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_08"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_08"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji08_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_depressed"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_08"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_08"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_08"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji08_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="우울해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_08"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_08"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_08"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_09"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_06"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="55dp">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji09_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_embarrassing"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_09"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji09_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_embarrassing"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_09"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji09_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="창피해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_09"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_09"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_10"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_07"
+        app:layout_constraintStart_toStartOf="parent">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji10_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_excited"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_10"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_10"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_10"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji10_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_excited"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_10"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_10"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_10"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji10_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="설레요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_10"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_10"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_10"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_11"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_08">
+
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji11_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_complicated"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_11"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_11"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_11"
+        />
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji11_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/emoji_dark_complicated"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_11"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_11"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_11"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji11_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="복잡해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_11"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_11"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_11"
+        />
+
+    <View
+        android:id="@+id/diary_write_emoji_view_12"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/diary_write_emoji_view_09"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="55dp">
+    </View>
+
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_emoji12_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_wonder"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_12"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_12"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_12"
+        />
+
+    <ImageView
+        android:id="@+id/diary_write_emoji_dark_emoji12_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/emoji_dark_wonder"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/diary_write_emoji_view_12"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_12"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_12"
+        />
+
+    <TextView
+        android:id="@+id/diary_write_emoji_emoji12_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9FA8DA"
+        android:text="궁금해요"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/diary_write_emoji_view_12"
+        app:layout_constraintEnd_toEndOf="@+id/diary_write_emoji_view_12"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/diary_write_emoji_view_12"
+        />
+
+    <android.widget.Button
+        android:id="@+id/diary_write_emoji_unselect_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_inactive_background"
+        android:text="선택"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        />
+
+
+
+    <android.widget.Button
+        android:id="@+id/diary_write_emoji_selected_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_active_background"
+        android:text="선택"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textColor="#262D89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

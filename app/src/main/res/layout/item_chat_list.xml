@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_list_cl"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/item_chat_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/char_list_profile_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/profile_image_background"
+        android:src="@drawable/profile_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/chat_list_opp_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="안녕안녕"
+        android:layout_marginStart="10dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@id/chat_list_date"
+        app:layout_constraintStart_toEndOf="@id/char_list_profile_iv"
+        app:layout_constraintTop_toTopOf="@id/char_list_profile_iv" />
+
+
+    <TextView
+        android:id="@+id/chat_list_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9CA3D4"
+        android:textSize="12sp"
+        android:text="21.12.24"
+        app:layout_constraintStart_toEndOf="@id/chat_list_opp_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chat_list_opp_name_tv"
+        app:layout_constraintBottom_toBottomOf="@id/chat_list_opp_name_tv"
+        />
+
+    <TextView
+        android:id="@+id/chat_list_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9CA3D4"
+        android:textSize="14sp"
+        android:text="그럼 오늘은 뭐 볼거야?"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/char_list_profile_iv"
+        app:layout_constraintBottom_toBottomOf="@id/char_list_profile_iv"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

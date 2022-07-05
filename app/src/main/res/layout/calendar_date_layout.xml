@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendar_date_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FBF8FF">
+
+    <ImageView
+        android:id="@+id/calendar_date_img_iv"
+        android:layout_width="26sp"
+        android:layout_height="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/calendar_date_non"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/calendar_date_text_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/calendar_date_img_iv"
+        android:layout_marginTop="6sp"
+        android:paddingBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,49 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BottomNaviTemplate" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!-- Customize your theme here. -->
+        <!-- 임의 추가 3개-->
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">#181B74</item>
+        <item name="colorControlNormal">#181B74</item>
+        <item name="android:textColorHighlight">#181B74</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_width">320dp</item>
+
+    </style>
+    <style name="Base.TextAppearance.AppCompat.Button." parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorHighlight">#FFFFFF</item>
+    </style>
+
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name='android:textSize'>17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/omni_gothic_35</item>
+    </style>
+
+    <style name="btm_text" parent="android:Widget.TextView">
+        <item name='android:textSize'>10sp</item>
+    </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
