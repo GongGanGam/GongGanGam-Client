@@ -33,7 +33,6 @@ import com.example.GongGanGam.diaryService.WriteDiary
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
 import com.example.GongGanGam.util.getRetrofit
-import com.example.gonggangam.activity.DiaryWriteEmojiActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

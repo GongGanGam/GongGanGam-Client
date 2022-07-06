@@ -1,12 +1,10 @@
-package com.example.gonggangam.activity
+package com.example.GongGanGam.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.GongGanGam.activity.ReplyToDiaryActivity
-import com.example.GongGanGam.activity.ReportActivity
 import com.example.GongGanGam.model.ReceivedDiary
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface
 import com.example.GongGanGam.diaryService.ReceivedDiaryResponse

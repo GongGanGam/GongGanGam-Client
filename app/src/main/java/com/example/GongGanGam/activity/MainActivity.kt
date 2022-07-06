@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.*
 import com.example.GongGanGam.fragment.ChatFragment
+import com.example.GongGanGam.fragment.DiaryFragment
 import com.example.GongGanGam.fragment.LetterFragment
 import com.example.gonggangam.databinding.ActivityMainBinding
-import com.example.gonggangam.fragment.DiaryFragment
 
 
 class MainActivity : AppCompatActivity() {

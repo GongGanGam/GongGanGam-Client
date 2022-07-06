@@ -49,7 +49,7 @@
         <activity
             android:name="com.example.GongGanGam.activity.ReplyToDiaryActivity"
             android:exported="false" />
-        <activity android:name=".Activity.AcceptDiaryActivity" />
+        <activity android:name="com.example.GongGanGam.activity.AcceptDiaryActivity" />
         <activity
             android:name="com.example.GongGanGam.activity.MainActivity"
             android:exported="true"/>
