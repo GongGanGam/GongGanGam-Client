@@ -150,7 +150,7 @@ class DiaryFragment : Fragment() {
 
                                 // emoji 존재 -> 다이어리 읽기
                                 container.dateImg.setOnClickListener {
-                                    goToReadDiaryView()
+                                    goToReadDiaryView(day.date.year, day.date.monthValue, day.day)
                                 }
                                 when (tmp.emoji) {
                                     "depressed" -> container.dateImg.setImageResource(R.drawable.emoji_depressed)
@@ -338,7 +338,6 @@ class DiaryFragment : Fragment() {
 
 
 
-
     }
 
     private fun initListener(thisY:Int,thisM:Int) {
@@ -363,8 +362,12 @@ class DiaryFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun goToReadDiaryView() {
+    private fun goToReadDiaryView(year: Int, month: Int, day: Int) {
         val intent = Intent(requireContext(), DiaryReadActivity::class.java)
+        intent.putExtra("year", year)
+        intent.putExtra("month",month)
+        intent.putExtra("day", day)
+
         startActivity(intent)
     }
 

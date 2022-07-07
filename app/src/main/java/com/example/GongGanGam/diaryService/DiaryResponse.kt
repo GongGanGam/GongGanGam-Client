@@ -53,21 +53,37 @@ data class WriteDiary (
     @Part val uploadImg: MultipartBody.Part?,
 )
 
+data class ReadDiaryResponse(
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: ReadDiary
+)
+
+data class ReadDiary(
+    @SerializedName("diaryIdx") val diaryIdx: Int,
+    @SerializedName("emoji") val emoji: String,
+    @SerializedName("diaryDate") val diaryDate: String,
+    @SerializedName("contents") val contents: String,
+    @SerializedName("image") val image: String?,
+    @SerializedName("answer") val answer: ReadAnswer?
+)
+
+data class ReadAnswer(
+    @SerializedName("answerIdx") val answerIdx: Int,
+    @SerializedName("userIdx") val userIdx: Int,
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("userProfImg") val userProfImg: String,
+    @SerializedName("answerTime") val answerTime: String,
+    @SerializedName("answerContents") val answerContent: String,
+)
+
 // basic response
 data class BasicResponse (
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
 )
-
-data class WriteResult (
-    @SerializedName("isSuccess") //성공여부
-    val isSuccess: Boolean,
-    @SerializedName("code") //코드
-    val code: Int,
-    @SerializedName("message") //메세지
-    val message: String,
-    )
 
 data class Report (
     @SerializedName("reportType") val reportType: String,
