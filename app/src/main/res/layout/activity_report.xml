@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_solid"
-    tools:context="com.example.GongGanGam.activity.ReportActivity">
+    tools:context="com.example.gonggangam.activity.ReportActivity">
     <View
         android:id="@+id/report_header_view"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.example.GongGanGam.activity.GlobalApplication"
+        android:name=".activity.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,10 +18,10 @@
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.GongGanGam.activity.ReportActivity"
+            android:name=".activity.ReportActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.GongGanGam.activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -31,27 +31,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.GongGanGam.activity.DiaryWriteEmojiActivity"
+            android:name=".activity.DiaryWriteEmojiActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.GongGanGam.activity.DiaryReadActivity"
+            android:name=".activity.DiaryReadActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.GongGanGam.activity.DiaryWriteActivity"
+            android:name=".activity.DiaryWriteActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.GongGanGam.activity.ChatActivity"
+            android:name=".activity.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.example.GongGanGam.activity.AcceptChattingActivity"
+            android:name=".activity.AcceptChattingActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.GongGanGam.activity.ReplyToDiaryActivity"
+            android:name=".activity.ReplyToDiaryActivity"
             android:exported="false" />
-        <activity android:name="com.example.GongGanGam.activity.AcceptDiaryActivity" />
+        <activity android:name=".activity.AcceptDiaryActivity" />
         <activity
-            android:name="com.example.GongGanGam.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"/>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -68,13 +68,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.GongGanGam.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true"/>
         <activity
-            android:name="com.example.GongGanGam.activity.AdditionalInformationActivity"
+            android:name=".activity.AdditionalInformationActivity"
             android:exported="true"/>
         <activity
-            android:name="com.example.GongGanGam.activity.MyInfoActivity"
+            android:name=".activity.MyInfoActivity"
             android:exported="false">
 
             <!-- <intent-filter> -->
@@ -85,12 +85,12 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="com.example.GongGanGam.activity.MyPageLeaveActivity"
+            android:name=".activity.MyPageLeaveActivity"
             android:exported="false" />
-        <activity android:name="com.example.GongGanGam.activity.MyPageNoticeActivity"
+        <activity android:name=".activity.MyPageNoticeActivity"
             android:exported="false"/>
         <service
-            android:name="com.example.GongGanGam.util.GongFirebaseMessagingService"
+            android:name=".util.GongFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
