@@ -2,6 +2,8 @@ package com.example.GongGanGam.diaryService
 
 import com.example.GongGanGam.model.*
 import com.google.gson.annotations.SerializedName
+import okhttp3.MultipartBody
+import retrofit2.http.Part
 
 data class Page (
     val curPage: Int,
@@ -17,6 +19,12 @@ data class DayRequest(
     val month: Int,
     )
 
+data class DayResponseList (
+    @SerializedName("previous") val previous: ArrayList<DayCell>,
+    @SerializedName("current") val current: ArrayList<DayCell>,
+    @SerializedName("next") val next: ArrayList<DayCell>,
+)
+
 data class DayResponse(
     @SerializedName("isSuccess") //성공여부
     val isSuccess: Boolean,
@@ -25,7 +33,7 @@ data class DayResponse(
     @SerializedName("message") //성공여부
     val message: String,
     @SerializedName("result") //날짜
-    val result: List<DayCell>, //정보가 저장된 날짜 리스트
+    val result: DayResponseList, //정보가 저장된 날짜 리스트
 )
 
 data class DayCell(
@@ -33,6 +41,16 @@ data class DayCell(
     val day: String,
     @SerializedName("emoji") //날짜에 저장된 이모지
     val emoji: String,
+)
+
+data class WriteDiary (
+    @SerializedName("emoji") val emoji: String,
+    @SerializedName("year") val year: Int,
+    @SerializedName("month") val month: Int,
+    @SerializedName("day") val day: Int,
+    @SerializedName("content") val content: String,
+    @SerializedName("shareAgree") val shareAgree: String,
+    @Part val uploadImg: MultipartBody.Part?,
 )
 
 // basic response

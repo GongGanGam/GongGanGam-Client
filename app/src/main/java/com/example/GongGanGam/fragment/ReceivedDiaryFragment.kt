@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gonggangam.activity.AcceptDiaryActivity
+import com.example.GongGanGam.activity.AcceptDiaryActivity
 import com.example.GongGanGam.model.Diary
 import com.example.GongGanGam.adapter.LetterReceivedDiaryRVAdapter
 import com.example.GongGanGam.diaryService.DiaryRetrofitInterface

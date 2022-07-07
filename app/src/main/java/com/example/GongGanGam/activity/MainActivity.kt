@@ -2,7 +2,6 @@ package com.example.GongGanGam.activity
 
 import com.example.GongGanGam.fragment.MyPageFragment
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gonggangam.*
 import com.example.GongGanGam.fragment.ChatFragment
