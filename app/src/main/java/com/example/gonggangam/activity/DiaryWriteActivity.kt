@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -22,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
@@ -29,13 +31,15 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
-import com.example.gonggangam.diaryService.WriteDiary
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
+import com.example.gonggangam.util.FormDataUtil
 import com.example.gonggangam.util.getRetrofit
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,9 +53,8 @@ class DiaryWriteActivity : AppCompatActivity() {
     var REQUIRED_PERMISSIONS = arrayOf<String>( Manifest.permission.READ_EXTERNAL_STORAGE)
     var mBackWait:Long = 0 //뒤로가기 버튼 눌렀을 때
 
+    private lateinit var imgUri: Uri // diaryImg uri 저장 변수
     var isShare:Boolean = false
-    // lateinit var diaryImg:String // 세영님 요청하신 diaryImg uri 저장 변수
-    var diaryImg:String = ""
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -96,11 +99,10 @@ class DiaryWriteActivity : AppCompatActivity() {
         if(result.resultCode == Activity.RESULT_OK) {
 
             // 이미지 uri 넣기
-            diaryImg = result.data?.data.toString() // image uri 저장
-            Log.d("TAG_WRITE_RESULT", diaryImg)
+            imgUri = result.data?.data!! // image uri 저장
 
             // Glide로 띄우기, 모서리 조정
-            Glide.with(this).load(result.data?.data)
+            Glide.with(this).load(imgUri)
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                 .into(binding.writeDiaryPhotoIv)
 
@@ -171,18 +173,34 @@ class DiaryWriteActivity : AppCompatActivity() {
             return
         }
 
-        var imgBody : MultipartBody.Part? = null
-        if(diaryImg!=""){
+        // image
+        val realPath = FormDataUtil.getRealPathFromURI(imgUri, this)
+        val destFile = File(realPath)
+        if(!destFile.exists())
+            destFile.mkdirs()
+        val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
+        val imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
 
-            val img = File(diaryImg)
-            val imgFile = RequestBody.create("image/jpg".toMediaTypeOrNull(), img)
-            imgBody = MultipartBody.Part.createFormData("uploadImg", img.name, imgFile)
-        }
-        val writeD = WriteDiary(emojiStr,year,month,day,content, shareAgree,imgBody)
+        // 나머지 body
+        val emojiRequestBody : RequestBody = emojiStr.toRequestBody()
+        val yearRequestBody: RequestBody = year.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val monthRequestBody: RequestBody = month.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val dayRequestBody: RequestBody = day.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val contentRequestBody: RequestBody = content.toRequestBody("text/plain".toMediaTypeOrNull())
+        val shareRequestBody: RequestBody = shareAgree.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java) // 이렇게 사용하시면 됩니다.
+        val textHashMap = hashMapOf<String, RequestBody>()
 
-        diaryService.diaryWrite(writeD).enqueue(object : Callback<BasicResponse> {
+        textHashMap["emoji"] = emojiRequestBody
+        textHashMap["year"] = yearRequestBody
+        textHashMap["month"] = monthRequestBody
+        textHashMap["day"] = dayRequestBody
+        textHashMap["content"] = contentRequestBody
+        textHashMap["shareAgree"] = shareRequestBody
+
+        val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
+
+        diaryService.writeDiary(imgRequestBody, textHashMap).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(
                 call: Call<BasicResponse>,
                 response: Response<BasicResponse>
@@ -190,9 +208,7 @@ class DiaryWriteActivity : AppCompatActivity() {
                 Log.d("글", "저장하려고")
 
                 if (response.isSuccessful) { //  response.code == 1000
-
                     Log.d("Retrofit", "onResponse 성공")
-                    Log.d("Retrofit", writeD.toString())
 
                 } else { //  response.code == 2000,3000,5001,5002
                     Log.d("Retrofit", "onResponse 실패"+response.code())
@@ -208,8 +224,6 @@ class DiaryWriteActivity : AppCompatActivity() {
         })
         Toast.makeText(this, "일기가 저장되었습니다", Toast.LENGTH_LONG).show()
         finish()
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -244,7 +258,8 @@ class DiaryWriteActivity : AppCompatActivity() {
                 binding.writeShareCheckIv.visibility = View.GONE
             }
         }
-        if(intent.getStringExtra("img")?.isNotEmpty() == true) {
+
+        if(!intent.getStringExtra("img").isNullOrEmpty()) {
             // Glide로 띄우기, 모서리 조정
             Glide.with(this).load(intent.getStringExtra("img"))
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
@@ -254,7 +269,7 @@ class DiaryWriteActivity : AppCompatActivity() {
             binding.writeDiaryPhotoIv.visibility = View.VISIBLE
             binding.writeDiaryPhotoXBtn.visibility = View.VISIBLE
 
-            diaryImg=intent.getStringExtra("img").toString()
+            imgUri= intent.getStringExtra("img")!!.toUri()
         }
 
         binding.writeDiaryBackCl.setOnClickListener {
@@ -271,7 +286,7 @@ class DiaryWriteActivity : AppCompatActivity() {
             binding.writeDiaryPhotoIv.setImageURI(null)
             binding.writeDiaryPhotoIv.visibility = View.GONE
             binding.writeDiaryPhotoXBtn.visibility = View.GONE
-            diaryImg=""
+            imgUri = "".toUri()
         }
 
         binding.writeShareBtn.setOnClickListener {
@@ -301,12 +316,11 @@ class DiaryWriteActivity : AppCompatActivity() {
             }
         })
 
+        // TODO : 일기 이모지 변경 & 수정
         binding.writeMoodChangeBtn.setOnClickListener {
             val year=intent.getIntExtra("year",0)
             val month = intent.getIntExtra("month",0)
             val day = intent.getIntExtra("day",0)
-            Log.d("이어",year.toString())
-            Log.d("diaryImg",diaryImg.toString())
             val shareAgree = if (isShare) "T" else "F"
             val emojiIntent = Intent(this, DiaryWriteEmojiActivity::class.java)
             emojiIntent.putExtra("year",year)
@@ -314,7 +328,7 @@ class DiaryWriteActivity : AppCompatActivity() {
             emojiIntent.putExtra("day",day)
             emojiIntent.putExtra("content",binding.writeInputEt.text.toString())
             emojiIntent.putExtra("shareAgree",shareAgree)
-            emojiIntent.putExtra("img",diaryImg)
+            emojiIntent.putExtra("img", imgUri.toString())
             startActivity(emojiIntent)
             finish()
         }

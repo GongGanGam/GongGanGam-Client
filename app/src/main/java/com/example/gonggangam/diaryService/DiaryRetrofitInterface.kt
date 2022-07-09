@@ -1,15 +1,21 @@
 package com.example.gonggangam.diaryService
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface DiaryRetrofitInterface {
 
     // 세영님쪽 api
+
+    @Multipart
     @POST("app/diarys")
-    fun diaryWrite(
-        @Body body: WriteDiary,
-    ): Call<BasicResponse>
+    fun writeDiary(
+        @Part uploadImg: MultipartBody.Part?,
+        @PartMap body: HashMap<String, RequestBody>
+    ): Call
+    <BasicResponse>
 
     @GET("app/diarys")
     fun getCalendar(
