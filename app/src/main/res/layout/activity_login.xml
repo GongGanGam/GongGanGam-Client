@@ -41,12 +41,12 @@
         android:layout_marginBottom="80dp"
         android:gravity="center"
         >
-        <Button
-            android:id="@+id/dummy"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:text="더미로 로그인"
-            />
+<!--        <Button-->
+<!--            android:id="@+id/dummy"-->
+<!--            android:layout_width="280dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:text="더미로 로그인"-->
+<!--            />-->
         <Button
             android:id="@+id/login_kakao_btn"
             android:backgroundTint="#FEE500"
