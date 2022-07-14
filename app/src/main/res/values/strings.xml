@@ -2,7 +2,7 @@
     <string name="app_name">GongGanGam</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="kakao_app_key">f2b1ab86a36bc9f3c9717a5799a8fbf8</string>
+    <string name="kakao_app_key">16faef69ec05a8a1f1cbed4b0269031d</string>
     <string name="naver_client_id">VqIpAv6YCfEjwsKp7mar</string>
     <string name="naver_client_secret">yzvGNScIhg</string>
     <string name="naver_client_name">공간감</string>
