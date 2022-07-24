@@ -27,7 +27,7 @@ class ReceivedDiaryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentReceivedDiaryBinding.inflate(inflater, container, false)
         jwt = PrefManager.jwt
@@ -64,7 +64,7 @@ class ReceivedDiaryFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.receivedDiaryRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val letterReceivedDiaryRVAdapter = LetterReceivedDiaryRVAdapter(diaries)
+        val letterReceivedDiaryRVAdapter = LetterReceivedDiaryRVAdapter(requireContext(), diaries)
         binding.receivedDiaryRv.adapter = letterReceivedDiaryRVAdapter
 
         letterReceivedDiaryRVAdapter.setOnItemClickListener(object:

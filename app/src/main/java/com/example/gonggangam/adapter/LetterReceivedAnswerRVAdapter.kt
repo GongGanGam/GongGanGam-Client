@@ -1,19 +1,22 @@
 package com.example.gonggangam.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gonggangam.model.Answer
 import com.example.gonggangam.R
 import com.example.gonggangam.util.ImageLoader
 import com.example.gonggangam.databinding.ItemReceivedLetterBinding
+import com.example.gonggangam.util.BindingAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LetterReceivedAnswerRVAdapter(private val answers: ArrayList<Answer>):  RecyclerView.Adapter<LetterReceivedAnswerRVAdapter.ViewHolder>() {
+class LetterReceivedAnswerRVAdapter(private val context: Context, private val answers: ArrayList<Answer>):  RecyclerView.Adapter<LetterReceivedAnswerRVAdapter.ViewHolder>() {
     interface OnItemClickListener{
         fun onItemClick(answer: Answer)
     }
@@ -55,17 +58,11 @@ class LetterReceivedAnswerRVAdapter(private val answers: ArrayList<Answer>):  Re
             }
 
             // profile iv
-            if(answer.userProfImg == null) {
-                binding.itemReceivedLetterIv.setImageResource(R.drawable.default_profile_img)
-            }
-            else {
-                CoroutineScope(Dispatchers.Main).launch {
-                    val bitmap = withContext(Dispatchers.IO) {
-                        ImageLoader.loadImage(answer.userProfImg!!)
-                    }
-                    binding.itemReceivedLetterIv.setImageBitmap(bitmap)
-                }
-            }
+            BindingAdapter.loadProfileImage(
+                answer.userProfImg,
+                binding.itemReceivedLetterIv,
+                ContextCompat.getDrawable(context, R.drawable.default_profile_img)!!
+            )
 
         }
 

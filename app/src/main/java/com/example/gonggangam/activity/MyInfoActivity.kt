@@ -18,6 +18,7 @@ import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.util.getRetrofit
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityMyInfoBinding
+import com.example.gonggangam.myPageService.EditUserBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -225,10 +226,6 @@ class MyInfoActivity : AppCompatActivity() {
             return
         }
 
-//        val nickName: String = binding.myInfoNickInputEt.text.toString()
-//        val birthYear: String = binding.myInfoBirthYearInputTv.text.toString()
-//        lateinit var gender: String
-//        lateinit var age: String
         nickname = binding.myInfoNickInputEt.text.toString()
         birthYear = binding.myInfoBirthYearInputTv.text.toString().toInt()
 
@@ -253,7 +250,7 @@ class MyInfoActivity : AppCompatActivity() {
         }
 
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        myPageService.editUserInfo(nickname!!, birthYear, setAge, gender, PrefManager.userIdx)
+        myPageService.editUserInfo(EditUserBody(nickname!!, birthYear, setAge, gender), PrefManager.userIdx)
             .enqueue(object: Callback<BasicResponse> {
                 override fun onResponse(
                     call: Call<BasicResponse>,

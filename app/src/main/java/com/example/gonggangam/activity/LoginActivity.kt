@@ -45,14 +45,6 @@ class LoginActivity : AppCompatActivity() {
         binding.loginNaverBtn.setOnClickListener {
             onNaver()
         }
-
-        binding.dummy.setOnClickListener {
-            // dummy
-            PrefManager.setAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4Ijo4LCJpYXQiOjE2NDM4ODI0MjcsImV4cCI6MTY3NTQxODQyNywic3ViIjoidXNlckluZm8ifQ.z5I8Vuv6kNK4ILB-s9mQSQvii6w5FmWJtaFq-AtZ_zQ", 8)
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     fun onNaver() {
@@ -89,8 +81,8 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("NAVER/API-RESPONSE-RESP", resp.toString())
 
                     userIdx = resp.result!!.userIdx
-                    jwt = resp.result!!.jwt
-                    Log.d("test", "${jwt}")
+                    jwt = resp.result.jwt
+                    Log.d("test", jwt)
 
                     when(resp.code) {
                         1000 -> {
@@ -148,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun kakaoLogin() {
-        var body = LoginBody(kakaoAccessToken, PrefManager.deviceToken)
+        val body = LoginBody(token = kakaoAccessToken, deviceToken = PrefManager.deviceToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("KAKAO-API", body.toString())
 
@@ -160,12 +152,12 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("KAKAO/API-RESPONSE-RESP", resp.toString())
 
-                    // save userIdx & jwt
-                    userIdx = resp.result!!.userIdx
-                    jwt = resp.result.jwt
-
                     when(resp.code) {
                         1000 -> {
+                            // save userIdx & jwt
+                            userIdx = resp.result!!.userIdx
+                            jwt = resp.result.jwt
+
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
                             goToMainActivity()
                         }
