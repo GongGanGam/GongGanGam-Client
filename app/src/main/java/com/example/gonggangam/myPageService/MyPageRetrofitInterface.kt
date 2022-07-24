@@ -1,9 +1,17 @@
 package com.example.gonggangam.myPageService
 
 import com.example.gonggangam.diaryService.BasicResponse
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+
+data class EditUserBody(
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("birthYear") val birthYear: Int,
+    @SerializedName("setAge") val setAge: String,
+    @SerializedName("gender") val gender: String,
+)
 
 interface MyPageRetrofitInterface {
     @GET("app/admin/notice")
@@ -16,10 +24,7 @@ interface MyPageRetrofitInterface {
 
     @PATCH("app/users/{userIdx}")
     fun editUserInfo(
-        @Body nickname: String,
-        @Body birthYear: Int,
-        @Body setAge: String,
-        @Body gender: String,
+        @Body eidtUserBody: EditUserBody,
         @Path("userIdx") userIdx: Int
     ): Call<BasicResponse>
 

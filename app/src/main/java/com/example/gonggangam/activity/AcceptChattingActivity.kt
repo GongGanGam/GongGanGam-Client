@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.gonggangam.model.BasicDiary
 import com.example.gonggangam.model.ReceivedAnswer
@@ -16,6 +17,7 @@ import com.example.gonggangam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
 import com.example.gonggangam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
+import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -113,19 +115,12 @@ class AcceptChattingActivity : AppCompatActivity() {
         binding.acceptChattingNameTv.text = answer.nickname
         binding.acceptChattingDateTv.text = answer.answerDate
         binding.acceptChattingContentTv.text = answer.answerContents
-        if(answer.profImg == null) {
-            binding.acceptChattingProfileIv.setImageResource(R.drawable.default_profile_img)
-        }
-        else {
-            CoroutineScope(Dispatchers.Main).launch {
-                val bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(answer.profImg!!)
-                }
 
-                // Glide 적용
-                Glide.with(this@AcceptChattingActivity).load(bitmap).circleCrop().into(binding.acceptChattingProfileIv)
-            }
-        }
+        BindingAdapter.loadProfileImage(
+            answer.profImg,
+            binding.acceptChattingProfileIv,
+            ContextCompat.getDrawable(this, R.drawable.default_profile_img)!!
+        )
 
         // 거절 버튼
         if(answer.isReject == 'F') { //  isReject, 거절안한 상태

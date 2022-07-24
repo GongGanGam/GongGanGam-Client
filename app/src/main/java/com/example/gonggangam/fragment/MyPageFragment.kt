@@ -16,10 +16,12 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.example.gonggangam.R
 import com.example.gonggangam.activity.LoginActivity
 import com.example.gonggangam.activity.MyInfoActivity
 import com.example.gonggangam.activity.MyPageNoticeActivity
@@ -30,6 +32,7 @@ import com.example.gonggangam.util.FormDataUtil
 import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.util.getRetrofit
 import com.example.gonggangam.databinding.FragmentMyPageBinding
+import com.example.gonggangam.util.BindingAdapter
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -53,9 +56,11 @@ class MyPageFragment : Fragment() {
             imgUri = result.data?.data!! // image uri 저장
             Log.d("TAG_WRITE_RESULT", imgUri.toString())
 
-            Glide.with(this).load(imgUri)
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                .into(binding.mypageUserProfileNone)
+            BindingAdapter.loadProfileImage(
+                imgUri.toString(),
+                binding.mypageUserProfileNone,
+                ContextCompat.getDrawable(requireContext(), R.drawable.default_profile_img)!!
+            )
 
             // retrofit 통신
             uploadProfImg()

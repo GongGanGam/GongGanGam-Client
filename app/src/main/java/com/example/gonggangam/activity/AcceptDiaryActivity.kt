@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.gonggangam.model.ReceivedDiary
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.diaryService.ReceivedDiaryResponse
 import com.example.gonggangam.R
 import com.example.gonggangam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptDiaryBinding
+import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +27,6 @@ class AcceptDiaryActivity : AppCompatActivity() {
     lateinit var binding: ActivityAcceptDiaryBinding
     var diary = ReceivedDiary() // receivedDiary API로 호출한 diary
     var diaryIdx: Int = -1// 받아온 diary idx
-    val dateFormat = SimpleDateFormat("yyyy.MM.dd")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAcceptDiaryBinding.inflate(layoutInflater)
@@ -85,18 +86,13 @@ class AcceptDiaryActivity : AppCompatActivity() {
             intent.putExtra("diary", diary)
             startActivity(intent)
         }
-        if(diary.userProfImg == null) {
-            binding.acceptDiaryProfileIv.setImageResource(R.drawable.default_profile_img)
-        }
-        else {
-            CoroutineScope(Dispatchers.Main).launch {
-                val bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(diary.userProfImg!!)
-                }
-                binding.acceptDiaryProfileIv.setImageBitmap(bitmap)
-            }
-        }
-//        var date = dateFormat.parse(diary.diaryDate)
+
+        BindingAdapter.loadProfileImage(
+            diary.userProfImg,
+            binding.acceptDiaryProfileIv,
+            ContextCompat.getDrawable(this, R.drawable.default_profile_img)!!
+        )
+
         binding.acceptDiaryContentTv.text = diary.diaryContent
         binding.acceptDiaryNameTv.text = diary.userNickname
         binding.acceptDiaryDateTv.text = diary.diaryDate

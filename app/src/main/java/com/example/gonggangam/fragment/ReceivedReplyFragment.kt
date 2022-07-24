@@ -69,7 +69,7 @@ class ReceivedReplyFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.receivedReplyRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val letterReceivedAnswerRVAdapter = LetterReceivedAnswerRVAdapter(answers)
+        val letterReceivedAnswerRVAdapter = LetterReceivedAnswerRVAdapter(requireContext(), answers)
         binding.receivedReplyRv.adapter = letterReceivedAnswerRVAdapter
 
         letterReceivedAnswerRVAdapter.setOnItemClickListener(object:

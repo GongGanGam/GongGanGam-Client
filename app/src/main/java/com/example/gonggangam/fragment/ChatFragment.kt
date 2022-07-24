@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.gonggangam.R
 import com.example.gonggangam.activity.ChatActivity
 import com.example.gonggangam.diaryService.ChatListResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
@@ -20,6 +22,8 @@ import com.example.gonggangam.model.ChatModel
 import com.example.gonggangam.model.Comment
 import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
+import com.example.gonggangam.model.Answer
+import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -34,19 +38,12 @@ class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     lateinit var mDatabase: DatabaseReference
     private var chatLists = ArrayList<ChatList>()
-//    private val userIdx : String? = getUserIdx(requireContext()).toString() // 내 idx
-
-//    private val chatLists = arrayListOf<ChatList>(
-//        ChatList("", "안녕안녕", "21.12.24", "그럼 오늘은 뭐 볼거야?"),
-//        ChatList("", "영화빌런", "21.01.14", "이번에 개봉하는 영화 어때?"),
-//        ChatList("", "이불밖은위험해", "21.02.11", "안녕하세요! 일기가 정말 인상 깊어서 꼭 이야..."),
-//    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentChatBinding.inflate(inflater, container, false)
         mDatabase = FirebaseDatabase.getInstance().reference
 
@@ -57,23 +54,14 @@ class ChatFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.chatRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        val chatListRVAdapter = TChatListRVAdapter(chatLists)
-//        binding.chatRv.adapter = chatListRVAdapter
-//
-//        chatListRVAdapter.setOnItemClickListener(object: ChatListRVAdapter.OnItemClickListener {
-//
-//            override fun onItemClick(chatList: ChatList) {
-//                goToChat()
-//            }
-//        })
 
         val chatListRVAdapter = ChatListRVAdapter()
         binding.chatRv.adapter = chatListRVAdapter
     }
 
     private fun goToChat() {
+        var chatRoomId: String = ""
         val intent = Intent(activity, ChatActivity::class.java)
-        // val intent = Intent(activity, ChatActivitySample::class.java)
         startActivity(intent)
     }
 
@@ -101,7 +89,6 @@ class ChatFragment : Fragment() {
             }
         })
     }
-
 
     fun convertTimestampToDate(timestamp: Long): String? {
         val sdf = SimpleDateFormat("HH:mm")
@@ -147,33 +134,14 @@ class ChatFragment : Fragment() {
                     oppUsers.add(oppId)
                 }
             }
-//            mDatabase.child("users").child("$oppId").addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-////                    val user = snapshot.getValue<User>()
-//                    val user = snapshot.value as User
-//                    Log.d("TAG_CHATFRAG", oppId.toString())
-//                    Log.d("TAG_CHATFRAG", snapshot.toString())
-//                    Log.d("TAG_CHATFRAG", user.toString())
-//                    // profile img
-//                    Glide.with(holder.itemView.context).load(user!!.profImg)
-//                        .apply(RequestOptions().circleCrop())
-//                        .into(holder.binding.charListProfileIv)
-//
-//                    // nickname
-//                    holder.binding.chatListOppNameTv.text = user.nickname
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                }
-//
-//            })
 
             for(chatList in chatLists) {
                 if(chatList.chatUserIdx.toString()+"_key" == oppId) {
-                    Glide.with(holder.itemView.context).load(chatList.profImg)
-                    .apply(RequestOptions().circleCrop())
-                    .into(holder.binding.charListProfileIv)
-
+                    BindingAdapter.loadProfileImage(
+                        chatList.profImg,
+                        holder.binding.charListProfileIv,
+                        ContextCompat.getDrawable(requireContext(), R.drawable.default_profile_img)!!
+                    )
                     // nickname
                     holder.binding.chatListOppNameTv.text = chatList.nickname
                 }
@@ -185,6 +153,10 @@ class ChatFragment : Fragment() {
             val lastMessageKey = commentMap.keys.toTypedArray()[0]
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
+
+            holder.binding.chatListCl.setOnClickListener {
+                goToChat()
+            }
         }
 
         override fun getItemCount(): Int {
@@ -193,11 +165,6 @@ class ChatFragment : Fragment() {
 
         inner class ViewHolder(val binding: ItemChatListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(chatList: ChatList) {
-//                binding.chatListOppNameTv.text = chatList.oppName
-//                binding.chatListDate.text = chatList.date
-//                binding.chatListContentTv.text = chatList.content
-            }
         }
     }
 

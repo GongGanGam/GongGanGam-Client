@@ -43,7 +43,6 @@ object BindingAdapter {
             .placeholder(placeholder)
             .error(placeholder)
             .circleCrop()
-            .fitCenter()
             .into(imageView)
     }
 }

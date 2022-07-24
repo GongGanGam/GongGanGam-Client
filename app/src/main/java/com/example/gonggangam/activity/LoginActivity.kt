@@ -140,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun kakaoLogin() {
-        var body = LoginBody(kakaoAccessToken, PrefManager.deviceToken)
+        val body = LoginBody(token = kakaoAccessToken, deviceToken = PrefManager.deviceToken)
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         Log.d("KAKAO-API", body.toString())
 
@@ -152,12 +152,12 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("KAKAO/API-RESPONSE-RESP", resp.toString())
 
-                    // save userIdx & jwt
-                    userIdx = resp.result!!.userIdx
-                    jwt = resp.result.jwt
-
                     when(resp.code) {
                         1000 -> {
+                            // save userIdx & jwt
+                            userIdx = resp.result!!.userIdx
+                            jwt = resp.result.jwt
+
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
                             goToMainActivity()
                         }

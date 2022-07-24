@@ -225,10 +225,6 @@ class MyInfoActivity : AppCompatActivity() {
             return
         }
 
-//        val nickName: String = binding.myInfoNickInputEt.text.toString()
-//        val birthYear: String = binding.myInfoBirthYearInputTv.text.toString()
-//        lateinit var gender: String
-//        lateinit var age: String
         nickname = binding.myInfoNickInputEt.text.toString()
         birthYear = binding.myInfoBirthYearInputTv.text.toString().toInt()
 
