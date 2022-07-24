@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.R
 
@@ -36,12 +37,13 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    fun loadProfileImage(url: String, imageView: ImageView, placeholder: Drawable) {
+    fun loadProfileImage(url: String?, imageView: ImageView, placeholder: Drawable) {
         Glide.with(imageView.context)
             .load(url)
             .placeholder(placeholder)
             .error(placeholder)
             .circleCrop()
+            .fitCenter()
             .into(imageView)
     }
 }
