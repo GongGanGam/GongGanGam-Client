@@ -1,7 +1,9 @@
 package com.example.gonggangam.diaryService
 
+import android.os.Parcelable
 import com.example.gonggangam.model.*
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import okhttp3.MultipartBody
 import retrofit2.http.Part
 
