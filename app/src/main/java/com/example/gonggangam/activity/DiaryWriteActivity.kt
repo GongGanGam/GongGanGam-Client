@@ -33,6 +33,7 @@ import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
+import com.example.gonggangam.diaryService.DiaryEditRequest
 import com.example.gonggangam.diaryService.ReadDiary
 import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.FormDataUtil
@@ -186,34 +187,9 @@ class DiaryWriteActivity : AppCompatActivity() {
             return
         }
 
-        // image
-        val realPath = FormDataUtil.getRealPathFromURI(imgUri, this)
-        val destFile = File(realPath)
-        if(!destFile.exists())
-            destFile.mkdirs()
-        val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
-        val imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
-
-        // 나머지 body
-        val emojiRequestBody : RequestBody = emojiStr.toRequestBody()
-        val yearRequestBody: RequestBody = year.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val monthRequestBody: RequestBody = month.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val dayRequestBody: RequestBody = day.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val contentRequestBody: RequestBody = content.toRequestBody("text/plain".toMediaTypeOrNull())
-        val shareRequestBody: RequestBody = shareAgree.toRequestBody("text/plain".toMediaTypeOrNull())
-
-        val textHashMap = hashMapOf<String, RequestBody>()
-
-        textHashMap["emoji"] = emojiRequestBody
-        textHashMap["year"] = yearRequestBody
-        textHashMap["month"] = monthRequestBody
-        textHashMap["day"] = dayRequestBody
-        textHashMap["content"] = contentRequestBody
-        textHashMap["shareAgree"] = shareRequestBody
-
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
 
-        diaryService.writeDiary(imgRequestBody, textHashMap).enqueue(object : Callback<BasicResponse> {
+        class DiaryWriteCallback : Callback<BasicResponse> {
             override fun onResponse(
                 call: Call<BasicResponse>,
                 response: Response<BasicResponse>
@@ -234,7 +210,49 @@ class DiaryWriteActivity : AppCompatActivity() {
                 Log.d("Retrofit", "onFailure 에러: "+ t.message.toString())
                 return
             }
-        })
+        }
+
+        if (diaryEditInfo == null) {
+            // POST
+
+            // image
+            val realPath = FormDataUtil.getRealPathFromURI(imgUri, this)
+            val destFile = File(realPath)
+            if(!destFile.exists())
+                destFile.mkdirs()
+            val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
+            val imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
+
+            // 나머지 body
+            val emojiRequestBody : RequestBody = emojiStr.toRequestBody()
+            val yearRequestBody: RequestBody = year.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val monthRequestBody: RequestBody = month.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val dayRequestBody: RequestBody = day.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val contentRequestBody: RequestBody = content.toRequestBody("text/plain".toMediaTypeOrNull())
+            val shareRequestBody: RequestBody = shareAgree.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            val textHashMap = hashMapOf<String, RequestBody>()
+
+            textHashMap["emoji"] = emojiRequestBody
+            textHashMap["year"] = yearRequestBody
+            textHashMap["month"] = monthRequestBody
+            textHashMap["day"] = dayRequestBody
+            textHashMap["content"] = contentRequestBody
+            textHashMap["shareAgree"] = shareRequestBody
+
+            diaryService.writeDiary(imgRequestBody, textHashMap).enqueue(DiaryWriteCallback())
+        } else {
+            // PATCH
+
+            diaryService.editDiary(diaryEditInfo!!.diaryIdx, DiaryEditRequest(
+                emoji = diaryEditInfo!!.emoji,
+                date = diaryEditInfo!!.diaryDate,
+                content = content,
+                shareAgree = shareAgree.toCharArray()[0]
+            )).enqueue(DiaryWriteCallback())
+        }
+
+
         Toast.makeText(this, "일기가 저장되었습니다", Toast.LENGTH_LONG).show()
         finish()
     }

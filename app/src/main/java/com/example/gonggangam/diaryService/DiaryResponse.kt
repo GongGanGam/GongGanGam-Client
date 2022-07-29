@@ -95,6 +95,13 @@ data class Report (
     @SerializedName("reportContent") val reportContent: String?,
 )
 
+data class DiaryEditRequest(
+    @SerializedName("emoji") val emoji: String,
+    @SerializedName("date") val date: String,
+    @SerializedName("content") val content: String,
+    @SerializedName("shareAgree") val shareAgree: Char
+)
+
 data class Reply (
     @SerializedName("content") val content: String,
     @SerializedName("diaryIdx") val diaryIdx: Int,
