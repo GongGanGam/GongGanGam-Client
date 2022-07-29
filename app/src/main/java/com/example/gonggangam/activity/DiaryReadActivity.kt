@@ -2,6 +2,7 @@ package com.example.gonggangam.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +13,19 @@ import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryReadBinding
+import com.example.gonggangam.diaryService.ReadDiary
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class DiaryReadActivity : AppCompatActivity() {
     lateinit var binding: ActivityDiaryReadBinding
+
+    private var year = -1
+    private var month = -1
+    private var day = -1
+    private var diary: ReadDiary? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +36,9 @@ class DiaryReadActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val year = intent.getIntExtra("year", -1)
-        val month = intent.getIntExtra("month", -1)
-        val day = intent.getIntExtra("day", -1)
+        year = intent.getIntExtra("year", -1)
+        month = intent.getIntExtra("month", -1)
+        day = intent.getIntExtra("day", -1)
 
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
         diaryService.getDiary(year, month, day).enqueue(object: Callback<ReadDiaryResponse> {
@@ -49,6 +57,7 @@ class DiaryReadActivity : AppCompatActivity() {
                             val contents: String  = resp.result.contents
                             val img: String?  = resp.result.image
                             val answer = resp.result.answer
+                            diary = resp.result
 
                             // Diary Binding
                             BindingAdapter.loadEmoji(emoji, binding.diaryReadMoodIv)
@@ -91,6 +100,19 @@ class DiaryReadActivity : AppCompatActivity() {
         binding.diaryReadHeader.layoutHeaderBtnTv.text= "수정"
         binding.diaryReadHeader.layoutHeaderMenuIv.visibility= View.INVISIBLE
         binding.diaryReadHeader.layoutHeaderTitleTv.visibility= View.INVISIBLE
+
+        binding.diaryReadHeader.layoutHeaderBtnTv.setOnClickListener {
+
+            if (diary != null) {
+                val intent = Intent(this, DiaryWriteActivity::class.java)
+                startActivity(intent.apply {
+                    putExtra("year", year)
+                    putExtra("month", month)
+                    putExtra("day", day)
+                    putExtra("diary", diary as Serializable)
+                })
+            }
+        }
 
         binding.diaryReadHeader.layoutHeaderBackIv.setOnClickListener {
             finish()

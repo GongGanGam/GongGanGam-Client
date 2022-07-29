@@ -33,6 +33,9 @@ import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
+import com.example.gonggangam.diaryService.ReadDiary
+import com.example.gonggangam.model.Diary
+import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.FormDataUtil
 import com.example.gonggangam.util.getRetrofit
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -124,6 +127,7 @@ class DiaryWriteActivity : AppCompatActivity() {
         lifecycle.addObserver(observer)
 
         initListener()
+        loadIntent()
         getImoji()
         val emojiStr=intent.getStringExtra("state")
         Log.d("이모지?", emojiStr.toString())
@@ -224,6 +228,20 @@ class DiaryWriteActivity : AppCompatActivity() {
         })
         Toast.makeText(this, "일기가 저장되었습니다", Toast.LENGTH_LONG).show()
         finish()
+    }
+
+    private fun loadIntent() {
+        val diary = intent.getSerializableExtra("diary") as ReadDiary?
+
+        if (diary != null) {
+            BindingAdapter.loadEmoji(diary.emoji, binding.writeMoodIconIv)
+            binding.writeInputEt.setText(diary.contents)
+
+            if (diary.image != null) {
+                BindingAdapter.loadDiaryImage(diary.image, binding.writeDiaryPhotoIv)
+                binding.writeDiaryPhotoIv.visibility = View.VISIBLE
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
