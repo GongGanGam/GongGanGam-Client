@@ -34,7 +34,6 @@ import com.example.gonggangam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.R
 import com.example.gonggangam.databinding.ActivityDiaryWriteBinding
 import com.example.gonggangam.diaryService.ReadDiary
-import com.example.gonggangam.model.Diary
 import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.FormDataUtil
 import com.example.gonggangam.util.getRetrofit
@@ -58,6 +57,8 @@ class DiaryWriteActivity : AppCompatActivity() {
 
     private lateinit var imgUri: Uri // diaryImg uri 저장 변수
     var isShare:Boolean = false
+
+    private var diaryEditInfo: ReadDiary? = null
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -149,21 +150,29 @@ class DiaryWriteActivity : AppCompatActivity() {
     }
 
     private fun saveDiary() {
-        var emojiStr=intent.getStringExtra("state").toString()
-        when (emojiStr) {
-            "우울해요" -> emojiStr = "depressed"
-            "짜증나요" -> emojiStr ="annoyed"
-            "지루해요" -> emojiStr ="boring"
-            "복잡해요" -> emojiStr ="complicated"
-            "창피해요" -> emojiStr ="embarrassing"
-            "설레요" -> emojiStr ="excited"
-            "즐거워요" ->  emojiStr ="fun"
-            "행복해요" -> emojiStr ="happy"
-            "슬퍼요" ->  emojiStr ="sad"
-            "그냥 그래요" ->  emojiStr ="soso"
-            "화나요" ->  emojiStr ="upset"
-            "궁금해요" ->   emojiStr ="wonder"
+        var emojiStr = ""
+
+        if (diaryEditInfo == null) {
+            emojiStr = intent.getStringExtra("state").toString()
+            when (emojiStr) {
+                "우울해요" -> emojiStr = "depressed"
+                "짜증나요" -> emojiStr = "annoyed"
+                "지루해요" -> emojiStr = "boring"
+                "복잡해요" -> emojiStr = "complicated"
+                "창피해요" -> emojiStr = "embarrassing"
+                "설레요" -> emojiStr = "excited"
+                "즐거워요" -> emojiStr = "fun"
+                "행복해요" -> emojiStr = "happy"
+                "슬퍼요" -> emojiStr = "sad"
+                "그냥 그래요" -> emojiStr = "soso"
+                "화나요" -> emojiStr = "upset"
+                "궁금해요" -> emojiStr = "wonder"
+            }
+        } else {
+            emojiStr = diaryEditInfo!!.emoji
         }
+
+
         Log.d("이모지?", emojiStr)
         val year = intent.getIntExtra("year",0)
         val month = intent.getIntExtra("month",0)
@@ -231,14 +240,14 @@ class DiaryWriteActivity : AppCompatActivity() {
     }
 
     private fun loadIntent() {
-        val diary = intent.getSerializableExtra("diary") as ReadDiary?
+        diaryEditInfo = intent.getSerializableExtra("diary") as ReadDiary?
 
-        if (diary != null) {
-            BindingAdapter.loadEmoji(diary.emoji, binding.writeMoodIconIv)
-            binding.writeInputEt.setText(diary.contents)
+        if (diaryEditInfo != null) {
+            BindingAdapter.loadEmoji(diaryEditInfo!!.emoji, binding.writeMoodIconIv)
+            binding.writeInputEt.setText(diaryEditInfo!!.contents)
 
-            if (diary.image != null) {
-                BindingAdapter.loadDiaryImage(diary.image, binding.writeDiaryPhotoIv)
+            if (diaryEditInfo!!.image != null) {
+                BindingAdapter.loadDiaryImage(diaryEditInfo!!.image!!, binding.writeDiaryPhotoIv)
                 binding.writeDiaryPhotoIv.visibility = View.VISIBLE
             }
         }

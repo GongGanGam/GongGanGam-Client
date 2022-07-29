@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import okhttp3.MultipartBody
 import retrofit2.http.Part
+import java.io.Serializable
 
 data class Page (
     val curPage: Int,
@@ -69,7 +70,7 @@ data class ReadDiary(
     @SerializedName("contents") val contents: String,
     @SerializedName("image") val image: String?,
     @SerializedName("answer") val answer: ReadAnswer?
-)
+) : Serializable
 
 data class ReadAnswer(
     @SerializedName("answerIdx") val answerIdx: Int,
