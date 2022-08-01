@@ -59,6 +59,11 @@ interface DiaryRetrofitInterface {
         @Path ("answerIdx") answerIdx: Int,
     ): Call<BasicResponse>
 
+    @PATCH("app/diarys/{diaryIdx}")
+    fun editDiary(
+        @Path("diaryIdx") diaryIdx: Int,
+        @Body diaryEditBody: DiaryEditRequest
+    ): Call<BasicResponse>
 
     @POST("app/chat")
     fun startChat(

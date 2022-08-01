@@ -1,6 +1,9 @@
 package com.example.gonggangam.activity
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -17,6 +20,7 @@ import com.example.gonggangam.diaryService.ReadDiary
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.Serializable
 
 class DiaryReadActivity : AppCompatActivity() {
@@ -109,7 +113,9 @@ class DiaryReadActivity : AppCompatActivity() {
                     putExtra("year", year)
                     putExtra("month", month)
                     putExtra("day", day)
-                    putExtra("diary", diary as Serializable)
+                    putExtra("diary", diary)
+                    putExtra("state", diary!!.emoji)
+                    putExtra("image", getEmojiImage(diary!!.emoji))
                 })
             }
         }
@@ -122,5 +128,34 @@ class DiaryReadActivity : AppCompatActivity() {
             val intent = Intent(this, AcceptDiaryActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun getEmojiImage(emojiStr: String): ByteArray {
+        val stream = ByteArrayOutputStream()
+        val dId: Int = when (emojiStr) {
+            "depressed" -> R.drawable.emoji_depressed
+            "annoyed" -> R.drawable.emoji_annoyed
+            "boring" -> R.drawable.emoji_boring
+            "complicated" -> R.drawable.emoji_complicated
+            "embarrassing" -> R.drawable.emoji_embarrassing
+            "excited" -> R.drawable.emoji_excited
+            "fun" -> R.drawable.emoji_fun
+            "happy" -> R.drawable.emoji_happy
+            "sad" -> R.drawable.emoji_sad
+            "soso" -> R.drawable.emoji_soso
+            "upset" -> R.drawable.emoji_upset
+            "wonder" -> R.drawable.emoji_wonder
+            else -> R.drawable.emoji_happy
+        }
+
+        val bitmap =
+            (getDrawable(dId) as BitmapDrawable).bitmap
+        val scale = (1024 / bitmap.width.toFloat())
+        val image_w = (bitmap.width * scale).toInt()
+        val image_h = (bitmap.height * scale).toInt()
+        val resize = Bitmap.createScaledBitmap(bitmap, image_w, image_h, true)
+        resize.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+        return stream.toByteArray()
     }
 }
