@@ -80,6 +80,10 @@ class DiaryFragment : Fragment() {
             return daysOfWeek
         }
 
+
+
+
+
         binding.diaryLayoutHeader.layoutHeaderBackIv.visibility= INVISIBLE
         binding.diaryLayoutHeader.layoutHeaderBtnTv.visibility= INVISIBLE
         binding.diaryLayoutHeader.layoutHeaderMenuIv.visibility= INVISIBLE
@@ -87,11 +91,15 @@ class DiaryFragment : Fragment() {
 
         //달력의 첫번째 요일 정하기
         val daysOfWeek = daysOfWeekFromLocale()
-        binding.diaryCalendarViewCv.setup(firstMonth, lastMonth, daysOfWeek.first())
+        binding.diaryCalendarViewCv.setup(firstMonth, lastMonth,daysOfWeek.first())
         binding.diaryCalendarViewCv.notifyCalendarChanged()
         binding.diaryCalendarViewCv.scrollToDate(LocalDate.now())
 
         binding.diaryCalendarViewCv.maxRowCount=6
+
+
+
+
 
         //날짜 바인딩 class
         class  DayViewContainer(view: View) : ViewContainer(view) {
@@ -125,7 +133,7 @@ class DiaryFragment : Fragment() {
             dataLoad(month.year, month.month)
             currentMonth=month.yearMonth
             binding.diaryCalendarViewCv.smoothScrollToMonth(month.yearMonth)
-
+            binding.diaryCalendarViewCv.notifyCalendarChanged()
         }
 
         //날짜 개별 뷰 설정
@@ -138,6 +146,7 @@ class DiaryFragment : Fragment() {
                 // Set the calendar day for this container.
 
                 container.day = day
+                container.dateText.text = day.date.dayOfMonth.toString()
 
                 fun emojiBinding(dayArr:ArrayList<DayCell>,isActive:Boolean) {
                     val dayIterator = dayArr.listIterator()
@@ -295,7 +304,6 @@ class DiaryFragment : Fragment() {
         }
 
 
-
         return binding.root
     }
 
@@ -331,7 +339,6 @@ class DiaryFragment : Fragment() {
                     Log.d("Retrofit", "onFailure 에러: "+ response.code().toString())
                 }
                 binding.diaryCalendarViewCv.notifyMonthChanged(currentMonth)
-
             }
 
         }

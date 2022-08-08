@@ -70,9 +70,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cv_outDateStyle="endOfRow"
-            app:cv_inDateStyle="firstMonth"
             android:backgroundTint="#FBF8FF"
-
+            app:cv_inDateStyle="allMonths"
             app:layout_constraintTop_toBottomOf="@id/diary_img_iv"
             app:cv_hasBoundaries="true"
             app:cv_dayViewResource="@layout/calendar_date_layout"
