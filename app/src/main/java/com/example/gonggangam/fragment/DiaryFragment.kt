@@ -110,30 +110,16 @@ class DiaryFragment : Fragment() {
 
             lateinit var day: CalendarDay
 
-            init {
-
-                view.setOnClickListener {
-                    if(day.owner == DayOwner.THIS_MONTH) {
-                        if (day.date.year > LocalDate.now().year || (day.date.year == LocalDate.now().year) && (day.date.dayOfYear > LocalDate.now().dayOfYear)) {
-                            Toast.makeText(context, "오늘과 이전 날짜의 일기만 작성할 수 있어요!", Toast.LENGTH_SHORT)
-                                .show()
-
-                        }
-                    }
-                    else if(day.owner != DayOwner.THIS_MONTH){
-                        Toast.makeText(context,"달력을 넘겨 클릭해주세요!",Toast.LENGTH_SHORT).show()
-                        Log.d("선택",day.date.dayOfMonth.toString()+","+day.date.monthValue.toString())
-                    }
-                }
-            }
         }
         //버튼 클릭이 아니라 드래그로 달력 넘길떄
         binding.diaryCalendarViewCv.monthScrollListener= { month ->
 
-            dataLoad(month.year, month.month)
+
             currentMonth=month.yearMonth
+            dataLoad(month.year, month.month)
+
             binding.diaryCalendarViewCv.smoothScrollToMonth(month.yearMonth)
-            binding.diaryCalendarViewCv.notifyCalendarChanged()
+
         }
 
         //날짜 개별 뷰 설정
@@ -159,7 +145,11 @@ class DiaryFragment : Fragment() {
 
                                 // emoji 존재 -> 다이어리 읽기
                                 container.dateImg.setOnClickListener {
-                                    goToReadDiaryView(day.date.year, day.date.monthValue, day.day)
+                                    if (day.date.year > LocalDate.now().year || (day.date.year == LocalDate.now().year && day.date.dayOfYear > LocalDate.now().dayOfYear)) {
+                                        Toast.makeText(context, "오늘과 이전 날짜의 일기만 작성할 수 있어요!", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                   else  goToReadDiaryView(day.date.year, day.date.monthValue, day.day)
                                 }
                                 when (tmp.emoji) {
                                     "depressed" -> container.dateImg.setImageResource(R.drawable.emoji_depressed)
@@ -217,7 +207,11 @@ class DiaryFragment : Fragment() {
 
                     // 이모지 미존재 -> 다이어리 쓰기
                     container.dateImg.setOnClickListener {
-                        goToWriteDiaryView(day.date.year, day.date.monthValue, day.day)
+                        if (day.date.year > LocalDate.now().year || (day.date.year == LocalDate.now().year && day.date.dayOfYear > LocalDate.now().dayOfYear)) {
+                            Toast.makeText(context, "오늘과 이전 날짜의 일기만 작성할 수 있어요!", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        else goToWriteDiaryView(day.date.year, day.date.monthValue, day.day)
                     }
 
 
@@ -240,6 +234,9 @@ class DiaryFragment : Fragment() {
                             R.color.calendar_inactive
                         )
                     )
+                    container.dateImg.setOnClickListener {
+                        Toast.makeText(context,"달력을 넘겨 클릭해주세요!",Toast.LENGTH_SHORT).show()
+                    }
                     container.dateImg.setImageResource(R.drawable.calendar_disable_icon)
                     if (day.date.monthValue.toString()
                             .toInt() == currentMonth.minusMonths(1).monthValue
@@ -288,14 +285,13 @@ class DiaryFragment : Fragment() {
 
                 container.monthPrev.setOnClickListener {
                     currentMonth=currentMonth.minusMonths(1)
+                    //이미 scroll 시의 동작을 정해주었기 때문에 따로 dataLoad 필요없음
                     binding.diaryCalendarViewCv.smoothScrollToMonth(currentMonth)
-                    dataLoad(currentMonth.year,currentMonth.monthValue)
 
                 }
                 container.monthNext.setOnClickListener {
                     currentMonth=currentMonth.plusMonths(1)
                     binding.diaryCalendarViewCv.smoothScrollToMonth(currentMonth)
-                    dataLoad(currentMonth.year,currentMonth.monthValue)
                 }
 
 
@@ -312,6 +308,7 @@ class DiaryFragment : Fragment() {
         previousM.clear()
         currentM.clear()
         nextM.clear()
+
         val diaryService = getRetrofit().create(DiaryRetrofitInterface::class.java)
         thread {
             val response = diaryService.getCalendar(thisY, thisM).execute()
@@ -339,6 +336,7 @@ class DiaryFragment : Fragment() {
                     Log.d("Retrofit", "onFailure 에러: "+ response.code().toString())
                 }
                 binding.diaryCalendarViewCv.notifyMonthChanged(currentMonth)
+                Log.d("달달", currentMonth.toString())
             }
 
         }
