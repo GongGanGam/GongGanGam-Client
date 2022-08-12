@@ -56,7 +56,7 @@ class DiaryWriteActivity : AppCompatActivity() {
     var REQUIRED_PERMISSIONS = arrayOf<String>( Manifest.permission.READ_EXTERNAL_STORAGE)
     var mBackWait:Long = 0 //뒤로가기 버튼 눌렀을 때
 
-    private lateinit var imgUri: Uri // diaryImg uri 저장 변수
+    private var imgUri: Uri =  Uri.parse("") // diaryImg uri 저장 변수
     var isShare:Boolean = false
 
     private var diaryEditInfo: ReadDiary? = null
@@ -367,13 +367,15 @@ class DiaryWriteActivity : AppCompatActivity() {
             val month = intent.getIntExtra("month",0)
             val day = intent.getIntExtra("day",0)
             val shareAgree = if (isShare) "T" else "F"
+            val img = imgUri
             val emojiIntent = Intent(this, DiaryWriteEmojiActivity::class.java)
             emojiIntent.putExtra("year",year)
             emojiIntent.putExtra("month",month)
             emojiIntent.putExtra("day",day)
             emojiIntent.putExtra("content",binding.writeInputEt.text.toString())
             emojiIntent.putExtra("shareAgree",shareAgree)
-            emojiIntent.putExtra("img", imgUri.toString())
+            emojiIntent.putExtra("img", img.toString())
+            Log.d("이미지", img.toString())
             startActivity(emojiIntent)
             finish()
         }
