@@ -2,6 +2,7 @@ package com.example.gonggangam.util
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
@@ -44,5 +45,11 @@ object BindingAdapter {
             .error(placeholder)
             .circleCrop()
             .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("test")
+    fun test() {
+
     }
 }
