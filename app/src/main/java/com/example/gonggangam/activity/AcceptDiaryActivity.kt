@@ -3,6 +3,7 @@ package com.example.gonggangam.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -74,6 +75,15 @@ class AcceptDiaryActivity : AppCompatActivity() {
     private fun initListener() {
 
         binding.acceptDiaryMenuIv.setOnClickListener {
+            if(binding.acceptDiaryReportButtonBtn.visibility == View.GONE){
+                binding.acceptDiaryReportButtonBtn.visibility = View.VISIBLE
+            }
+            else if(binding.acceptDiaryReportButtonBtn.visibility == View.VISIBLE){
+                binding.acceptDiaryReportButtonBtn.visibility = View.GONE
+            }
+        }
+
+        binding.acceptDiaryReportButtonBtn.setOnClickListener{
             goToReportActivity()
         }
 

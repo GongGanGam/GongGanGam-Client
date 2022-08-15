@@ -65,7 +65,7 @@ class AcceptChattingActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ReceivedAnswerResponse>, t: Throwable) {
-                Log.d("TAG/API-ERROR", t.message.toString());
+                Log.d("TAG/API-ERROR", t.message.toString())
             }
 
         })
@@ -164,14 +164,23 @@ class AcceptChattingActivity : AppCompatActivity() {
 
             })
         }
+        binding.acceptChattingMenuIv.setOnClickListener {
+            if(binding.acceptChattingReportButtonBtn.visibility == View.GONE){
+                binding.acceptChattingReportButtonBtn.visibility = View.VISIBLE
+            }
+            else if(binding.acceptChattingReportButtonBtn.visibility == View.VISIBLE){
+                binding.acceptChattingReportButtonBtn.visibility = View.GONE
+            }
+        }
+
+        binding.acceptChattingReportButtonBtn.setOnClickListener{
+            goToReportActivity()
+        }
 
         binding.acceptChattingBackIv.setOnClickListener {
             finish()
         }
 
-        binding.acceptChattingMenuIv.setOnClickListener {
-            goToReportActivity()
-        }
 
     }
 
