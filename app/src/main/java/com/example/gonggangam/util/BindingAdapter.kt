@@ -1,6 +1,8 @@
 package com.example.gonggangam.util
 
 import android.graphics.drawable.Drawable
+import android.util.Log
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -8,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.R
+import kotlin.coroutines.coroutineContext
 
 object BindingAdapter {
 
@@ -48,8 +51,16 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("test")
-    fun test() {
-
+    @BindingAdapter("autoPlaceholder")
+    fun autoPlaceholder(editText: EditText, hint: String) {
+        with(editText) {
+            this.hint = hint
+            setOnFocusChangeListener { view, b ->
+                if (b)
+                    editText.hint = ""
+                else
+                    editText.hint = hint
+            }
+        }
     }
 }
