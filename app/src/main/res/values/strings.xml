@@ -40,4 +40,6 @@
         <item>불쾌감을 주거나 부적절한 이름 사용</item>
         <item>기타</item>
     </string-array>
+
+    <string name="diary_write_hint">오늘의 감정을 기록해보세요</string>
 </resources>
