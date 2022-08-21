@@ -3,11 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.gonggangam.fragment.ReceivedReplyFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/received_reply_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_empty_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/received_reply_empty_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

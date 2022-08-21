@@ -103,6 +103,7 @@ class ChatFragment : Fragment() {
 
         init {
             getChatList()
+
             mDatabase.child("chatRooms").orderByChild("users/${uid}_key").equalTo(true).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 @SuppressLint("NotifyDataSetChanged")
@@ -113,12 +114,13 @@ class ChatFragment : Fragment() {
                         println(data)
                     }
                     notifyDataSetChanged()
+                    checkEmpty()
                 }
                 override fun onCancelled(error: DatabaseError) {
                 }
 
             })
-
+            checkEmpty()
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -165,6 +167,13 @@ class ChatFragment : Fragment() {
 
         inner class ViewHolder(val binding: ItemChatListBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        }
+
+        private fun checkEmpty() {
+            if (chatLists.isEmpty() && chatModel.isEmpty())
+                binding.tvEmptyList.visibility = View.VISIBLE
+            else
+                binding.tvEmptyList.visibility = View.INVISIBLE
         }
     }
 

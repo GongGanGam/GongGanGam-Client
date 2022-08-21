@@ -71,6 +71,10 @@ class ReceivedReplyFragment : Fragment() {
         binding.receivedReplyRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val letterReceivedAnswerRVAdapter = LetterReceivedAnswerRVAdapter(requireContext(), answers)
         binding.receivedReplyRv.adapter = letterReceivedAnswerRVAdapter
+        if (answers.isEmpty())
+            binding.tvEmptyList.visibility = View.VISIBLE
+        else
+            binding.tvEmptyList.visibility = View.INVISIBLE
 
         letterReceivedAnswerRVAdapter.setOnItemClickListener(object:
             LetterReceivedAnswerRVAdapter.OnItemClickListener {

@@ -66,6 +66,10 @@ class ReceivedDiaryFragment : Fragment() {
         binding.receivedDiaryRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val letterReceivedDiaryRVAdapter = LetterReceivedDiaryRVAdapter(requireContext(), diaries)
         binding.receivedDiaryRv.adapter = letterReceivedDiaryRVAdapter
+        if (diaries.isEmpty())
+            binding.tvEmptyList.visibility = View.VISIBLE
+        else
+            binding.tvEmptyList.visibility = View.INVISIBLE
 
         letterReceivedDiaryRVAdapter.setOnItemClickListener(object:
             LetterReceivedDiaryRVAdapter.OnItemClickListener {

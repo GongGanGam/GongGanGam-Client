@@ -2,6 +2,7 @@ package com.example.gonggangam.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gonggangam.adapter.MypageNoticeRVAdapter
@@ -60,6 +61,12 @@ class MyPageNoticeActivity:AppCompatActivity() {
                                 isExpanded = false
                             )
                         } as ArrayList<NoticeModel>)
+
+                        if (it.notices.isEmpty())
+                            binding.tvEmptyList.visibility = View.VISIBLE
+                        else
+                            binding.tvEmptyList.visibility = View.INVISIBLE
+
                         Log.d(TAG, "retrofit success : $body")
                     }
                 }
