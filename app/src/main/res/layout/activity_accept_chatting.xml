@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/accept_chatting_menu_iv"
         android:layout_marginTop="10dp"
         android:visibility="gone"
-        android:background="@drawable/button_inactive_background"
+        android:background="@drawable/background_report_btn"
     />
     <TextView
         android:id="@+id/accept_chatting_report_button_btn_tv"
@@ -70,7 +70,8 @@
         app:layout_constraintBottom_toBottomOf="@id/accept_chatting_report_button_btn"
         android:background="@drawable/background_transparent"
         android:text="신고하기"
-        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textColor="#262D89"
         android:textSize="12sp"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
