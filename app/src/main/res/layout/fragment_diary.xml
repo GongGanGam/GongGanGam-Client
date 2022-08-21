@@ -74,7 +74,6 @@
             app:cv_inDateStyle="allMonths"
             app:cv_maxRowCount="6"
             app:layout_constraintTop_toBottomOf="@id/diary_img_iv"
-            app:cv_hasBoundaries="true"
             app:cv_dayViewResource="@layout/calendar_date_layout"
             app:cv_monthHeaderResource="@layout/calendar_month_header_layout"
             />
