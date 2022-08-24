@@ -41,5 +41,16 @@
         <item>기타</item>
     </string-array>
 
+    <!-- diary -->
     <string name="diary_write_hint">오늘의 감정을 기록해보세요</string>
+
+    <!-- letter -->
+    <string name="received_diary_empty_list">아직 받은 일기가 없어요.</string>
+    <string name="received_reply_empty_list">아직 받은 답장이 없어요.</string>
+
+    <!-- chat -->
+    <string name="chat_empty_list">아직 진행중인 채팅이 없어요.</string>
+
+    <!-- notice -->
+    <string name="notice_empty_list">아직 공지사항이 없어요.</string>
 </resources>
