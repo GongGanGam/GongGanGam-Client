@@ -15,6 +15,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.auth.model.Prompt
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         initListener()
         loadDeviceToken()
+        Log.d("sdfsd", Utility.getKeyHash(this))
     }
 
     fun initListener() {
@@ -80,11 +82,12 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("NAVER/API-RESPONSE-RESP", resp.toString())
 
-                    userIdx = resp.result!!.userIdx
-                    jwt = resp.result.jwt
-                    Log.d("test", jwt)
+                    if (resp.result != null) {
+                        userIdx = resp.result.userIdx
+                        jwt = resp.result.jwt
+                    }
 
-                    when(resp.code) {
+                    when (resp.code) {
                         1000 -> {
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
                             goToMainActivity()
@@ -152,12 +155,13 @@ class LoginActivity : AppCompatActivity() {
                     val resp = response.body()!!
                     Log.d("KAKAO/API-RESPONSE-RESP", resp.toString())
 
+                    if (resp.result != null) {
+                        userIdx = resp.result.userIdx
+                        jwt = resp.result.jwt
+                    }
+
                     when(resp.code) {
                         1000 -> {
-                            // save userIdx & jwt
-                            userIdx = resp.result!!.userIdx
-                            jwt = resp.result.jwt
-
                             Toast.makeText(this@LoginActivity,"로그인 성공",Toast.LENGTH_SHORT).show()
                             goToMainActivity()
                         }

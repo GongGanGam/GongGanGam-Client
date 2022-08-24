@@ -2,6 +2,7 @@ package com.example.gonggangam.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 object PrefManager {
     private lateinit var pref: SharedPreferences
@@ -24,6 +25,7 @@ object PrefManager {
         get() = pref.getString(DEVICE_TOKEN, "").toString()
 
     fun setAuth(jwt: String, userIdx: Int) {
+        Log.d("SharePreference", "saved : $jwt $userIdx")
         pref.edit()?.apply {
             putString(JWT, jwt)
             putInt(USER_IDX, userIdx)
