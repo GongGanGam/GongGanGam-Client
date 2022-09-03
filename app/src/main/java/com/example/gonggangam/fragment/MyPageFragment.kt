@@ -28,11 +28,8 @@ import com.example.gonggangam.activity.MyPageNoticeActivity
 import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.myPageService.MyPageRetrofitInterface
 import com.example.gonggangam.myPageService.UserResponse
-import com.example.gonggangam.util.FormDataUtil
-import com.example.gonggangam.util.PrefManager
-import com.example.gonggangam.util.getRetrofit
 import com.example.gonggangam.databinding.FragmentMyPageBinding
-import com.example.gonggangam.util.BindingAdapter
+import com.example.gonggangam.util.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -305,14 +302,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun logout() {
-        val intent = Intent(requireContext(), LoginActivity::class.java)
-        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
-        val editor = spf!!.edit()
-
-        editor.remove("userIdx")
-        editor.remove("jwt")
-        editor.apply()
-        startActivity(intent)
+        AuthUtil.logout(requireActivity())
     }
 
     private fun chooseImageFromGallery() {
