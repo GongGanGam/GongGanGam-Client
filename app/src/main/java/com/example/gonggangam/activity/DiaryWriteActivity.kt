@@ -46,6 +46,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Part
 import java.io.File
 
 
@@ -217,11 +218,15 @@ class DiaryWriteActivity : AppCompatActivity() {
 
             // image
             val realPath = FormDataUtil.getRealPathFromURI(imgUri, this)
-            val destFile = File(realPath)
-            if(!destFile.exists())
-                destFile.mkdirs()
-            val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
-            val imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
+            var imgRequestBody: MultipartBody.Part? = null
+
+            if (realPath != null) {
+                val destFile = File(realPath)
+                if(!destFile.exists())
+                    destFile.mkdirs()
+                val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
+                imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
+            }
 
             // 나머지 body
             val emojiRequestBody : RequestBody = emojiStr.toRequestBody()
