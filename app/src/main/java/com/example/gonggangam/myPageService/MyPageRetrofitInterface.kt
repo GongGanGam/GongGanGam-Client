@@ -52,4 +52,9 @@ interface MyPageRetrofitInterface {
         @Path("userIdx") userIdx: Int,
         @Body chatPush: String
     ): Call<BasicResponse>
+
+    @PATCH("app/users/{userIdx}/status")
+    fun setWithdrawal(
+        @Path("userIdx") userIdx: Int
+    ): Call<BasicResponse>
 }
