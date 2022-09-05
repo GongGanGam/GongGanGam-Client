@@ -301,7 +301,7 @@
         <Button
             android:id="@+id/mypage_cs_notice_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:text="공지사항"
             android:textColor="#9CA3D4"
             android:background="#00000000"
@@ -309,27 +309,29 @@
             app:layout_constraintTop_toBottomOf="@+id/mypage_cs_tv"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
+            android:lineHeight="18.75dp"
+
             />
 
-        <TextView
-            android:id="@+id/mypage_cs_qNa_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1:1문의"
-            android:textColor="#9CA3D4"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_cs_notice_tv"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/mypage_cs_qNa_tv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="1:1문의"-->
+<!--            android:textColor="#9CA3D4"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/mypage_cs_notice_tv"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            />-->
 
         <View
             android:id="@+id/mypage_rectangle_03"
             android:layout_width="match_parent"
             android:layout_height="6dp"
             android:background="#2E3795"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_cs_qNa_tv"
+            app:layout_constraintTop_toBottomOf="@+id/mypage_cs_notice_tv"
             android:layout_marginTop="30dp"
             />
 
