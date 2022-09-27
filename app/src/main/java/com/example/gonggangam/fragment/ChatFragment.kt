@@ -17,12 +17,9 @@ import com.example.gonggangam.R
 import com.example.gonggangam.activity.ChatActivity
 import com.example.gonggangam.diaryService.ChatListResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
-import com.example.gonggangam.model.ChatList
-import com.example.gonggangam.model.ChatModel
-import com.example.gonggangam.model.Comment
 import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
-import com.example.gonggangam.model.Answer
+import com.example.gonggangam.model.*
 import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
@@ -59,9 +56,10 @@ class ChatFragment : Fragment() {
         binding.chatRv.adapter = chatListRVAdapter
     }
 
-    private fun goToChat() {
+    private fun goToChat(opp:User) {
         var chatRoomId: String = ""
         val intent = Intent(activity, ChatActivity::class.java)
+        intent.putExtra("opp",opp)
         startActivity(intent)
     }
 
@@ -146,6 +144,10 @@ class ChatFragment : Fragment() {
                     )
                     // nickname
                     holder.binding.chatListOppNameTv.text = chatList.nickname
+                    holder.binding.chatListCl.setOnClickListener {
+                        var tmpUser= User(chatList.chatUserIdx, chatList.nickname, chatList.profImg)
+                        goToChat(tmpUser)
+                    }
                 }
             }
 
@@ -155,10 +157,10 @@ class ChatFragment : Fragment() {
             val lastMessageKey = commentMap.keys.toTypedArray()[0]
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
-
-            holder.binding.chatListCl.setOnClickListener {
-                goToChat()
-            }
+//임시 주석
+//            holder.binding.chatListCl.setOnClickListener {
+//                goToChat()
+//            }
         }
 
         override fun getItemCount(): Int {

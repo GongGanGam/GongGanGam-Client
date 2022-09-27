@@ -53,6 +53,7 @@ class ChatActivity : AppCompatActivity() {
 
         myUserIdx = PrefManager.userIdx
         opp = intent.getSerializableExtra("opp") as User
+        Log.d("opp",opp.toString())
 
         if(opp.profImg != null) {
             CoroutineScope(Dispatchers.Main).launch {
