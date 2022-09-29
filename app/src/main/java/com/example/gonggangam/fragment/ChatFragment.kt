@@ -11,8 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.R
 import com.example.gonggangam.activity.ChatActivity
 import com.example.gonggangam.diaryService.ChatListResponse
@@ -21,6 +19,7 @@ import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
 import com.example.gonggangam.model.*
 import com.example.gonggangam.util.BindingAdapter
+import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -97,7 +96,7 @@ class ChatFragment : Fragment() {
     inner class ChatListRVAdapter: RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>() {
         private val chatModel = ArrayList<ChatModel>()
         private val oppUsers : ArrayList<String> = arrayListOf() // 채팅 상대 userIdx
-        private val uid : Int = 8
+        private val uid : Int = PrefManager.userIdx
 
         init {
             getChatList()
@@ -145,7 +144,7 @@ class ChatFragment : Fragment() {
                     // nickname
                     holder.binding.chatListOppNameTv.text = chatList.nickname
                     holder.binding.chatListCl.setOnClickListener {
-                        var tmpUser= User(chatList.chatUserIdx, chatList.nickname, chatList.profImg)
+                        var tmpUser= User(chatList.chatUserIdx, chatList.nickname,  chatList.profImg.toString())
                         goToChat(tmpUser)
                     }
                 }
