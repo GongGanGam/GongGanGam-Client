@@ -55,10 +55,11 @@ class ChatFragment : Fragment() {
         binding.chatRv.adapter = chatListRVAdapter
     }
 
-    private fun goToChat(opp:User) {
-        var chatRoomId: String = ""
+    private fun goToChat(opp:User,index:String) {
+        var chatRoomId: String = index
         val intent = Intent(activity, ChatActivity::class.java)
         intent.putExtra("opp",opp)
+        intent.putExtra("chatRoomId",index)
         startActivity(intent)
     }
 
@@ -133,8 +134,7 @@ class ChatFragment : Fragment() {
                     oppUsers.add(oppId)
                 }
             }
-
-            for(chatList in chatLists) {
+            for((index,chatList) in chatLists.withIndex()) {
                 if(chatList.chatUserIdx.toString()+"_key" == oppId) {
                     BindingAdapter.loadProfileImage(
                         chatList.profImg,
@@ -145,7 +145,7 @@ class ChatFragment : Fragment() {
                     holder.binding.chatListOppNameTv.text = chatList.nickname
                     holder.binding.chatListCl.setOnClickListener {
                         var tmpUser= User(chatList.chatUserIdx, chatList.nickname,  chatList.profImg.toString())
-                        goToChat(tmpUser)
+                        goToChat(tmpUser,index.toString())
                     }
                 }
             }
@@ -156,7 +156,7 @@ class ChatFragment : Fragment() {
             val lastMessageKey = commentMap.keys.toTypedArray()[0]
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
-//임시 주석
+
 //            holder.binding.chatListCl.setOnClickListener {
 //                goToChat()
 //            }

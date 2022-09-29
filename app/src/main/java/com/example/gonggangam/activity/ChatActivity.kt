@@ -26,10 +26,7 @@ import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
 import com.google.firebase.database.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 
 class ChatActivity : AppCompatActivity() {
@@ -37,7 +34,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var imm: InputMethodManager
     lateinit var mDatabase: DatabaseReference
     lateinit var chatModel: ChatModel
-    lateinit var bitmap:Bitmap
+    lateinit var bitmap:Deferred<Bitmap>
     var chatRoomId: String? = null
 
 //    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
@@ -53,13 +50,16 @@ class ChatActivity : AppCompatActivity() {
 
         myUserIdx = PrefManager.userIdx
         opp = intent.getSerializableExtra("opp") as User
-        Log.d("opp",opp.toString())
-
+        Log.d("opp",opp.profImg.toString())
+        if(intent.getStringExtra("chatRoomId")!=null) {
+            chatRoomId=intent.getStringExtra("chatRoomId")
+        }
         if(opp.profImg != null) {
             CoroutineScope(Dispatchers.Main).launch {
-                bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(opp.profImg!!)!!
+                bitmap = async {withContext (Dispatchers.IO){
+                    ImageLoader.loadImage(opp.profImg!!)
                 }
+                } as Deferred<Bitmap>
             }
         }
         init()
@@ -155,20 +155,20 @@ class ChatActivity : AppCompatActivity() {
         val chatRVAdapter = ChatRVAdapter()
         binding.chatMessageRv.adapter = chatRVAdapter
 //        chatRVAdapter.addMessage(test)
-////        mDatabase.child("chatRooms").child(chatRoomId!!).child("comments").addValueEventListener(object: ValueEventListener{
-////            override fun onDataChange(snapshot: DataSnapshot) {
-////                var comments = ArrayList<Comment>()
-////                for(item in snapshot.children) {
-////                    val comment = item.getValue(Comment::class.java)
-////                    comments.add(comment!!)
-////                }
-////                chatRVAdapter.addMessage(comments)
-////            }
-////
-////            override fun onCancelled(error: DatabaseError) {
-////
-////            }
-////        })
+        mDatabase.child("chatRooms").child(chatRoomId!!).child("comments").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var comments = ArrayList<Comment>()
+                for(item in snapshot.children) {
+                    val comment = item.getValue(Comment::class.java)
+                    comments.add(comment!!)
+                }
+                chatRVAdapter.addMessage(comments)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun goToReportActivity() {
