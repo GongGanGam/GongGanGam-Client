@@ -11,10 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.model.ChatModel
 import com.example.gonggangam.model.Comment
 import com.example.gonggangam.model.User
@@ -25,8 +28,15 @@ import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
+import com.example.gonggangam.myPageService.MyPageRetrofitInterface
+import com.example.gonggangam.myPageService.UserResponse
+import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 
 class ChatActivity : AppCompatActivity() {
@@ -39,7 +49,7 @@ class ChatActivity : AppCompatActivity() {
 
 //    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
     var myUserIdx:Int = 0
-    var me: User = User(8, "나", null)
+//    var me: User = User( PrefManager.userIdx,  "g", null)
     lateinit var opp: User
 //    var opp:User = User("테스트", "https://gonggangam-bucket.s3.ap-northeast-2.amazonaws.com/btn_msg_blue.PNG", 0)
 
@@ -68,7 +78,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // initRecyclerView()
+         initRecyclerView()
     }
 
     private fun init() {
@@ -78,8 +88,8 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.chatBackIv.setOnClickListener {
-            val intent = Intent(this@ChatActivity, ChatFragment::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ChatActivity, ChatFragment::class.java)
+//            startActivity(intent)
             finish()
         }
         binding.chatSendBtnIv.setOnClickListener {
@@ -88,8 +98,8 @@ class ChatActivity : AppCompatActivity() {
 
             // 그냥 숫자로 저장하게 되면 파이어베이스에서 key로 인식하지 못함
             chatModel.users[myUserIdx.toString() +"_key"] = true
-            chatModel.users[opp.uid.toString()+"_key"] = true
-//            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
+//            chatModel.users[opp.uid.toString()+"_key"] = true
+            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
 
             // 채팅방 아이디 없으면
             if(chatRoomId == null) {
@@ -105,7 +115,7 @@ class ChatActivity : AppCompatActivity() {
             else { // 채팅방 아이디 존재하면
                 sendMsg(binding.chatInputEt.text.toString())
             }
-            // checkChatRoom()
+             checkChatRoom()
         }
 
         binding.chatMenuIv.setOnClickListener {
@@ -123,7 +133,24 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
+    //내 정보 알아오기 위해 추가
+    private fun getUser() {
+        val authService = getRetrofit().create(MyPageRetrofitInterface::class.java)
+        authService.getUser(PrefManager.userIdx).enqueue(object: Callback<UserResponse> {
+        override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("TAG-USER", response.toString())
+                if(response.isSuccessful && response.code() == 200) {
+                    val resp = response.body()!!
+                    Log.d("TAG-USER", resp.toString())
+                }
+            }
 
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("TAG-USER", t.message.toString())
+            }
+
+        })
+    }
     private fun checkChatRoom() {
         mDatabase.child("chatRooms").orderByChild("users/${myUserIdx.toString()}_key").equalTo(true).addListenerForSingleValueEvent(
             object: ValueEventListener {
@@ -199,8 +226,9 @@ class ChatActivity : AppCompatActivity() {
             mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     Log.d("TAG_CHAT", snapshot.key.toString())
-                    //user = snapshot.getValue(User::class.java)!!
-                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
+//                    user = snapshot.getValue(User::class.java)!!
+//                    user = opp
+//                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
                     getMessageList()
                 }
 

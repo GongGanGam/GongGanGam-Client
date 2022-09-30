@@ -33,6 +33,7 @@ import kotlin.collections.ArrayList
 class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     lateinit var mDatabase: DatabaseReference
+    lateinit var oppParam: User
     private var chatLists = ArrayList<ChatList>()
 
     override fun onCreateView(
@@ -56,7 +57,6 @@ class ChatFragment : Fragment() {
     }
 
     private fun goToChat(opp:User,index:String) {
-        var chatRoomId: String = index
         val intent = Intent(activity, ChatActivity::class.java)
         intent.putExtra("opp",opp)
         intent.putExtra("chatRoomId",index)
@@ -105,6 +105,20 @@ class ChatFragment : Fragment() {
             mDatabase.child("chatRooms").orderByChild("users/${uid}_key").equalTo(true).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 @SuppressLint("NotifyDataSetChanged")
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    for(item in snapshot.children) {
+//                        Log.d("TAG_CHAT, checkChatRoom", item.value.toString())
+//                        var chatModel: ChatModel = item.getValue(ChatModel::class.java)!!
+//                        Log.d("TAG_CHAT, checkChatRoom", chatModel.toString())
+//                        if(chatModel?.users!!.containsKey(opp.uid.toString()+"_key")) {
+//                            chatRoomId = item.key.toString()
+//                            binding.chatSendBtnIv.isEnabled = true
+//
+//                            // 리사이클러뷰 초기화 메세지 읽어들이기
+//                            initRecyclerView()
+//                        }
+//                    }
+//                }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     chatModel.clear()
                     for(data in snapshot.children) {
@@ -153,7 +167,7 @@ class ChatFragment : Fragment() {
             // last message & time
             val commentMap = TreeMap<String, Comment>(reverseOrder())
             commentMap.putAll(chatModel[position].comments)
-            val lastMessageKey = commentMap.keys.toTypedArray()[0]
+            val lastMessageKey = commentMap.keys.toTypedArray()[commentMap.keys.size-1]
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
 
