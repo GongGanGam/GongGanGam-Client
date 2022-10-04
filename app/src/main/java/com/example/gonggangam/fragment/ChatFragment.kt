@@ -33,7 +33,8 @@ import kotlin.collections.ArrayList
 class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     lateinit var mDatabase: DatabaseReference
-    lateinit var oppParam: User
+    lateinit var chatListRVAdapter: RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>
+    var chatRoomId: String? = null
     private var chatLists = ArrayList<ChatList>()
 
     override fun onCreateView(
@@ -48,18 +49,24 @@ class ChatFragment : Fragment() {
 
         return binding.root
     }
+    //채팅 후 리로드 위함
+    override fun onResume() {
+        super.onResume()
+        chatListRVAdapter = ChatListRVAdapter()
+        binding.chatRv.adapter = chatListRVAdapter
 
+    }
     private fun initRecyclerView() {
         binding.chatRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val chatListRVAdapter = ChatListRVAdapter()
+        chatListRVAdapter = ChatListRVAdapter()
         binding.chatRv.adapter = chatListRVAdapter
     }
 
-    private fun goToChat(opp:User,index:String) {
+    private fun goToChat(opp:User) {
         val intent = Intent(activity, ChatActivity::class.java)
         intent.putExtra("opp",opp)
-        intent.putExtra("chatRoomId",index)
+        intent.putExtra("chatRoomId",chatRoomId)
         startActivity(intent)
     }
 
@@ -105,25 +112,12 @@ class ChatFragment : Fragment() {
             mDatabase.child("chatRooms").orderByChild("users/${uid}_key").equalTo(true).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 @SuppressLint("NotifyDataSetChanged")
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    for(item in snapshot.children) {
-//                        Log.d("TAG_CHAT, checkChatRoom", item.value.toString())
-//                        var chatModel: ChatModel = item.getValue(ChatModel::class.java)!!
-//                        Log.d("TAG_CHAT, checkChatRoom", chatModel.toString())
-//                        if(chatModel?.users!!.containsKey(opp.uid.toString()+"_key")) {
-//                            chatRoomId = item.key.toString()
-//                            binding.chatSendBtnIv.isEnabled = true
-//
-//                            // 리사이클러뷰 초기화 메세지 읽어들이기
-//                            initRecyclerView()
-//                        }
-//                    }
-//                }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     chatModel.clear()
                     for(data in snapshot.children) {
                         chatModel.add(data.getValue<ChatModel>()!!)
                         println(data)
+                        chatRoomId = data.key.toString()
                     }
                     notifyDataSetChanged()
                     checkEmpty()
@@ -148,7 +142,8 @@ class ChatFragment : Fragment() {
                     oppUsers.add(oppId)
                 }
             }
-            for((index,chatList) in chatLists.withIndex()) {
+
+            for(chatList in chatLists) {
                 if(chatList.chatUserIdx.toString()+"_key" == oppId) {
                     BindingAdapter.loadProfileImage(
                         chatList.profImg,
@@ -159,7 +154,7 @@ class ChatFragment : Fragment() {
                     holder.binding.chatListOppNameTv.text = chatList.nickname
                     holder.binding.chatListCl.setOnClickListener {
                         var tmpUser= User(chatList.chatUserIdx, chatList.nickname,  chatList.profImg.toString())
-                        goToChat(tmpUser,index.toString())
+                        goToChat(tmpUser)
                     }
                 }
             }
@@ -167,13 +162,10 @@ class ChatFragment : Fragment() {
             // last message & time
             val commentMap = TreeMap<String, Comment>(reverseOrder())
             commentMap.putAll(chatModel[position].comments)
-            val lastMessageKey = commentMap.keys.toTypedArray()[commentMap.keys.size-1]
+            val lastMessageKey = commentMap.keys.toTypedArray()[0]
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
 
-//            holder.binding.chatListCl.setOnClickListener {
-//                goToChat()
-//            }
         }
 
         override fun getItemCount(): Int {

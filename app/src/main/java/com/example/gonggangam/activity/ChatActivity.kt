@@ -47,9 +47,9 @@ class ChatActivity : AppCompatActivity() {
     lateinit var bitmap:Deferred<Bitmap>
     var chatRoomId: String? = null
 
-//    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
+    //    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
     var myUserIdx:Int = 0
-//    var me: User = User( PrefManager.userIdx,  "g", null)
+    //    var me: User = User( PrefManager.userIdx,  "g", null)
     lateinit var opp: User
 //    var opp:User = User("테스트", "https://gonggangam-bucket.s3.ap-northeast-2.amazonaws.com/btn_msg_blue.PNG", 0)
 
@@ -78,7 +78,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-         initRecyclerView()
+        initRecyclerView()
     }
 
     private fun init() {
@@ -98,7 +98,7 @@ class ChatActivity : AppCompatActivity() {
 
             // 그냥 숫자로 저장하게 되면 파이어베이스에서 key로 인식하지 못함
             chatModel.users[myUserIdx.toString() +"_key"] = true
-//            chatModel.users[opp.uid.toString()+"_key"] = true
+            chatModel.users[opp.uid.toString()+"_key"] = true
             chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
 
             // 채팅방 아이디 없으면
@@ -115,7 +115,7 @@ class ChatActivity : AppCompatActivity() {
             else { // 채팅방 아이디 존재하면
                 sendMsg(binding.chatInputEt.text.toString())
             }
-             checkChatRoom()
+            checkChatRoom()
         }
 
         binding.chatMenuIv.setOnClickListener {
@@ -133,24 +133,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
-    //내 정보 알아오기 위해 추가
-    private fun getUser() {
-        val authService = getRetrofit().create(MyPageRetrofitInterface::class.java)
-        authService.getUser(PrefManager.userIdx).enqueue(object: Callback<UserResponse> {
-        override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                Log.d("TAG-USER", response.toString())
-                if(response.isSuccessful && response.code() == 200) {
-                    val resp = response.body()!!
-                    Log.d("TAG-USER", resp.toString())
-                }
-            }
 
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                Log.d("TAG-USER", t.message.toString())
-            }
-
-        })
-    }
     private fun checkChatRoom() {
         mDatabase.child("chatRooms").orderByChild("users/${myUserIdx.toString()}_key").equalTo(true).addListenerForSingleValueEvent(
             object: ValueEventListener {
@@ -160,7 +143,7 @@ class ChatActivity : AppCompatActivity() {
                         var chatModel: ChatModel = item.getValue(ChatModel::class.java)!!
                         Log.d("TAG_CHAT, checkChatRoom", chatModel.toString())
                         if(chatModel?.users!!.containsKey(opp.uid.toString()+"_key")) {
-                            chatRoomId = item.key.toString()
+//                            chatRoomId = item.key.toString()
                             binding.chatSendBtnIv.isEnabled = true
 
                             // 리사이클러뷰 초기화 메세지 읽어들이기
@@ -223,19 +206,19 @@ class ChatActivity : AppCompatActivity() {
         var user: User? = null
         init {
             Log.d("TAG_CHAT", "리싸이클러뷰 init 내부")
-            mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    Log.d("TAG_CHAT", snapshot.key.toString())
-//                    user = snapshot.getValue(User::class.java)!!
+//            mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    Log.d("TAG_CHAT", snapshot.key.toString())
+////                    user = snapshot.getValue(User::class.java)!!
 //                    user = opp
 //                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
                     getMessageList()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                }
+//
+//            })
         }
 
         fun getMessageList() {
@@ -276,7 +259,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-           //  holder.bind(comments[position])
+            //  holder.bind(comments[position])
             if(getItemViewType(position) == 0) {
                 (holder as ViewHolderRight).bind(comments[position])
             } else {
