@@ -29,6 +29,8 @@ import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.myPageService.MyPageRetrofitInterface
 import com.example.gonggangam.myPageService.UserResponse
 import com.example.gonggangam.databinding.FragmentMyPageBinding
+import com.example.gonggangam.myPageService.EditAnswerPushBody
+import com.example.gonggangam.myPageService.EditDiaryPushBody
 import com.example.gonggangam.util.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -224,7 +226,7 @@ class MyPageFragment : Fragment() {
         val myPageService = getRetrofit().create(MyPageRetrofitInterface::class.java)
         when(type) {
             PushType.DIARY -> {
-                myPageService.setDiaryPush(PrefManager.userIdx, isPush).enqueue(object: Callback<BasicResponse>{
+                myPageService.setDiaryPush(PrefManager.userIdx, EditDiaryPushBody(isPush)).enqueue(object: Callback<BasicResponse>{
 
                     override fun onResponse(
                         call: Call<BasicResponse>,
@@ -249,7 +251,7 @@ class MyPageFragment : Fragment() {
             }
 
             PushType.ANSWER -> {
-                myPageService.setAnswerPush(PrefManager.userIdx, isPush).enqueue(object: Callback<BasicResponse>{
+                myPageService.setAnswerPush(PrefManager.userIdx, EditAnswerPushBody(isPush)).enqueue(object: Callback<BasicResponse>{
 
                     override fun onResponse(
                         call: Call<BasicResponse>,

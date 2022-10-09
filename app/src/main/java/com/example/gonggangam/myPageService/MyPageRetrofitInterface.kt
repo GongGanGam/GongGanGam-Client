@@ -13,6 +13,14 @@ data class EditUserBody(
     @SerializedName("gender") val gender: String,
 )
 
+data class EditDiaryPushBody(
+    @SerializedName("diaryPush") val diaryPush: String
+)
+
+data class EditAnswerPushBody(
+    @SerializedName("answerPush") val answerPush: String
+)
+
 interface MyPageRetrofitInterface {
     @GET("app/admin/notice")
     fun getNoticeList(): Call<NoticeResponse>
@@ -38,13 +46,13 @@ interface MyPageRetrofitInterface {
     @PATCH("app/users/{userIdx}/push/diary")
     fun setDiaryPush(
         @Path("userIdx") userIdx: Int,
-        @Body diaryPush: String
+        @Body diaryPush: EditDiaryPushBody
     ): Call<BasicResponse>
 
     @PATCH("app/users/{userIdx}/push/answer")
     fun setAnswerPush(
         @Path("userIdx") userIdx: Int,
-        @Body answerPush: String
+        @Body answerPush: EditAnswerPushBody
     ): Call<BasicResponse>
 
     @PATCH("app/users/{userIdx}/push/chat")
