@@ -67,6 +67,9 @@ class AdditionalInformationActivity() : AppCompatActivity() {
                             Toast.makeText(this@AdditionalInformationActivity,"회원가입 성공",Toast.LENGTH_SHORT).show()
                             goToMainActivity()
                         }
+                        3002 -> { // 중복된 닉네임
+                            Toast.makeText(this@AdditionalInformationActivity,"중복된 닉네임입니다.",Toast.LENGTH_SHORT).show()
+                        }
                         else -> Toast.makeText(this@AdditionalInformationActivity,"회원가입 실패",Toast.LENGTH_SHORT).show()
                     }
                 }
