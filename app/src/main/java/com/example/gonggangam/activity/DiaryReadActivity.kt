@@ -39,6 +39,11 @@ class DiaryReadActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
+
     private fun getData() {
         year = intent.getIntExtra("year", -1)
         month = intent.getIntExtra("month", -1)

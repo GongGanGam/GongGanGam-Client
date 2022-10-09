@@ -97,7 +97,9 @@ data class Report (
 
 data class DiaryEditRequest(
     @SerializedName("emoji") val emoji: String,
-    @SerializedName("date") val date: String,
+    @SerializedName("year") val year: Int,
+    @SerializedName("month") val month: Int,
+    @SerializedName("day") val day: Int,
     @SerializedName("content") val content: String,
     @SerializedName("shareAgree") val shareAgree: Char
 )
