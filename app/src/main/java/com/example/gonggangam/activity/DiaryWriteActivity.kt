@@ -60,6 +60,10 @@ class DiaryWriteActivity : AppCompatActivity() {
     private var imgUri: Uri =  Uri.parse("") // diaryImg uri 저장 변수
     var isShare:Boolean = false
 
+    private var year = -1
+    private var month = -1
+    private var day = -1
+
     private var diaryEditInfo: ReadDiary? = null
 
     override fun onRequestPermissionsResult(
@@ -176,9 +180,9 @@ class DiaryWriteActivity : AppCompatActivity() {
 
 
         Log.d("이모지?", emojiStr)
-        val year = intent.getIntExtra("year",0)
-        val month = intent.getIntExtra("month",0)
-        val day = intent.getIntExtra("day",0)
+        year = intent.getIntExtra("year",0)
+        month = intent.getIntExtra("month",0)
+        day = intent.getIntExtra("day",0)
 
         val content = binding.writeInputEt.text.toString()
         val shareAgree = if (isShare) "T" else "F"
@@ -251,7 +255,9 @@ class DiaryWriteActivity : AppCompatActivity() {
 
             diaryService.editDiary(diaryEditInfo!!.diaryIdx, DiaryEditRequest(
                 emoji = diaryEditInfo!!.emoji,
-                date = diaryEditInfo!!.diaryDate,
+                year = this.year,
+                month = this.month,
+                day = this.day,
                 content = content,
                 shareAgree = shareAgree.toCharArray()[0]
             )).enqueue(DiaryWriteCallback())
