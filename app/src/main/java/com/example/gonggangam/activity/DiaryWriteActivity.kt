@@ -199,8 +199,6 @@ class DiaryWriteActivity : AppCompatActivity() {
                 call: Call<BasicResponse>,
                 response: Response<BasicResponse>
             ) {
-                Log.d("글", "저장하려고")
-
                 if (response.isSuccessful) { //  response.code == 1000
                     Log.d("Retrofit", "onResponse 성공")
 
@@ -229,7 +227,7 @@ class DiaryWriteActivity : AppCompatActivity() {
                 if(!destFile.exists())
                     destFile.mkdirs()
                 val requestFile = destFile.asRequestBody("image/*".toMediaTypeOrNull())
-                imgRequestBody = MultipartBody.Part.createFormData("uploadImg", destFile.name, requestFile)
+                imgRequestBody = MultipartBody.Part.createFormData("files", destFile.name, requestFile)
             }
 
             // 나머지 body
