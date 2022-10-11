@@ -265,6 +265,8 @@ class MyInfoActivity : AppCompatActivity() {
                             else -> Log.d("TAG/API-CODE", "정보 수정 실패" )
                         }
                     }
+
+                    finish()
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
