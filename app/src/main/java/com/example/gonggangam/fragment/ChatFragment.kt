@@ -11,19 +11,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.R
 import com.example.gonggangam.activity.ChatActivity
 import com.example.gonggangam.diaryService.ChatListResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
-import com.example.gonggangam.model.ChatList
-import com.example.gonggangam.model.ChatModel
-import com.example.gonggangam.model.Comment
 import com.example.gonggangam.databinding.FragmentChatBinding
 import com.example.gonggangam.databinding.ItemChatListBinding
-import com.example.gonggangam.model.Answer
+import com.example.gonggangam.model.*
 import com.example.gonggangam.util.BindingAdapter
+import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
@@ -37,6 +33,8 @@ import kotlin.collections.ArrayList
 class ChatFragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     lateinit var mDatabase: DatabaseReference
+    lateinit var chatListRVAdapter: RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>
+    var chatRoomId: String? = null
     private var chatLists = ArrayList<ChatList>()
 
     override fun onCreateView(
@@ -51,17 +49,24 @@ class ChatFragment : Fragment() {
 
         return binding.root
     }
+    //채팅 후 리로드 위함
+    override fun onResume() {
+        super.onResume()
+        chatListRVAdapter = ChatListRVAdapter()
+        binding.chatRv.adapter = chatListRVAdapter
 
+    }
     private fun initRecyclerView() {
         binding.chatRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val chatListRVAdapter = ChatListRVAdapter()
+        chatListRVAdapter = ChatListRVAdapter()
         binding.chatRv.adapter = chatListRVAdapter
     }
 
-    private fun goToChat() {
-        var chatRoomId: String = ""
+    private fun goToChat(opp:User) {
         val intent = Intent(activity, ChatActivity::class.java)
+        intent.putExtra("opp",opp)
+        intent.putExtra("chatRoomId",chatRoomId)
         startActivity(intent)
     }
 
@@ -99,7 +104,7 @@ class ChatFragment : Fragment() {
     inner class ChatListRVAdapter: RecyclerView.Adapter<ChatListRVAdapter.ViewHolder>() {
         private val chatModel = ArrayList<ChatModel>()
         private val oppUsers : ArrayList<String> = arrayListOf() // 채팅 상대 userIdx
-        private val uid : Int = 8
+        private val uid : Int = PrefManager.userIdx
 
         init {
             getChatList()
@@ -112,6 +117,7 @@ class ChatFragment : Fragment() {
                     for(data in snapshot.children) {
                         chatModel.add(data.getValue<ChatModel>()!!)
                         println(data)
+                        chatRoomId = data.key.toString()
                     }
                     notifyDataSetChanged()
                     checkEmpty()
@@ -146,6 +152,10 @@ class ChatFragment : Fragment() {
                     )
                     // nickname
                     holder.binding.chatListOppNameTv.text = chatList.nickname
+                    holder.binding.chatListCl.setOnClickListener {
+                        var tmpUser= User(chatList.chatUserIdx, chatList.nickname,  chatList.profImg.toString())
+                        goToChat(tmpUser)
+                    }
                 }
             }
 
@@ -156,9 +166,6 @@ class ChatFragment : Fragment() {
             holder.binding.chatListContentTv.text = chatModel[position].comments[lastMessageKey]?.message
             holder.binding.chatListDate.text = convertTimestampToDate(chatModel[position].comments[lastMessageKey]?.timeStamp!!)
 
-            holder.binding.chatListCl.setOnClickListener {
-                goToChat()
-            }
         }
 
         override fun getItemCount(): Int {

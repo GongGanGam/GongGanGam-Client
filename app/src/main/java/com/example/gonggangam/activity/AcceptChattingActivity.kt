@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.example.gonggangam.model.BasicDiary
 import com.example.gonggangam.model.ReceivedAnswer
 import com.example.gonggangam.model.User
@@ -15,14 +14,9 @@ import com.example.gonggangam.diaryService.BasicResponse
 import com.example.gonggangam.diaryService.DiaryRetrofitInterface
 import com.example.gonggangam.diaryService.ReceivedAnswerResponse
 import com.example.gonggangam.R
-import com.example.gonggangam.util.ImageLoader
 import com.example.gonggangam.databinding.ActivityAcceptChattingBinding
 import com.example.gonggangam.util.BindingAdapter
 import com.example.gonggangam.util.getRetrofit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

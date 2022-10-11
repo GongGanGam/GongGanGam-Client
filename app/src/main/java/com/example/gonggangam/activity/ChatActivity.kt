@@ -11,10 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.gonggangam.model.ChatModel
 import com.example.gonggangam.model.Comment
 import com.example.gonggangam.model.User
@@ -25,11 +28,15 @@ import com.example.gonggangam.util.PrefManager
 import com.example.gonggangam.databinding.ActivityChatBinding
 import com.example.gonggangam.databinding.ItemMessageLeftBinding
 import com.example.gonggangam.databinding.ItemMessageRightBinding
+import com.example.gonggangam.myPageService.MyPageRetrofitInterface
+import com.example.gonggangam.myPageService.UserResponse
+import com.example.gonggangam.util.getRetrofit
 import com.google.firebase.database.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.google.firebase.database.ktx.getValue
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 
 class ChatActivity : AppCompatActivity() {
@@ -37,12 +44,12 @@ class ChatActivity : AppCompatActivity() {
     lateinit var imm: InputMethodManager
     lateinit var mDatabase: DatabaseReference
     lateinit var chatModel: ChatModel
-    lateinit var bitmap:Bitmap
+    lateinit var bitmap:Deferred<Bitmap>
     var chatRoomId: String? = null
 
-//    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
+    //    lateinit var opp: User // 상대 정보 nickname / userIdx/ profile
     var myUserIdx:Int = 0
-    var me: User = User(8, "나", null)
+    //    var me: User = User( PrefManager.userIdx,  "g", null)
     lateinit var opp: User
 //    var opp:User = User("테스트", "https://gonggangam-bucket.s3.ap-northeast-2.amazonaws.com/btn_msg_blue.PNG", 0)
 
@@ -53,12 +60,16 @@ class ChatActivity : AppCompatActivity() {
 
         myUserIdx = PrefManager.userIdx
         opp = intent.getSerializableExtra("opp") as User
-
+        Log.d("opp",opp.profImg.toString())
+        if(intent.getStringExtra("chatRoomId")!=null) {
+            chatRoomId=intent.getStringExtra("chatRoomId")
+        }
         if(opp.profImg != null) {
             CoroutineScope(Dispatchers.Main).launch {
-                bitmap = withContext(Dispatchers.IO) {
-                    ImageLoader.loadImage(opp.profImg!!)!!
+                bitmap = async {withContext (Dispatchers.IO){
+                    ImageLoader.loadImage(opp.profImg!!)
                 }
+                } as Deferred<Bitmap>
             }
         }
         init()
@@ -67,7 +78,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // initRecyclerView()
+        initRecyclerView()
     }
 
     private fun init() {
@@ -77,8 +88,8 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initListener() {
         binding.chatBackIv.setOnClickListener {
-            val intent = Intent(this@ChatActivity, ChatFragment::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@ChatActivity, ChatFragment::class.java)
+//            startActivity(intent)
             finish()
         }
         binding.chatSendBtnIv.setOnClickListener {
@@ -88,7 +99,7 @@ class ChatActivity : AppCompatActivity() {
             // 그냥 숫자로 저장하게 되면 파이어베이스에서 key로 인식하지 못함
             chatModel.users[myUserIdx.toString() +"_key"] = true
             chatModel.users[opp.uid.toString()+"_key"] = true
-//            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
+            chatModel.opp[opp.uid.toString()+"_key"] = opp // 상대 추가
 
             // 채팅방 아이디 없으면
             if(chatRoomId == null) {
@@ -104,7 +115,7 @@ class ChatActivity : AppCompatActivity() {
             else { // 채팅방 아이디 존재하면
                 sendMsg(binding.chatInputEt.text.toString())
             }
-            // checkChatRoom()
+            checkChatRoom()
         }
 
         binding.chatMenuIv.setOnClickListener {
@@ -132,7 +143,7 @@ class ChatActivity : AppCompatActivity() {
                         var chatModel: ChatModel = item.getValue(ChatModel::class.java)!!
                         Log.d("TAG_CHAT, checkChatRoom", chatModel.toString())
                         if(chatModel?.users!!.containsKey(opp.uid.toString()+"_key")) {
-                            chatRoomId = item.key.toString()
+//                            chatRoomId = item.key.toString()
                             binding.chatSendBtnIv.isEnabled = true
 
                             // 리사이클러뷰 초기화 메세지 읽어들이기
@@ -154,20 +165,20 @@ class ChatActivity : AppCompatActivity() {
         val chatRVAdapter = ChatRVAdapter()
         binding.chatMessageRv.adapter = chatRVAdapter
 //        chatRVAdapter.addMessage(test)
-////        mDatabase.child("chatRooms").child(chatRoomId!!).child("comments").addValueEventListener(object: ValueEventListener{
-////            override fun onDataChange(snapshot: DataSnapshot) {
-////                var comments = ArrayList<Comment>()
-////                for(item in snapshot.children) {
-////                    val comment = item.getValue(Comment::class.java)
-////                    comments.add(comment!!)
-////                }
-////                chatRVAdapter.addMessage(comments)
-////            }
-////
-////            override fun onCancelled(error: DatabaseError) {
-////
-////            }
-////        })
+        mDatabase.child("chatRooms").child(chatRoomId!!).child("comments").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var comments = ArrayList<Comment>()
+                for(item in snapshot.children) {
+                    val comment = item.getValue(Comment::class.java)
+                    comments.add(comment!!)
+                }
+                chatRVAdapter.addMessage(comments)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun goToReportActivity() {
@@ -195,18 +206,19 @@ class ChatActivity : AppCompatActivity() {
         var user: User? = null
         init {
             Log.d("TAG_CHAT", "리싸이클러뷰 init 내부")
-            mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    Log.d("TAG_CHAT", snapshot.key.toString())
-                    //user = snapshot.getValue(User::class.java)!!
-                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
+//            mDatabase.child("users").child(opp.uid.toString()+"_key").addListenerForSingleValueEvent(object:ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    Log.d("TAG_CHAT", snapshot.key.toString())
+////                    user = snapshot.getValue(User::class.java)!!
+//                    user = opp
+//                    comments.add(Comment(opp.uid.toString()!!, "안녕하세요! 일기가 정말 인상깊어서 꼭 이야기 나누고 싶었어요", System.currentTimeMillis()))
                     getMessageList()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                }
+//
+//            })
         }
 
         fun getMessageList() {
@@ -247,7 +259,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-           //  holder.bind(comments[position])
+            //  holder.bind(comments[position])
             if(getItemViewType(position) == 0) {
                 (holder as ViewHolderRight).bind(comments[position])
             } else {
